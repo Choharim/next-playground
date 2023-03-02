@@ -1,11 +1,15 @@
 import Head from 'next/head'
+import { Provider } from 'react-redux'
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query'
 
 import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
 import { AppPropsWithLayout } from '@/types/app'
+import { wrapper } from '@/services/redux/store'
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, ...appProps }: AppPropsWithLayout) {
+  const { store, props } = wrapper.useWrappedStore(appProps)
+  const { pageProps } = props
   const getLayout = Component.getLayout || ((page) => page)
 
   return (
@@ -18,13 +22,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
 
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <GlobalStyleProvider>
-            {getLayout(<Component {...pageProps} />, pageProps)}
-          </GlobalStyleProvider>
-        </Hydrate>
-      </QueryClientProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <GlobalStyleProvider>
+              {getLayout(<Component {...pageProps} />, pageProps)}
+            </GlobalStyleProvider>
+          </Hydrate>
+        </QueryClientProvider>
+      </Provider>
     </>
   )
 }
+
+export default App
