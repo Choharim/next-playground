@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
@@ -25,6 +26,7 @@ function App({ Component, ...appProps }: AppPropsWithLayout) {
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
+            <ReactQueryDevtools initialIsOpen={false} />
             <GlobalStyleProvider>
               {getLayout(<Component {...pageProps} />, pageProps)}
             </GlobalStyleProvider>
