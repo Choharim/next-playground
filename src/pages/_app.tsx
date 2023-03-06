@@ -7,6 +7,7 @@ import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
 import { AppPropsWithLayout } from '@/types/app'
 import { wrapper } from '@/services/redux/store'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 function App({ Component, ...appProps }: AppPropsWithLayout) {
   const { store, props } = wrapper.useWrappedStore(appProps)
@@ -28,7 +29,9 @@ function App({ Component, ...appProps }: AppPropsWithLayout) {
           <Hydrate state={pageProps.dehydratedState}>
             <ReactQueryDevtools initialIsOpen={false} />
             <GlobalStyleProvider>
-              {getLayout(<Component {...pageProps} />, pageProps)}
+              <ErrorBoundary fallback={<div>서버 에러</div>}>
+                {getLayout(<Component {...pageProps} />, pageProps)}
+              </ErrorBoundary>
             </GlobalStyleProvider>
           </Hydrate>
         </QueryClientProvider>
