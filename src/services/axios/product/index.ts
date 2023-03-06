@@ -1,10 +1,10 @@
+import { AxiosResponse } from 'axios'
+
+import axiosInstance from '../interceptor'
 import { Category, Product } from '@/domain/product/type'
 import { joinKeyValuePayload, assertField } from '@/utils/obj'
-import { AxiosResponse } from 'axios'
-import axiosInstance from '../interceptor'
-import { ListResponse } from '../type'
 import { API_PATH } from './constant'
-import { Payload } from './type'
+import { ProductList, Payload } from './type'
 
 export const getProducts = async (payload?: Payload['getProducts']) => {
   let path = API_PATH['products']
@@ -27,8 +27,8 @@ export const getProducts = async (payload?: Payload['getProducts']) => {
     : null
 
   const response = await axiosInstance.get<
-    ListResponse<Product>,
-    AxiosResponse<ListResponse<Product>>
+    ProductList,
+    AxiosResponse<ProductList>
   >(`${path}${query}`)
 
   return response.data
