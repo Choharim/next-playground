@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: 'https://dummyjson.com/',
+  baseURL: process.env.NEXT_PUBLIC_DOMAIN,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
