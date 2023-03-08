@@ -10,10 +10,10 @@ const useIntersectionObserver = ({ target, onCallback, options }: Props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(onCallback, options)
 
-    target && observer.observe(target)
+    if (target) observer.observe(target)
 
     return () => {
-      target && observer.unobserve(target)
+      if (target) observer.unobserve(target)
     }
   }, [onCallback, options, target])
 }

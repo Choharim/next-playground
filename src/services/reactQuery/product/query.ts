@@ -44,9 +44,7 @@ export const useInfiniteProducts = ({
   const queryResult = useInfiniteQuery({
     queryKey: productKey.list({ limit: defaultCount, skip: 0 }),
     queryFn: ({ queryKey, pageParam }) => {
-      return pageParam
-        ? getProducts({ ...queryKey[0], skip: pageParam })
-        : getProducts(queryKey[0])
+      return getProducts({ ...queryKey[0], skip: pageParam ?? 0 })
     },
     getNextPageParam: (lastPage) =>
       lastPage.skip + lastPage.limit === lastPage.total
