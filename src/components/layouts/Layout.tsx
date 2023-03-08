@@ -1,9 +1,9 @@
 import React from 'react'
+import styled from '@emotion/styled'
 
 import { GetLayout } from '@/types/app'
 
 import Header, { HeaderProps } from './Header'
-import Frame from './Frame'
 
 interface LayoutProps extends HeaderProps {
   children: React.ReactNode
@@ -15,10 +15,10 @@ const Layout = ({ children, title, description, showNav }: LayoutProps) => {
     <>
       <Header title={title} description={description} />
 
-      <Frame>
+      <Main>
         {showNav && <nav>nav</nav>}
         {children}
-      </Frame>
+      </Main>
     </>
   )
 }
@@ -37,3 +37,14 @@ export const getLayout: GetLayout = (page, pageProps) => (
     {page}
   </Layout>
 )
+
+const Main = styled.main`
+  width: 100%;
+  height: 100%;
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+`
