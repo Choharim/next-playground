@@ -33,23 +33,16 @@ export const useProduct = (
   )
 }
 
-type FetchedOffset = {
-  defaultCount: number
-  moreCount?: number
-}
-export const useInfiniteProducts = ({
-  defaultCount,
-  moreCount,
-}: FetchedOffset) => {
+export const useInfiniteProducts = (payload: Payload['getProducts']) => {
   const queryResult = useInfiniteQuery({
-    queryKey: productKey.list({ limit: defaultCount, skip: 0 }),
-    queryFn: ({ queryKey, pageParam }) => {
-      return getProducts({ ...queryKey[0], skip: pageParam ?? 0 })
-    },
+    queryKey: productKey.list(payload),
+    queryFn: ({ queryKey, pageParam }) =>
+      getProducts({ ...queryKey[0], skip: pageParam ?? 0 }),
     getNextPageParam: (lastPage) =>
       lastPage.skip + lastPage.limit === lastPage.total
         ? undefined
-        : lastPage.skip + (moreCount ?? defaultCount),
+        : lastPage.skip + payload.limit,
+    refetchOnWindowFocus: false,
   })
 
   return queryResult
