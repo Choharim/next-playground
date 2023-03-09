@@ -11,6 +11,8 @@ const RowInput = forwardRef<HTMLInputElement, Props>(
     const setValue = useSetValue()
 
     const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
+      attributes?.onChange?.(e)
+
       if (!setValue) return
 
       setValue(e.target.value)

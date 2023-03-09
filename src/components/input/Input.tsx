@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { InputHTMLAttributes, useRef, KeyboardEvent } from 'react'
+import React, { useRef, KeyboardEvent, InputHTMLAttributes } from 'react'
 
 import { useSubmit } from './context/inputProvider'
 
@@ -20,7 +20,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement>, StyleProps {
 
 export const SUBMIT_BUTTON_KEY = 'submitButton'
 
-const Input = ({ children, error, className, ...attributes }: Props) => {
+const Input = ({ children, error, className, ...inputAttributes }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const submit = useSubmit()
 
@@ -40,12 +40,12 @@ const Input = ({ children, error, className, ...attributes }: Props) => {
       handleSubmit()
     }
 
-    attributes?.onKeyDown?.(e)
+    inputAttributes?.onKeyDown?.(e)
   }
 
   return (
     <Input.InputBox className={className} onClick={focusInput} error={error}>
-      <RowInput ref={inputRef} {...attributes} onKeyDown={handleKeydown} />
+      <RowInput ref={inputRef} {...inputAttributes} onKeyDown={handleKeydown} />
       {children &&
         React.Children.map(children, (child) =>
           child?.key === SUBMIT_BUTTON_KEY
