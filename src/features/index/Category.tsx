@@ -1,29 +1,28 @@
 import styled from '@emotion/styled'
 import React from 'react'
 
+import { CATEGORIES } from '@/domain/product/constant'
 import { Category } from '@/domain/product/type'
+import { useToggleCategory } from './context/fillterProvider'
 
-type Props = {
-  categories: Category[]
-}
-const Category = ({ categories }: Props) => {
+const Category = () => {
+  const toggleCategory = useToggleCategory()
+
+  const clickCategory = (category: Category) => () => {
+    toggleCategory(category)
+  }
   return (
     <Container>
-      {categories.map((item) => (
-        <CategoryChip key={item}>{item}</CategoryChip>
+      {CATEGORIES.map((item) => (
+        <Wrapper key={item} onClick={clickCategory(item)}>
+          {item}
+        </Wrapper>
       ))}
     </Container>
   )
 }
 
 export default Category
-
-type ChildProps = {
-  children: string
-}
-function CategoryChip({ children }: ChildProps) {
-  return <Wrapper>{children}</Wrapper>
-}
 
 const Container = styled.div`
   display: flex;

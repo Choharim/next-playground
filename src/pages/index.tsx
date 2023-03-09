@@ -1,35 +1,23 @@
-import { useCallback, useRef } from 'react'
 import { InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 import styled from '@emotion/styled'
-import { dehydrate, InfiniteData, QueryClient } from '@tanstack/react-query'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 
 import { NextPageWithLayout } from '@/types/app'
-import {
-  useCategories,
-  useInfiniteProducts,
-} from '@/services/reactQuery/product/query'
 import { productKey } from '@/services/reactQuery/product/key'
-import { getCategories, getProducts } from '@/services/axios/product'
-import Category from '@/features/index/Category'
-import ProductCard from '@/features/index/ProductCard'
-import useIntersectionObserver from '@/hooks/useIntersectionObserver'
-import { ProductList } from '@/services/axios/product/type'
-import { queryClient } from '@/services/reactQuery/queryClient'
-
+import { getProducts } from '@/services/axios/product'
+import CategoryChips from '@/features/index/Category'
 import { getLayout } from '@/components/layouts/Layout'
-
-const DEFAULT_COUNT = 20
-const OPTION: IntersectionObserverInit = {
-  root: null,
-}
+import ProductList, {
+  PRODUCTS_DEFAULT_COUNT,
+} from '@/features/index/ProductList'
+import Search from '@/features/index/Search'
+import FillterProvider from '@/features/index/context/fillterProvider'
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(productKey.categories(), getCategories)
   await queryClient.prefetchInfiniteQuery(
-    productKey.list({ limit: DEFAULT_COUNT, skip: 0 }),
+    productKey.list({ limit: PRODUCTS_DEFAULT_COUNT, skip: 0 }),
     ({ queryKey }) => getProducts(queryKey[0])
   )
 
@@ -49,50 +37,14 @@ export async function getStaticProps() {
 const HomePage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = () => {
-  const fetchTriggerRef = useRef<HTMLDivElement>(null)
-  const { data: categories } = useCategories()
-  const {
-    data: productList,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteProducts({ defaultCount: DEFAULT_COUNT })
-
-  /**
-   * @description
-   * hydration 에러 해결
-   */
-  queryClient.setQueryData<InfiniteData<ProductList>>(
-    productKey.list({ limit: DEFAULT_COUNT, skip: 0 }),
-    (older) => (older ? { ...older, pageParams: [0] } : older)
-  )
-
-  useIntersectionObserver({
-    target: fetchTriggerRef.current,
-    onCallback: useCallback(
-      ([target]) => {
-        if (target.isIntersecting && hasNextPage) {
-          fetchNextPage()
-        }
-      },
-      [fetchNextPage, hasNextPage]
-    ),
-    options: OPTION,
-  })
-
   return (
     <>
       <Wrapper>
-        {categories && <Category categories={categories} />}
-        {productList?.pages?.map((page) =>
-          page.products.map((item) => (
-            <Link key={item.id} href={`products/${item.id}`}>
-              <ProductCard product={item} />
-            </Link>
-          ))
-        )}
-        <div ref={fetchTriggerRef} />
-        {isFetchingNextPage && <div>로딩 중</div>}
+        <FillterProvider>
+          <Search />
+          <CategoryChips />
+          <ProductList />
+        </FillterProvider>
       </Wrapper>
     </>
   )
@@ -105,4 +57,5 @@ export default HomePage
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 50px;
 `
