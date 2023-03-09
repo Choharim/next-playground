@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 
 type Props = {
   onCallback: IntersectionObserverCallback
   options?: IntersectionObserverInit
-  target: HTMLElement | null
+  targetRef: RefObject<HTMLElement> | null
 }
 
-const useIntersectionObserver = ({ target, onCallback, options }: Props) => {
+const useIntersectionObserver = ({ targetRef, onCallback, options }: Props) => {
   useEffect(() => {
+    const target = targetRef?.current
     const observer = new IntersectionObserver(onCallback, options)
 
     if (target) observer.observe(target)
@@ -15,7 +16,7 @@ const useIntersectionObserver = ({ target, onCallback, options }: Props) => {
     return () => {
       if (target) observer.unobserve(target)
     }
-  }, [onCallback, options, target])
+  }, [onCallback, options, targetRef])
 }
 
 export default useIntersectionObserver
