@@ -8,17 +8,31 @@ import { ProductList, Payload } from './type'
 
 export const getProducts = async (payload?: Payload['getProducts']) => {
   let path = API_PATH['products']
-  const queries = { ...payload }
+  const queries: Payload['getProducts'] = {
+    category: payload?.category,
+    q: payload?.q,
+    limit: payload?.limit || 0,
+    skip: payload?.skip || 0,
+  }
 
   for (const key in queries) {
     if (!assertField(queries, key)) continue
 
     if (key === 'category') {
-      path += `/category/${queries[key]}`
+      if (!!queries['category']) {
+        path += `/category/${queries[key]}`
+        delete queries['q']
+      }
 
       delete queries['category']
+      break
     } else if (key === 'q') {
-      path += `/search`
+      if (!!queries['q']) {
+        path += `/search`
+        delete queries['category']
+      } else {
+        delete queries['q']
+      }
     }
   }
 
@@ -30,7 +44,6 @@ export const getProducts = async (payload?: Payload['getProducts']) => {
     ProductList,
     AxiosResponse<ProductList>
   >(`${path}${query}`)
-
   return response.data
 }
 
