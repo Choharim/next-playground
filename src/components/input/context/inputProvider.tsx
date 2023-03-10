@@ -1,34 +1,47 @@
 import React, { createContext, useContext, useMemo } from 'react'
 
-export type InputProviderValue<T = string> = {
+type InputProviderValue<T = string> = {
   value?: T
+}
+type InputProviderAction<T = string> = {
   setValue?: (value: T) => void
   submit?: (value: T) => void
 }
 
-interface Props extends InputProviderValue {
+export type InputProviderValues = InputProviderValue & InputProviderAction
+
+interface Props extends InputProviderValues {
   children: React.ReactNode
 }
 
-const inputContext = createContext<InputProviderValue | undefined>(undefined)
+const inputValue = createContext<InputProviderValue | undefined>(undefined)
+const inputAction = createContext<InputProviderAction | undefined>(undefined)
 
 const InputProvider = ({ children, value, setValue, submit }: Props) => {
   const providerValue = useMemo(
-    () => ({ value: value, setValue, submit }),
-    [value, setValue, submit]
+    () => ({
+      value,
+    }),
+    [value]
   )
 
+  const providerAction = useMemo(
+    () => ({ setValue, submit }),
+    [setValue, submit]
+  )
   return (
-    <inputContext.Provider value={providerValue}>
-      {children}
-    </inputContext.Provider>
+    <inputValue.Provider value={providerValue}>
+      <inputAction.Provider value={providerAction}>
+        {children}
+      </inputAction.Provider>
+    </inputValue.Provider>
   )
 }
 
 export default InputProvider
 
 export const useValue = () => {
-  const context = useContext(inputContext)
+  const context = useContext(inputValue)
 
   if (context === undefined) {
     throw new Error('it must be used within a InputProvider')
@@ -38,7 +51,7 @@ export const useValue = () => {
 }
 
 export const useSetValue = () => {
-  const context = useContext(inputContext)
+  const context = useContext(inputAction)
 
   if (context === undefined) {
     throw new Error('it must be used within a InputProvider')
@@ -48,7 +61,7 @@ export const useSetValue = () => {
 }
 
 export const useSubmit = () => {
-  const context = useContext(inputContext)
+  const context = useContext(inputAction)
 
   if (context === undefined) {
     throw new Error('it must be used within a InputProvider')

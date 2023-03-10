@@ -5,6 +5,10 @@ import { useSetValue, useValue } from './context/inputProvider'
 
 type Props = InputHTMLAttributes<HTMLInputElement>
 
+/**
+ * @note
+ * InputProvider에 value와 setValue를 넘기지 않으면 비제어컴포넌트로 작동합니다.
+ */
 const RowInput = forwardRef<HTMLInputElement, Props>(
   ({ ...attributes }, ref) => {
     const value = useValue()
@@ -13,13 +17,11 @@ const RowInput = forwardRef<HTMLInputElement, Props>(
     const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
       attributes?.onChange?.(e)
 
-      if (!setValue) return
-
-      setValue(e.target.value)
+      if (setValue) setValue(e.target.value)
     }
 
     return (
-      <Input ref={ref} {...attributes} value={value} onChange={handleValue} />
+      <Input {...attributes} ref={ref} value={value} onChange={handleValue} />
     )
   }
 )

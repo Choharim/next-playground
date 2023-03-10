@@ -5,7 +5,7 @@ interface Props
   extends Pick<LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor' | 'className'> {
   children: React.ReactNode
 }
-const RowLabel = ({ children, className, htmlFor }: Props) => {
+const RowLabel = ({ htmlFor, children, className }: Props) => {
   return (
     <Label className={className} htmlFor={htmlFor}>
       {children}
@@ -17,4 +17,8 @@ export default React.memo(RowLabel)
 
 const Label = styled.label`
   width: fit-content;
+
+  &:empty {
+    display: none;
+  }
 `
