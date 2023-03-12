@@ -1,7 +1,7 @@
 import React, { FormEvent, FormHTMLAttributes } from 'react'
 
 interface Props<T extends DefaultForm>
-  extends FormHTMLAttributes<HTMLFormElement> {
+  extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   children: React.ReactNode
   onSubmitForm?: (data: T) => void
 }

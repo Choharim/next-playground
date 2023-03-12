@@ -59,7 +59,11 @@ const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
       isError={isError}
       className={className}
     >
-      <RowInput ref={inputRef} {...inputAttributes} onKeyDown={handleKeydown} />
+      <Input.Row
+        ref={inputRef}
+        {...inputAttributes}
+        onKeyDown={handleKeydown}
+      />
 
       {isValidElement(children) &&
         React.Children.map(children, (child) =>
@@ -75,6 +79,11 @@ const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
 }
 
 export default Input
+
+Input.Row = styled(RowInput)`
+  width: 100%;
+  border: none;
+`
 
 Input.InputBox = styled.div<StyleProps>`
   padding: 6px 12px;

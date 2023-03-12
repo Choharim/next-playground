@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import React, { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
 
 import { useSetValue, useValue } from './context/inputProvider'
@@ -21,7 +20,7 @@ const RowInput = forwardRef<HTMLInputElement, Props>(
     }
 
     return (
-      <Input {...attributes} ref={ref} value={value} onChange={handleValue} />
+      <input {...attributes} ref={ref} value={value} onChange={handleValue} />
     )
   }
 )
@@ -29,8 +28,3 @@ const RowInput = forwardRef<HTMLInputElement, Props>(
 export default RowInput
 
 RowInput.displayName = 'RowInput'
-
-const Input = styled.input`
-  width: 100%;
-  border: none;
-`
