@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 
 import axiosInstance from '../interceptor'
 import { Category, Product } from '@/domain/product/type'
-import { joinKeyValuePayload, assertField } from '@/utils/obj'
+import { joinKeyValuePayload, assertField } from '@/utils/object'
 import { API_PATH } from './constant'
 import { ProductList, Payload } from './type'
 
