@@ -11,21 +11,21 @@
 # 프로젝트 구조
 
 - src
-  - components
+  - components  
     전역으로 사용하는 공용 컴포넌트가 위치합니다.
-  - domain
+  - domain  
     기능의 핵심을 구현하기 위한 로직이 위치합니다.
-  - features
+  - features  
     페이지 별 로직, 컴포넌트, 타입, 상수 등이 위치합니다.
-  - hooks
+  - hooks  
     커스텀 hook이 위치합니다.
-  - services
+  - services  
     외부 라이브러리가 위치합니다.
-  - styles
+  - styles  
     전역으로 사용하는 폰트, 색상 스타일이 위치합니다.
-  - types
+  - types  
     전역으로 사용하는 공통 타입이 위치합니다.
-  - utils
+  - utils  
     전역으로 사용하는 유틸 함수가 위치합니다.
 
 # 프로젝트 환경
