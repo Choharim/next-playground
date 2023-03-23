@@ -7,6 +7,7 @@ import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
 import { AppPropsWithLayout } from '@/types/app'
 import { wrapper } from '@/services/redux/store'
+
 import ErrorBoundary from '@/components/ErrorBoundary'
 
 function App({ Component, ...appProps }: AppPropsWithLayout) {
