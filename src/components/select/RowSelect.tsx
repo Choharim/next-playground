@@ -1,6 +1,5 @@
-import React, { ChangeEvent, SelectHTMLAttributes } from 'react'
-
-import { useOptions, useSelectedOption } from './context/selectProvider'
+import { ChangeEvent, SelectHTMLAttributes } from 'react'
+import { useOptions, useSelectedOption } from './context/consumer'
 
 type Props = SelectHTMLAttributes<HTMLSelectElement>
 const RowSelect = ({ ...selectAttributes }: Props) => {

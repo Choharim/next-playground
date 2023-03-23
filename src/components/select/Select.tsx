@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { HTMLAttributes, useRef } from 'react'
 
-import { useClose, useToggleOpen } from './context/selectProvider'
 import useClickOutside from '@/hooks/useClickOutside'
+import { useClose, useToggleOpen } from './context/consumer'
 
 import RowSelect from './RowSelect'
 import OptionList from './OptionList'

@@ -1,12 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { HTMLAttributes, useEffect } from 'react'
+import { HTMLAttributes, useEffect } from 'react'
 
-import {
-  useOpen,
-  useOptions,
-  useSetSelectedOption,
-} from './context/selectProvider'
+import { useOpen, useOptions, useSetSelectedOption } from './context/consumer'
 
 type Props = Pick<HTMLAttributes<HTMLSelectElement>, 'defaultValue'>
 
@@ -46,7 +42,7 @@ const Options = styled.ul<{ open: boolean }>`
   flex-direction: column;
 
   border-radius: 4px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
 
   ${({ open }) =>
     open
@@ -67,6 +63,6 @@ const Option = styled.li`
   width: 100%;
 
   &:hover {
-    background-color: grey;
+    background-color: ${({ theme }) => theme.color.grey200};
   }
 `

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react'
+import React, { createContext, useCallback, useMemo, useState } from 'react'
 
 type SelectValue = {
   open: boolean
@@ -17,8 +11,8 @@ type SelectAction = {
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>
 }
 
-const selectValue = createContext<SelectValue | undefined>(undefined)
-const selectAction = createContext<SelectAction | undefined>(undefined)
+export const selectValue = createContext<SelectValue | undefined>(undefined)
+export const selectAction = createContext<SelectAction | undefined>(undefined)
 
 export type Option = {
   text: string
@@ -67,62 +61,3 @@ const SelectProvider = ({ children, options }: Props) => {
 }
 
 export default SelectProvider
-
-export const useOpen = () => {
-  const context = useContext(selectValue)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.open
-}
-
-export const useSelectedOption = () => {
-  const context = useContext(selectValue)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.selectedOption
-}
-export const useOptions = () => {
-  const context = useContext(selectValue)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.options
-}
-
-export const useToggleOpen = () => {
-  const context = useContext(selectAction)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.toggleOpen
-}
-
-export const useClose = () => {
-  const context = useContext(selectAction)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.close
-}
-
-export const useSetSelectedOption = () => {
-  const context = useContext(selectAction)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.setSelectedOption
-}

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { HTMLAttributes } from 'react'
 
-import { useOptions, useSelectedOption } from './context/selectProvider'
+import { useOptions, useSelectedOption } from './context/consumer'
 
 type Props = Pick<HTMLAttributes<HTMLSelectElement>, 'placeholder'>
 
