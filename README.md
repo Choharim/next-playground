@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 프로적트 설치
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```js
+yarn create next-app --typescript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 프로젝트 세팅
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Eslint 설치
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- eslint가 typescript 코드를 분석하고 javascript 코드와 동일한 linting 규칙을 적용하도록 합니다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```js
+@typescript-eslint/eslint-plugin
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 위의 패키지가 의존하고 있는 패키지를 설치합니다.
 
-## Learn More
+```js
+@typescript-eslint/parser@^5.0.0
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. Prettier 설치
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- prettier를 설치합니다.
+- prettier와 eslint rule의 충돌을 예방하기 위해 설치합니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```js
+yarn add --dev prettier eslint-config-prettier
+```
 
-## Deploy on Vercel
+3. Husky 설치
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 각 커밋에서 eslint, prettier를 실행하여 커밋한 모든 파일에 오류가 없고 형식이 올바르게 지정되었는지 확인합니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```js
+yarn add --dev husky
+```
+
+4. Lint-staged 설치
+
+- staged 상태인 파일만 husky를 실행하기 위함 입니다.
+- pre-commit시 lint-staged가 실행되도록 합니다.
+
+```js
+yarn add --dev lint-staged
+```
+
+5. Commitlint 설치
+
+- 커밋 메세지 컨벤션을 유지하기 위해 사용합니다.
+- 커밋 명령어를 사용할 때 commitlint가 실행되도록 합니다.
+
+```js
+yarn add --dev @commitlint/config-conventional @commitlint/cli
+```
