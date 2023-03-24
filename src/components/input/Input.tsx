@@ -5,38 +5,44 @@ import React, {
   KeyboardEvent,
   InputHTMLAttributes,
   isValidElement,
+  ChangeEvent,
 } from 'react'
+import {
+  useInputSetValue,
+  useInputEnterSubmit,
+  useInputValue,
+} from './context/consumer'
 
-import { useSubmit } from './context/inputProvider'
-
-import RowInput from './RowInput'
+import RowInput from './atomic/RowInput'
 
 interface StyleProps {
   isError?: boolean
 }
 
 interface Props extends InputHTMLAttributes<HTMLInputElement>, StyleProps {
-  /**
-   * @note
-   * 제출 버튼을 넘길 경우, key를 SUBMIT_BUTTON_KEY로 지정해야 합니다.
-   */
   children?: React.ReactNode
 }
 
+/**
+ * @note
+ * 입력 창 내부에 제출 버튼을 포함할 경우, key를 SUBMIT_BUTTON_KEY로 지정해야 합니다.
+ */
 export const SUBMIT_BUTTON_KEY = 'submitButton'
 
 const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const submit = useSubmit()
+  const enterSubmit = useInputEnterSubmit()
+  const value = useInputValue()
+  const setValue = useInputSetValue()
 
   const focusInput = () => {
     inputRef.current?.focus()
   }
 
   const handleSubmit = () => {
-    if (!submit || !inputRef.current) return
+    if (!enterSubmit || !inputRef.current) return
 
-    submit(inputRef.current.value)
+    enterSubmit(inputRef.current.value)
   }
 
   const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -53,6 +59,9 @@ const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
     return child.key === SUBMIT_BUTTON_KEY || child.type === 'button'
   }
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (setValue) setValue(e.target.value)
+  }
   return (
     <Input.InputBox
       onClick={focusInput}
@@ -62,6 +71,8 @@ const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
       <Input.Row
         ref={inputRef}
         {...inputAttributes}
+        value={value}
+        onChange={handleChange}
         onKeyDown={handleKeydown}
       />
 
@@ -90,16 +101,16 @@ Input.InputBox = styled.div<StyleProps>`
   border-radius: 4px;
   cursor: default;
 
-  ${({ isError }) =>
+  ${({ isError, theme }) =>
     isError
       ? css`
-          border: 1px solid red;
+          border: 1px solid ${theme.color.warning};
         `
       : css`
-          border: 1px solid black;
+          border: 1px solid ${theme.color.grey400};
 
           &:focus-within {
-            border: 1px solid blue;
+            border: 1px solid ${theme.color.primary400};
           }
         `}
 `

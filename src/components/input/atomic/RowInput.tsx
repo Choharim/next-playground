@@ -1,7 +1,5 @@
 import React, { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react'
 
-import { useSetValue, useValue } from './context/inputProvider'
-
 type Props = InputHTMLAttributes<HTMLInputElement>
 
 /**
@@ -10,18 +8,11 @@ type Props = InputHTMLAttributes<HTMLInputElement>
  */
 const RowInput = forwardRef<HTMLInputElement, Props>(
   ({ ...attributes }, ref) => {
-    const value = useValue()
-    const setValue = useSetValue()
-
-    const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       attributes?.onChange?.(e)
-
-      if (setValue) setValue(e.target.value)
     }
 
-    return (
-      <input {...attributes} ref={ref} value={value} onChange={handleValue} />
-    )
+    return <input {...attributes} ref={ref} onChange={handleChange} />
   }
 )
 
