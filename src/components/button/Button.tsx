@@ -4,7 +4,7 @@ import React, { ButtonHTMLAttributes } from 'react'
 import { VARIETY } from './constant'
 import { Variety } from './type'
 
-import RowButton from './RowButton'
+import RowButton from './atomic/RowButton'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode

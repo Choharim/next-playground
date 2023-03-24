@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from '@emotion/styled'
 
 import Select from '@/components/select/Select'
-import RowLabel from '@/components/form/RowLabel'
+import RowLabel from '@/components/form/atomic/RowLabel'
 import Frame from '@/features/components/Frame'
 import { SelectBasic } from '@/components/select/shared'
 import Form from '@/components/form/Form'

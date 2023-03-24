@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import Frame from '@/features/components/Frame'
 import Button from '@/components/button/Button'
 import Form from '@/components/form/Form'
-import RowLabel from '@/components/form/RowLabel'
+import RowLabel from '@/components/form/atomic/RowLabel'
 import InputProvider from '@/components/input/context/inputProvider'
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
 
