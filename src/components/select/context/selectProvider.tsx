@@ -15,10 +15,10 @@ export const selectStaticData = createContext<
 export const selectValue = createContext<SelectValue | undefined>(undefined)
 export const selectAction = createContext<SelectAction | undefined>(undefined)
 
-interface SelectProviderProps
-  extends Pick<SelectBasic, 'options'>,
-    Partial<SelectAction>,
-    Partial<SelectValue> {
+type SelectProviderValues = Pick<SelectBasic, 'options'> &
+  Partial<SelectAction> &
+  Partial<SelectValue>
+interface Props extends SelectProviderValues {
   children: React.ReactNode
 }
 const SelectProvider = ({
@@ -26,10 +26,9 @@ const SelectProvider = ({
   options,
   selectedOption,
   setSelectedOption,
-}: SelectProviderProps) => {
+}: Props) => {
   const [_selectedOption, _setSelectedOption] = useState('')
-  const isUseStateProps =
-    typeof selectedOption === 'string' && setSelectedOption
+  const isUseStateProps = selectedOption !== undefined && setSelectedOption
 
   const value = useMemo(
     () => ({

@@ -25,13 +25,13 @@ const Search = () => {
     }
   }, [keyword, searchKeyword, searchedKeyword])
 
-  const submit = () => {
+  const enterSubmit = () => {
     searchKeyword(value)
     rounter.push({ ...rounter, query: { q: value } })
   }
 
   return (
-    <InputProvider submit={submit} value={value} setValue={setValue}>
+    <InputProvider enterSubmit={enterSubmit} value={value} setValue={setValue}>
       <CustomSearchInput>
         <Button key={SUBMIT_BUTTON_KEY}>제출</Button>
       </CustomSearchInput>
