@@ -21,6 +21,7 @@ const FRUIT_OPTIONS: SelectBasic['options'] = [
 ]
 
 const ANIMAL_SELECT_ID = 'animals'
+const FRUIT_SELECT_ID = 'fruits'
 
 type Form = {
   [ANIMAL_SELECT_ID]: { value: string }
@@ -43,7 +44,7 @@ const SelectPage = () => {
             <CustomSelect
               id={ANIMAL_SELECT_ID}
               name={ANIMAL_SELECT_ID}
-              placeholder="선택하세요."
+              defaultValue={ANIMAL_OPTIONS[2].value}
             >
               <Select.ToggleIcon>
                 <>{'^'}</>
@@ -51,17 +52,18 @@ const SelectPage = () => {
             </CustomSelect>
           </SelectProvider>
 
-          <Button type="submit" variety="contain">
+          <CustomButton type="submit" variety="contain">
             확인
-          </Button>
+          </CustomButton>
         </Form>
 
+        <Label htmlFor={FRUIT_SELECT_ID}>과일</Label>
         <SelectProvider
           options={FRUIT_OPTIONS}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
         >
-          <CustomSelect defaultValue={FRUIT_OPTIONS[2].value} />
+          <CustomSelect placeholder="선택하세요." id={FRUIT_SELECT_ID} />
         </SelectProvider>
       </Frame>
     </>
@@ -76,4 +78,8 @@ const Label = styled(RowLabel)`
 
 const CustomSelect = styled(Select)`
   width: 300px;
+`
+const CustomButton = styled(Button)`
+  height: 48px;
+  margin-top: 10px;
 `
