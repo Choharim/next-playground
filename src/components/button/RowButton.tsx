@@ -17,7 +17,6 @@ const Button = styled.button`
   border-radius: inherit;
   border: none;
 
-  cursor: pointer;
   &:disabled {
     cursor: default;
     pointer-events: none;

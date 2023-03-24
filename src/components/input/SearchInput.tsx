@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes } from 'react'
 
-import Form from './Form'
+import Form from '../form/Form'
 import Input from './Input'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {

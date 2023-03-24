@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React, { InputHTMLAttributes } from 'react'
 
 import Input from './Input'
-import RowLabel from '../RowLabel'
+import RowLabel from '../form/RowLabel'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
