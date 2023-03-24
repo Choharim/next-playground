@@ -28,6 +28,20 @@ export const globalStyle = css`
     outline: none;
   }
 
+  a,
+  button,
+  svg {
+    cursor: pointer;
+  }
+  address {
+    font-style: normal;
+  }
+  ul,
+  ol,
+  li {
+    list-style: none;
+  }
+
   #__next {
     height: 100%;
   }
