@@ -1,0 +1,6 @@
+{
+  "foods": [
+    { "id": "1", "name": "taco", "image": "🌮" },
+    { "id": "2", "name": "beer", "image": "🍺" }
+  ]
+}
