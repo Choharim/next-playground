@@ -5,14 +5,12 @@ interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: React.ReactNode
 }
 const RowLabel = ({ children, ...labelAttributes }: Props) => {
-  return <RowLabel.Text {...labelAttributes}>{children}</RowLabel.Text>
+  return <Label {...labelAttributes}>{children}</Label>
 }
 
 export default RowLabel
 
-RowLabel.Text = styled.label`
-  width: fit-content;
-
+const Label = styled.label`
   &:empty {
     display: none;
   }
