@@ -1,15 +1,5 @@
 import { useContext } from 'react'
-import { selectAction, selectValue } from './selectProvider'
-
-export const useOpen = () => {
-  const context = useContext(selectValue)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.open
-}
+import { selectAction, selectStaticData, selectValue } from './selectProvider'
 
 export const useSelectedOption = () => {
   const context = useContext(selectValue)
@@ -21,33 +11,13 @@ export const useSelectedOption = () => {
   return context.selectedOption
 }
 export const useOptions = () => {
-  const context = useContext(selectValue)
+  const context = useContext(selectStaticData)
 
   if (context === undefined) {
     throw new Error('it must be used within a SelectProvider')
   }
 
   return context.options
-}
-
-export const useToggleOpen = () => {
-  const context = useContext(selectAction)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.toggleOpen
-}
-
-export const useClose = () => {
-  const context = useContext(selectAction)
-
-  if (context === undefined) {
-    throw new Error('it must be used within a SelectProvider')
-  }
-
-  return context.close
 }
 
 export const useSetSelectedOption = () => {

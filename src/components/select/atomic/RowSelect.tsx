@@ -1,11 +1,13 @@
 import { ChangeEvent, SelectHTMLAttributes } from 'react'
-import { useOptions, useSelectedOption } from './context/consumer'
 
 type Props = SelectHTMLAttributes<HTMLSelectElement>
-const RowSelect = ({ ...selectAttributes }: Props) => {
-  const options = useOptions()
-  const selectedOption = useSelectedOption()
 
+const RowSelect = ({
+  children,
+  value = '',
+  defaultValue = '',
+  ...selectAttributes
+}: Props) => {
   /**
    * @note
    * select에 value 속성을 부여하기 위해서는 onChange 함수가 존재해야 합니다.
@@ -13,17 +15,14 @@ const RowSelect = ({ ...selectAttributes }: Props) => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     selectAttributes.onChange?.(e)
   }
+
   return (
     <select
       {...selectAttributes}
       onChange={handleChange}
-      value={selectedOption}
+      value={value || defaultValue}
     >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.text}
-        </option>
-      ))}
+      {children}
     </select>
   )
 }

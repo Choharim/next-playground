@@ -1,38 +1,47 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { HTMLAttributes, useEffect } from 'react'
+import { MouseEvent, SelectHTMLAttributes, useEffect } from 'react'
 
-import { useOpen, useOptions, useSetSelectedOption } from './context/consumer'
+import { useOptions, useSetSelectedOption } from './context/consumer'
+import HiddenSelect from './HiddenSelect'
+import { SelectBasic } from './shared'
 
-type Props = Pick<HTMLAttributes<HTMLSelectElement>, 'defaultValue'>
+interface Props
+  extends Pick<SelectBasic, 'isOpen'>,
+    SelectHTMLAttributes<HTMLSelectElement> {}
 
-const OptionList = ({ defaultValue }: Props) => {
-  const open = useOpen()
+const OptionList = ({ isOpen, ...selectAttributes }: Props) => {
+  const { defaultValue } = selectAttributes
   const options = useOptions()
   const setSelectedOption = useSetSelectedOption()
 
   useEffect(() => {
-    setSelectedOption(String(defaultValue))
+    setSelectedOption(String(defaultValue ?? ''))
   }, [defaultValue, setSelectedOption])
 
-  const selectOption = (value: string) => () => {
+  const selectOption = (e: MouseEvent<HTMLUListElement>) => {
+    const value = (e.target as HTMLLIElement)?.id ?? ''
     setSelectedOption(value)
   }
 
   return (
-    <Options open={open}>
-      {options.map((option) => (
-        <Option key={option.value} onClick={selectOption(option.value)}>
-          {option.text}
-        </Option>
-      ))}
-    </Options>
+    <>
+      <Options isOpen={isOpen} onClick={selectOption}>
+        {options.map((option) => (
+          <Option key={option.value} id={option.value}>
+            {option.text}
+          </Option>
+        ))}
+      </Options>
+
+      <HiddenSelect {...selectAttributes} />
+    </>
   )
 }
 
 export default OptionList
 
-const Options = styled.ul<{ open: boolean }>`
+const Options = styled.ul<Pick<SelectBasic, 'isOpen'>>`
   position: absolute;
   top: calc(100% + 5px);
   left: 0px;
@@ -43,9 +52,11 @@ const Options = styled.ul<{ open: boolean }>`
 
   border-radius: 4px;
   background-color: ${({ theme }) => theme.color.white};
+  ${({ theme }) => theme.shadow.dropBox};
+  ${({ theme }) => theme.zIndex.dropBox};
 
-  ${({ open }) =>
-    open
+  ${({ isOpen }) =>
+    isOpen
       ? css`
           opacity: 1;
           visibility: visible;
@@ -59,10 +70,14 @@ const Options = styled.ul<{ open: boolean }>`
 `
 
 const Option = styled.li`
-  padding: 3px;
   width: 100%;
+  padding: 6px 8px;
 
-  &:hover {
+  &:not(:last-of-type) {
+    border-bottom: 1px solid ${({ theme }) => theme.color.grey200};
+  }
+
+  &:is(:hover) {
     background-color: ${({ theme }) => theme.color.grey200};
   }
 `

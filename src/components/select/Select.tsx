@@ -1,15 +1,30 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { HTMLAttributes, useRef } from 'react'
+import React, {
+  Children,
+  isValidElement,
+  MouseEvent,
+  ReactNode,
+  SelectHTMLAttributes,
+  useCallback,
+  useRef,
+} from 'react'
 
 import useClickOutside from '@/hooks/useClickOutside'
-import { useClose, useToggleOpen } from './context/consumer'
+import { useIsOpenState } from './shared'
 
-import RowSelect from './RowSelect'
-import OptionList from './OptionList'
+import ToggleIcon from './ToggleIcon'
 import SelectedOption from './SelectedOption'
+import OptionList from './OptionList'
 
-interface Props extends HTMLAttributes<HTMLSelectElement> {
+const ToggleIconType = (<ToggleIcon />).type
+function getToggleIcon(children: ReactNode) {
+  return Children.toArray(children).find(
+    (child) => isValidElement(child) && child.type === ToggleIconType
+  )
+}
+
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   isError?: boolean
   children?: React.ReactNode
 }
@@ -21,38 +36,48 @@ const Select = ({
   ...selectAttributes
 }: Props) => {
   const selectRef = useRef<HTMLDivElement>(null)
-  const toggle = useToggleOpen()
-  const close = useClose()
+  const { isOpen, setIsOpen } = useIsOpenState()
+
+  const close = useCallback(() => {
+    setIsOpen(false)
+  }, [setIsOpen])
+
+  const toggle = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    setIsOpen((prev) => !prev)
+  }
 
   useClickOutside({
     target: selectRef,
     callabck: close,
   })
 
-  return (
-    <Box
-      className={className}
-      ref={selectRef}
-      isError={isError}
-      onClick={toggle}
-    >
-      <SelectedOption placeholder={selectAttributes.placeholder} />
-      {children}
-      <OptionList defaultValue={selectAttributes.defaultValue} />
+  const toggleIcon = getToggleIcon(children)
 
-      <Select.HiddenSelect {...selectAttributes} />
-    </Box>
+  return (
+    <>
+      <Box
+        className={className}
+        ref={selectRef}
+        isError={isError}
+        onClick={toggle}
+      >
+        <SelectedOption placeholder={selectAttributes.placeholder} />
+
+        {isValidElement(toggleIcon) &&
+          React.cloneElement(toggleIcon, { ...toggleIcon.props, isOpen })}
+
+        <OptionList {...selectAttributes} isOpen={isOpen} />
+      </Box>
+    </>
   )
 }
 
 export default Select
 
-Select.HiddenSelect = styled(RowSelect)``
+Select.ToggleIcon = ToggleIcon
 
 const Box = styled.div<Pick<Props, 'isError'>>`
-  ${Select.HiddenSelect} {
-    display: none;
-  }
   position: relative;
   width: 100%;
   display: flex;
@@ -60,12 +85,15 @@ const Box = styled.div<Pick<Props, 'isError'>>`
   align-items: center;
   height: 32px;
   padding: 4px 12px;
+  border-radius: 4px;
   cursor: pointer;
 
-  border: 1px solid grey;
-  ${({ isError }) =>
-    isError &&
-    css`
-      border: 1px solid red;
-    `};
+  ${({ isError, theme }) =>
+    isError
+      ? css`
+          border: 1px solid red;
+        `
+      : css`
+          border: 1px solid ${theme.color.grey400};
+        `};
 `

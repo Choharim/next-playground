@@ -1,62 +1,65 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react'
+import React, { createContext, useMemo, useState } from 'react'
 
-type SelectValue = {
-  open: boolean
+import { SelectBasic } from '../shared'
+
+interface SelectValue {
   selectedOption: string
-  options: Option[]
 }
 type SelectAction = {
-  toggleOpen: () => void
-  close: () => void
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>
 }
 
+export const selectStaticData = createContext<
+  Pick<SelectBasic, 'options'> | undefined
+>(undefined)
 export const selectValue = createContext<SelectValue | undefined>(undefined)
 export const selectAction = createContext<SelectAction | undefined>(undefined)
 
-export type Option = {
-  text: string
-  value: string
-}
-
-type Props = {
+interface SelectProviderProps
+  extends Pick<SelectBasic, 'options'>,
+    Partial<SelectAction>,
+    Partial<SelectValue> {
   children: React.ReactNode
-  options: Option[]
 }
-const SelectProvider = ({ children, options }: Props) => {
-  const [open, setOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState('')
+const SelectProvider = ({
+  children,
+  options,
+  selectedOption,
+  setSelectedOption,
+}: SelectProviderProps) => {
+  const [_selectedOption, _setSelectedOption] = useState('')
+  const isUseStateProps =
+    typeof selectedOption === 'string' && setSelectedOption
 
   const value = useMemo(
     () => ({
-      open,
-      selectedOption,
-      options,
+      selectedOption: isUseStateProps ? selectedOption : _selectedOption,
     }),
-    [open, selectedOption, options]
+    [selectedOption, isUseStateProps, _selectedOption]
   )
-
-  const toggleOpen = useCallback(() => {
-    setOpen((prev) => !prev)
-  }, [])
-
-  const close = useCallback(() => {
-    setOpen(false)
-  }, [])
 
   const action = useMemo(
     () => ({
-      toggleOpen,
-      close,
-      setSelectedOption,
+      setSelectedOption: isUseStateProps
+        ? setSelectedOption
+        : _setSelectedOption,
     }),
-    [toggleOpen, close]
+    [isUseStateProps, _setSelectedOption, setSelectedOption]
+  )
+
+  const staticData = useMemo(
+    () => ({
+      options,
+    }),
+    [options]
   )
 
   return (
-    <selectValue.Provider value={value}>
-      <selectAction.Provider value={action}>{children}</selectAction.Provider>
-    </selectValue.Provider>
+    <selectStaticData.Provider value={staticData}>
+      <selectAction.Provider value={action}>
+        <selectValue.Provider value={value}>{children}</selectValue.Provider>
+      </selectAction.Provider>
+    </selectStaticData.Provider>
   )
 }
 

@@ -1,16 +1,19 @@
 import styled from '@emotion/styled'
-import React, { HTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 import { useOptions, useSelectedOption } from './context/consumer'
 
-type Props = Pick<HTMLAttributes<HTMLSelectElement>, 'placeholder'>
+type Props = Pick<
+  HTMLAttributes<HTMLSelectElement>,
+  'placeholder' | 'className'
+>
 
-const SelectedOption = ({ placeholder }: Props) => {
+const SelectedOption = ({ placeholder, className }: Props) => {
   const options = useOptions()
   const seletedOption = useSelectedOption()
 
   return (
-    <Seleted>
+    <Seleted className={className}>
       {options.find((option) => option.value === seletedOption)?.text ||
         placeholder}
     </Seleted>
