@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 type ConfirmCallback = () => Promise<void>
 
-export const useBlockLeaving = (confirmCallback?: ConfirmCallback) => {
+const useBlockLeaving = (confirmCallback?: ConfirmCallback) => {
   const router = useRouter()
   const [block, setBlock] = useState(true)
 
@@ -46,3 +46,5 @@ export const useBlockLeaving = (confirmCallback?: ConfirmCallback) => {
 
   return { unBlock }
 }
+
+export default useBlockLeaving
