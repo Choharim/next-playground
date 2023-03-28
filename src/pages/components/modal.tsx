@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
 import useConfirm from '@/hooks/useConfirm'
 import useBlockLeaving from '@/hooks/useBlockLeaving'
 
@@ -9,7 +11,7 @@ import ConfirmModal from '@/components/modal/ConfirmModal'
 import ModalPortal from '@/components/modal/Portal'
 import Button from '@/components/button/Button'
 
-const Modal = () => {
+const ModalPage: NextPageWithLayout = () => {
   const router = useRouter()
   const { isOpen, confirm, onCancel, onConfirm } = useConfirm()
   const { unBlock } = useBlockLeaving(showModal)
@@ -55,7 +57,9 @@ const Modal = () => {
   )
 }
 
-export default Modal
+export default ModalPage
+
+ModalPage.getLayout = getLayout
 
 const CustomTitle = styled(ConfirmModal.BodyTitle)`
   color: ${({ theme }) => theme.color.grey900};

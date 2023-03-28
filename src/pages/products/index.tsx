@@ -5,14 +5,15 @@ import { dehydrate } from '@tanstack/react-query'
 import { NextPageWithLayout } from '@/types/app'
 import { productKey } from '@/services/reactQuery/product/key'
 import { getProducts } from '@/services/axios/product'
-import CategoryChips from '@/features/products/Category'
+import { queryClient } from '@/services/reactQuery/queryClient'
 import { getLayout } from '@/components/layouts/Layout'
+
+import FillterProvider from '@/features/products/context/fillterProvider'
+import CategoryChips from '@/features/products/Category'
+import Search from '@/features/products/Search'
 import ProductList, {
   PRODUCTS_DEFAULT_COUNT,
 } from '@/features/products/ProductList'
-import Search from '@/features/products/Search'
-import FillterProvider from '@/features/products/context/fillterProvider'
-import { queryClient } from '@/services/reactQuery/queryClient'
 
 export async function getStaticProps() {
   await queryClient.prefetchInfiniteQuery(
@@ -33,7 +34,7 @@ export async function getStaticProps() {
   }
 }
 
-const HomePage: NextPageWithLayout<
+const ProductsPage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = () => {
   return (
@@ -49,9 +50,9 @@ const HomePage: NextPageWithLayout<
   )
 }
 
-HomePage.getLayout = getLayout
+export default ProductsPage
 
-export default HomePage
+ProductsPage.getLayout = getLayout
 
 const Wrapper = styled.div`
   display: flex;

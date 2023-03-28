@@ -5,6 +5,8 @@ import { BsFillTriangleFill } from 'react-icons/bs'
 
 import { FOLDER } from '@/features/recursive/constant'
 import { Folder } from '@/features/recursive/type'
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
 
 type RecursiveBoxProps = {
   data: Folder
@@ -35,7 +37,7 @@ const RecursiveBox = ({ data, order }: RecursiveBoxProps) => {
   )
 }
 
-const FolderPage = () => {
+const FolderPage: NextPageWithLayout = () => {
   return (
     <>
       {FOLDER.map((data, i) => (
@@ -46,6 +48,8 @@ const FolderPage = () => {
 }
 
 export default FolderPage
+
+FolderPage.getLayout = getLayout
 
 const Box = styled.div`
   border: 1px solid ${({ theme }) => theme.color.grey400};

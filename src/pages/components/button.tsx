@@ -1,9 +1,12 @@
-import Frame from '@/features/components/Frame'
-
-import Button from '@/components/button/Button'
 import styled from '@emotion/styled'
 
-const ButtonPage = () => {
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
+
+import Frame from '@/features/components/Frame'
+import Button from '@/components/button/Button'
+
+const ButtonPage: NextPageWithLayout = () => {
   return (
     <Frame title="버튼 종류">
       <CustomButton variety="contain">contain</CustomButton>
@@ -25,6 +28,8 @@ const ButtonPage = () => {
 }
 
 export default ButtonPage
+
+ButtonPage.getLayout = getLayout
 
 const CustomButton = styled(Button)`
   height: 48px;

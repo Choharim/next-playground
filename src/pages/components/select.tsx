@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
 
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
+
 import Select from '@/components/select/Select'
 import RowLabel from '@/components/form/atomic/RowLabel'
 import Frame from '@/features/components/Frame'
@@ -26,7 +29,7 @@ const FRUIT_SELECT_ID = 'fruits'
 type Form = {
   [ANIMAL_SELECT_ID]: { value: string }
 }
-const SelectPage = () => {
+const SelectPage: NextPageWithLayout = () => {
   const [selectedOption, setSelectedOption] = useState('')
 
   console.log(selectedOption)
@@ -71,6 +74,8 @@ const SelectPage = () => {
 }
 
 export default SelectPage
+
+SelectPage.getLayout = getLayout
 
 const Label = styled(RowLabel)`
   ${({ theme }) => theme.font.header_4};

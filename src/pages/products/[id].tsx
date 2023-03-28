@@ -1,12 +1,10 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import React from 'react'
 
 import { getProduct } from '@/services/axios/product'
 import { productKey } from '@/services/reactQuery/product/key'
-import { NextPageWithLayout } from '@/types/app'
-
-import { getLayout } from '@/components/layouts/Layout'
 import { queryClient } from '@/services/reactQuery/queryClient'
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
@@ -29,7 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
-const ProductDetails: NextPageWithLayout<
+const ProductDetailsPage: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ product }) => {
   return (
@@ -42,6 +40,6 @@ const ProductDetails: NextPageWithLayout<
   )
 }
 
-export default ProductDetails
+export default ProductDetailsPage
 
-ProductDetails.getLayout = getLayout
+ProductDetailsPage.getLayout = getLayout

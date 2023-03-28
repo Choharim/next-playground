@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
 
+import { NextPageWithLayout } from '@/types/app'
+import { getLayout } from '@/components/layouts/Layout'
+
 import Frame from '@/features/components/Frame'
 import Button from '@/components/button/Button'
 import Form from '@/components/form/Form'
@@ -16,7 +19,7 @@ type Form = {
   [CONTORLL_INPUT_ID]: { value: string }
 }
 
-const InputPage = () => {
+const InputPage: NextPageWithLayout = () => {
   const [value, setValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
 
@@ -86,6 +89,8 @@ const InputPage = () => {
 }
 
 export default InputPage
+
+InputPage.getLayout = getLayout
 
 const CustomLabel = styled(RowLabel)`
   margin-bottom: 4px;
