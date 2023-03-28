@@ -4,20 +4,26 @@ import styled from '@emotion/styled'
 import { GetLayout } from '@/types/app'
 
 import Header, { HeaderProps } from './Header'
+import Navigation from './Navigation'
 
 interface LayoutProps extends HeaderProps {
   children: React.ReactNode
   showNav?: boolean
 }
 
-const Layout = ({ children, title, description, showNav }: LayoutProps) => {
+const Layout = ({
+  children,
+  title,
+  description,
+  showNav = true,
+}: LayoutProps) => {
   return (
     <>
       <Header title={title} description={description} />
 
       <Main>
-        {showNav && <nav>nav</nav>}
-        {children}
+        {showNav && <Navigation />}
+        <Body>{children}</Body>
       </Main>
     </>
   )
@@ -33,7 +39,7 @@ export default Layout
  * HomePage.getLayout = getLayout
  */
 export const getLayout: GetLayout = (page, pageProps) => (
-  <Layout title={pageProps.title} description={pageProps?.description}>
+  <Layout title={pageProps.title} description={pageProps.description}>
     {page}
   </Layout>
 )
@@ -44,7 +50,11 @@ const Main = styled.main`
 
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden;
+`
+
+const Body = styled.div`
+  width: 100%;
+  height: 100%;
 `

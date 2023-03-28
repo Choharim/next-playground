@@ -9,8 +9,8 @@ export type HeaderProps = {
 const Header = ({ title, description }: HeaderProps) => {
   return (
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      {!!title && <title>{title}</title>}
+      {!!description && <meta name="description" content={description} />}
     </Head>
   )
 }
