@@ -41,7 +41,6 @@ const useBlockLeaving = (confirmCallback?: ConfirmCallback) => {
 
   const unBlock = () => {
     setBlock(false)
-    router.back()
   }
 
   return { unBlock }

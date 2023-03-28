@@ -20,6 +20,8 @@ const ModalPage: NextPageWithLayout = () => {
     const answer = await confirm()
     if (answer) {
       console.log('확인')
+      goToBack()
+
       unBlock()
     } else {
       console.log('취소')
