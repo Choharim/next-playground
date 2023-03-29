@@ -21,12 +21,16 @@ const PAGE_DIRECTIONS = [
   'shop',
 ] as const
 
+const getPath = (direction: string, page: string) => {
+  return `/${direction}${!!page ? `/${page}` : ''}`
+}
+
 const Navigation = () => {
   return (
     <HorizontalBox>
       {PAGE_DIRECTIONS.map((direction) =>
         PAGES[direction].map((page) => (
-          <Link key={page} href={`/${direction}/${page}`}>
+          <Link key={page} href={getPath(direction, page)}>
             <CustomChip>
               {direction} / {page}
             </CustomChip>

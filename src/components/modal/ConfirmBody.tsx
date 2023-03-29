@@ -9,8 +9,7 @@ import styled from '@emotion/styled'
 
 import { Confirm } from '@/hooks/useConfirm'
 
-import Button from '@/components/button/Button'
-import FooterButton from './FooterButton'
+import ConfirmButton from './ConfirmButton'
 
 interface Props
   extends Partial<Pick<Confirm, 'onCancel' | 'onConfirm'>>,
@@ -35,8 +34,8 @@ const getChildren = (
 
 const isButton = (
   child: ReactElement
-): child is ReturnType<typeof FooterButton> => {
-  return child.type === (<FooterButton />).type
+): child is ReturnType<typeof ConfirmButton> => {
+  return child.type === (<ConfirmButton />).type
 }
 
 /**
@@ -46,12 +45,7 @@ const isButton = (
  * - children에 FooterButton 버튼을 포함할 경우,
  * onCancel/onConfirm 이벤트를 연결하지 않아도 됩니다.
  */
-const ConfirmModalBody = ({
-  className,
-  children,
-  onCancel,
-  onConfirm,
-}: Props) => {
+const ConfirmBody = ({ className, children, onCancel, onConfirm }: Props) => {
   const contents = getChildren(children, 'contents')
   const buttons = getChildren(children, 'button')
 
@@ -75,8 +69,8 @@ const ConfirmModalBody = ({
           renderButtons()
         ) : (
           <>
-            <FooterButton buttonType="cancel" onClick={onCancel} />
-            <FooterButton buttonType="confirm" onClick={onConfirm} />
+            <ConfirmButton buttonType="cancel" onClick={onCancel} />
+            <ConfirmButton buttonType="confirm" onClick={onConfirm} />
           </>
         )}
       </ButtonContainer>
@@ -84,7 +78,7 @@ const ConfirmModalBody = ({
   )
 }
 
-export default ConfirmModalBody
+export default ConfirmBody
 
 export const Title = styled.span`
   white-space: nowrap;
@@ -92,11 +86,6 @@ export const Title = styled.span`
 
 export const Desc = styled.p`
   white-space: nowrap;
-`
-
-export const ConfirmButton = styled(Button)`
-  height: 48px;
-  width: 100%;
 `
 
 const Body = styled.div`

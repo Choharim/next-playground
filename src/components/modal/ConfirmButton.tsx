@@ -1,9 +1,9 @@
 import React, { ButtonHTMLAttributes, ReactElement } from 'react'
-
-import Button from '@/components/button/Button'
 import styled from '@emotion/styled'
 
 import { THEME } from '@/styles/theme'
+
+import Button from '@/components/button/Button'
 
 const DEFAULT_TEXT: { [key in ButtonType]: string } = {
   cancel: '취소',
@@ -18,7 +18,7 @@ interface Props
   buttonType?: ButtonType
 }
 
-const FooterButton = ({
+const ConfirmButton = ({
   children,
   onClick,
   buttonType = 'confirm',
@@ -30,7 +30,7 @@ const FooterButton = ({
   )
 }
 
-export default FooterButton
+export default ConfirmButton
 
 const CANCEL_STYLE = {
   color: THEME.color.white,

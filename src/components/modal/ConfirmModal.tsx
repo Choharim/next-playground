@@ -4,8 +4,9 @@ import { cloneElement, MouseEvent } from 'react'
 
 import { Confirm } from '@/hooks/useConfirm'
 
-import Body, { Desc, Title } from './Body'
-import FooterButton from './FooterButton'
+import Body, { Desc, Title } from './ConfirmBody'
+import ConfirmButton from './ConfirmButton'
+import ModalPortal from './ModalPortal'
 interface Props extends Confirm {
   children: React.ReactElement
 }
@@ -16,13 +17,13 @@ const ConfirmModal = ({ isOpen, onCancel, onConfirm, children }: Props) => {
     onCancel()
   }
   return (
-    <>
+    <ModalPortal>
       {isOpen && (
         <Overlay onClick={clickFallback}>
           {cloneElement(children, { ...children.props, onCancel, onConfirm })}
         </Overlay>
       )}
-    </>
+    </ModalPortal>
   )
 }
 
@@ -30,15 +31,15 @@ export default ConfirmModal
 
 /**
  * @note children 설명
- * - children으로 FooterButton 버튼을 전달하지 않았을 경우,
- * '취소', '확인' FooterButton 버튼이 기본적으로 사용됩니다.
- * - children에 FooterButton 버튼을 포함할 경우,
+ * - children으로 ConfirmButton 버튼을 전달하지 않았을 경우,
+ * '취소', '확인' ConfirmButton 버튼이 기본적으로 사용됩니다.
+ * - children에 ConfirmButton 버튼을 포함할 경우,
  * onCancel/onConfirm 이벤트를 연결하지 않아도 됩니다.
  */
 ConfirmModal.Body = Body
 ConfirmModal.BodyTitle = Title
 ConfirmModal.BodyDesc = Desc
-ConfirmModal.Button = FooterButton
+ConfirmModal.Button = ConfirmButton
 
 const fadeIn = keyframes`
   from {

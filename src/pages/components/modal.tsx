@@ -8,7 +8,6 @@ import useBlockLeaving from '@/hooks/useBlockLeaving'
 
 import Frame from '@/features/components/Frame'
 import ConfirmModal from '@/components/modal/ConfirmModal'
-import ModalPortal from '@/components/modal/Portal'
 import Button from '@/components/button/Button'
 
 const ModalPage: NextPageWithLayout = () => {
@@ -20,9 +19,8 @@ const ModalPage: NextPageWithLayout = () => {
     const answer = await confirm()
     if (answer) {
       console.log('확인')
-      goToBack()
-
       unBlock()
+      goToBack()
     } else {
       console.log('취소')
     }
@@ -43,18 +41,16 @@ const ModalPage: NextPageWithLayout = () => {
         </CustomButton>
       </ButtonContainer>
 
-      <ModalPortal>
-        <ConfirmModal isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm}>
-          <ConfirmModal.Body>
-            <CustomTitle>모달 제목</CustomTitle>
-            <CustomDesc>모달 설명입니다.</CustomDesc>
-            {/* 추가적인 버튼 커스텀이 필요하지 않고 '취소', '확인' 버튼 나열만 할 경우 , 버튼을 전달하지 않아도 됩니다. */}
-            {/* 
+      <ConfirmModal isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm}>
+        <ConfirmModal.Body>
+          <CustomTitle>모달 제목</CustomTitle>
+          <CustomDesc>모달 설명입니다.</CustomDesc>
+          {/* 추가적인 버튼 커스텀이 필요하지 않고 '취소', '확인' 버튼 나열만 할 경우 , 버튼을 전달하지 않아도 됩니다. */}
+          {/* 
             <ConfirmModal.Button buttonType="cancel">닫기</ConfirmModal.Button>
             <ConfirmModal.Button buttonType="confirm" /> */}
-          </ConfirmModal.Body>
-        </ConfirmModal>
-      </ModalPortal>
+        </ConfirmModal.Body>
+      </ConfirmModal>
     </Frame>
   )
 }
