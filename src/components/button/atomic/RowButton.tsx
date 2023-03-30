@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import React, { ButtonHTMLAttributes } from 'react'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface RowButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
 }
-const RowButton = ({ children, ...buttonAttributes }: Props) => {
+const RowButton = ({ children, ...buttonAttributes }: RowButtonProps) => {
   return <Button {...buttonAttributes}>{children}</Button>
 }
 

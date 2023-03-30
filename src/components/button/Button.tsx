@@ -1,13 +1,11 @@
 import styled from '@emotion/styled'
-import React, { ButtonHTMLAttributes } from 'react'
 
 import { VARIETY } from './constant'
 import { Variety } from './type'
 
-import RowButton from './atomic/RowButton'
+import RowButton, { RowButtonProps } from './atomic/RowButton'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
+interface Props extends RowButtonProps {
   variety: Variety
 }
 const Button = ({ children, variety, ...buttonAttributes }: Props) => {
