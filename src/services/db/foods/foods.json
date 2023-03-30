@@ -1,6 +1,100 @@
 {
   "foods": [
-    { "id": "1", "name": "taco", "image": "🌮" },
-    { "id": "2", "name": "beer", "image": "🍺" }
+    {
+      "id": "1",
+      "name": "taco",
+      "image": "🌮",
+      "stock": 5,
+      "isNew": true,
+      "price": 10000
+    },
+    {
+      "id": "2",
+      "name": "beer",
+      "image": "🍺",
+      "stock": 0,
+      "isNew": true,
+      "price": 5500
+    },
+    {
+      "id": "3",
+      "name": "pizza",
+      "image": "🍕",
+      "stock": 5,
+      "isNew": false,
+      "price": 8900
+    },
+    {
+      "id": "4",
+      "name": "hamberger",
+      "image": "🍔",
+      "stock": 5,
+      "isNew": false,
+      "price": 9900
+    },
+    {
+      "id": "5",
+      "name": "donet",
+      "image": "🍩",
+      "stock": 5,
+      "isNew": true,
+      "price": 3000
+    },
+    {
+      "id": "6",
+      "name": "abocado",
+      "image": "🥑",
+      "stock": 5,
+      "isNew": false,
+      "price": 4850
+    },
+    {
+      "id": "7",
+      "name": "cheese",
+      "image": "🧀",
+      "stock": 3,
+      "isNew": false,
+      "price": 1000
+    },
+    {
+      "id": "8",
+      "name": "sandwich",
+      "image": "🥪",
+      "stock": 3,
+      "isNew": false,
+      "price": 1000
+    },
+    {
+      "id": "9",
+      "name": "icescream",
+      "image": "🍦",
+      "stock": 5,
+      "isNew": false,
+      "price": 1300
+    },
+    {
+      "id": "10",
+      "name": "cake",
+      "image": "🍰",
+      "stock": 8,
+      "isNew": true,
+      "price": 10000
+    },
+    {
+      "id": "11",
+      "name": "cupcake",
+      "image": "🧁",
+      "stock": 8,
+      "isNew": true,
+      "price": 10000
+    },
+    {
+      "id": "12",
+      "name": "popcon",
+      "image": "🍿",
+      "stock": 1,
+      "isNew": false,
+      "price": 12000
+    }
   ]
 }

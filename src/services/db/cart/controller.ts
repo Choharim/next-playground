@@ -1,6 +1,6 @@
 import path from 'path'
 import { promises as fs } from 'fs'
-import { Cart } from '@/domain/cart/type'
+import { DatabaseResponse } from '../type'
 
 const getCartDirectory = () => {
   const directory = path.join(
@@ -19,8 +19,8 @@ export const readCartFile = async () => {
   return contents
 }
 
-export const writeCartFile = async (cart: Cart[]) => {
+export const writeCartFile = async (cart: Pick<DatabaseResponse, 'cart'>) => {
   const directory = getCartDirectory()
 
-  fs.writeFile(directory, JSON.stringify({ cart }))
+  await fs.writeFile(directory, JSON.stringify(cart))
 }
