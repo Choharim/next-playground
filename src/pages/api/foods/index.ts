@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { Food } from '@/domain/food/type'
 import { readFoodsFile } from '@/services/db/foods/controller'
-import { DatabaseError } from '@/services/db/type'
+import { DatabaseError, DatabaseResponse } from '@/services/db/type'
 import { ERROR_MESSAGE } from '@/services/db/constant'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Food | DatabaseError>
+  res: NextApiResponse<Pick<DatabaseResponse, 'foods'> | DatabaseError>
 ) {
   try {
     const contents = await readFoodsFile()
