@@ -5,7 +5,7 @@ import Chip from '../chip/Chip'
 
 const PAGES: { [key in PageDirection]: string[] } = {
   '': [''],
-  components: ['button', 'input', 'modal', 'select'],
+  components: ['button', 'input', 'modal', 'select', 'toast'],
   products: [''],
   recursive: ['folder'],
   shop: ['order', ''],

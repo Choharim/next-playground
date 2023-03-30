@@ -1,6 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
-export const MODAL_CONTAINER_ID = 'modal-container'
+export const MODAL_PORTAL_ID = 'modal-portal'
+export const TOAST_PORTAL_ID = 'toast-portal'
 
 export default function Document() {
   return (
@@ -8,7 +9,8 @@ export default function Document() {
       <Head />
       <body>
         <Main />
-        <div id={MODAL_CONTAINER_ID} />
+        <div id={MODAL_PORTAL_ID} />
+        <div id={TOAST_PORTAL_ID} />
         <NextScript />
       </body>
     </Html>
