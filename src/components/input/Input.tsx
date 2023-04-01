@@ -7,11 +7,6 @@ import React, {
   isValidElement,
   ChangeEvent,
 } from 'react'
-import {
-  useInputSetValue,
-  useInputEnterSubmit,
-  useInputValue,
-} from './context/consumer'
 
 import RowInput from './atomic/RowInput'
 
@@ -21,6 +16,8 @@ interface StyleProps {
 
 interface Props extends InputHTMLAttributes<HTMLInputElement>, StyleProps {
   children?: React.ReactNode
+  setValue?: React.Dispatch<React.SetStateAction<string>>
+  enterSubmit?: (value: string) => void
 }
 
 /**
@@ -29,74 +26,90 @@ interface Props extends InputHTMLAttributes<HTMLInputElement>, StyleProps {
  */
 export const SUBMIT_BUTTON_KEY = 'submitButton'
 
-const Input = ({ isError, children, className, ...inputAttributes }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const enterSubmit = useInputEnterSubmit()
-  const value = useInputValue()
-  const setValue = useInputSetValue()
+const Input = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      isError,
+      children,
+      className,
+      value,
+      setValue,
+      enterSubmit,
+      ...inputAttributes
+    },
+    ref
+  ) => {
+    const inputRef = useRef<HTMLInputElement>(null)
 
-  const focusInput = () => {
-    inputRef.current?.focus()
-  }
-
-  const handleSubmit = () => {
-    if (!enterSubmit || !inputRef.current) return
-
-    enterSubmit(inputRef.current.value)
-  }
-
-  const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-    inputAttributes.onKeyDown?.(e)
-
-    if (e.key === 'Enter') {
-      e.preventDefault()
-
-      handleSubmit()
+    const focusInput = () => {
+      inputRef.current?.focus()
     }
-  }
 
-  const isSubmitButton = (child: React.ReactElement) => {
-    return child.key === SUBMIT_BUTTON_KEY || child.type === 'button'
-  }
+    const handleSubmit = () => {
+      if (!enterSubmit || !inputRef.current) return
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (setValue) setValue(e.target.value)
-  }
-  return (
-    <Input.InputBox
-      onClick={focusInput}
-      isError={isError}
-      className={className}
-    >
-      <Input.Row
-        ref={inputRef}
-        {...inputAttributes}
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeydown}
-      />
+      enterSubmit(inputRef.current.value)
+    }
 
-      {isValidElement(children) &&
-        React.Children.map(children, (child) =>
-          isSubmitButton(child)
-            ? React.cloneElement(child, {
-                ...child.props,
-                onClick: handleSubmit,
-              })
-            : child
-        )}
-    </Input.InputBox>
-  )
-}
+    const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+      inputAttributes.onKeyDown?.(e)
+
+      if (e.key === 'Enter') {
+        e.preventDefault()
+
+        handleSubmit()
+      }
+    }
+
+    const isSubmitButton = (child: React.ReactElement) => {
+      return child.key === SUBMIT_BUTTON_KEY || child.type === 'button'
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      setValue?.(e.target.value)
+    }
+    return (
+      <InputBox onClick={focusInput} isError={isError} className={className}>
+        <CustomRowInput
+          {...inputAttributes}
+          ref={ref ?? inputRef}
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeydown}
+        />
+
+        {isValidElement(children) &&
+          React.Children.map(children, (child) =>
+            isSubmitButton(child)
+              ? React.cloneElement(child, {
+                  ...child.props,
+                  onClick: handleSubmit,
+                })
+              : child
+          )}
+      </InputBox>
+    )
+  }
+)
 
 export default Input
 
-Input.Row = styled(RowInput)`
+Input.displayName = 'Input'
+
+const CustomRowInput = styled(RowInput)`
   width: 100%;
   border: none;
+
+  /* Chrome, Safari, Edge, Opera */
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `
 
-Input.InputBox = styled.div<StyleProps>`
+const InputBox = styled.div<StyleProps>`
   padding: 6px 12px;
   border-radius: 4px;
   cursor: default;

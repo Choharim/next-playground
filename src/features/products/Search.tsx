@@ -5,9 +5,8 @@ import { useRouter } from 'next/router'
 
 import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
-import SearchInput from '@/components/input/SearchInput'
-import InputProvider from '@/components/input/context/inputProvider'
-import { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
+import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
+import Form from '@/components/form/Form'
 
 const Search = () => {
   const rounter = useRouter()
@@ -31,17 +30,21 @@ const Search = () => {
   }
 
   return (
-    <InputProvider enterSubmit={enterSubmit} value={value} setValue={setValue}>
-      <CustomSearchInput>
+    <Form>
+      <CustomSearchInput
+        enterSubmit={enterSubmit}
+        value={value}
+        setValue={setValue}
+      >
         <Button key={SUBMIT_BUTTON_KEY}>제출</Button>
       </CustomSearchInput>
-    </InputProvider>
+    </Form>
   )
 }
 
 export default Search
 
-const CustomSearchInput = styled(SearchInput)`
+const CustomSearchInput = styled(Input)`
   display: flex;
 `
 
