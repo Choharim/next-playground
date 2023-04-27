@@ -2,10 +2,10 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, {
   Children,
+  ComponentPropsWithoutRef,
   isValidElement,
   MouseEvent,
   ReactNode,
-  SelectHTMLAttributes,
   useCallback,
   useRef,
 } from 'react'
@@ -16,6 +16,7 @@ import { useIsOpenState } from './shared'
 import ToggleIcon from './ToggleIcon'
 import SelectedOption from './SelectedOption'
 import OptionList from './OptionList'
+import ExtendableFlex from '../Flex/ExtendableFlex'
 
 const ToggleIconType = (<ToggleIcon />).type
 function getToggleIcon(children: ReactNode) {
@@ -24,9 +25,8 @@ function getToggleIcon(children: ReactNode) {
   )
 }
 
-interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+interface Props extends ComponentPropsWithoutRef<'select'> {
   isError?: boolean
-  children?: React.ReactNode
 }
 
 const Select = ({
@@ -55,21 +55,21 @@ const Select = ({
   const toggleIcon = getToggleIcon(children)
 
   return (
-    <>
-      <Box
-        className={className}
-        ref={selectRef}
-        isError={isError}
-        onClick={toggle}
-      >
-        <SelectedOption placeholder={selectAttributes.placeholder} />
+    <Box
+      justify="space-between"
+      align="center"
+      className={className}
+      ref={selectRef}
+      isError={isError}
+      onClick={toggle}
+    >
+      <SelectedOption placeholder={selectAttributes.placeholder} />
 
-        {isValidElement(toggleIcon) &&
-          React.cloneElement(toggleIcon, { ...toggleIcon.props, isOpen })}
+      {isValidElement(toggleIcon) &&
+        React.cloneElement(toggleIcon, { ...toggleIcon.props, isOpen })}
 
-        <OptionList {...selectAttributes} isOpen={isOpen} />
-      </Box>
-    </>
+      <OptionList {...selectAttributes} isOpen={isOpen} />
+    </Box>
   )
 }
 
@@ -77,12 +77,9 @@ export default Select
 
 Select.ToggleIcon = ToggleIcon
 
-const Box = styled.div<Pick<Props, 'isError'>>`
+const Box = styled(ExtendableFlex)<Pick<Props, 'isError'>>`
   position: relative;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 32px;
   padding: 4px 12px;
   border-radius: 4px;

@@ -8,29 +8,38 @@ import getStyle from './getStyle'
 
 const DEFAULT_ELEMENT = 'div'
 
-export interface FlexProps {
+export interface FlexStyleProps {
   direction: CSSProperties['flexDirection']
   justify: CSSProperties['justifyContent']
   align: CSSProperties['alignItems']
   gap: CSSProperties['gap']
 }
 
-type Props<E extends ElementType> = PolymorphicComponentProps<
+export type FlexProps<E extends ElementType> = PolymorphicComponentProps<
   E,
-  Partial<FlexProps>
+  Partial<FlexStyleProps>
+>
+
+/**
+ * @description
+ * forwardRef로 인해 컴포넌트의 타입이 추론되지 않아
+ * 타입 단언을 해줍니다.
+ */
+export type FlexComponent = PolymorphicForwardRefComponent<
+  Partial<FlexStyleProps>
 >
 
 const Flex: FlexComponent = <E extends ElementType = typeof DEFAULT_ELEMENT>(
   {
     as,
     children,
-    direction = 'row',
-    justify = 'flex-start',
-    align = 'center',
+    direction,
+    justify,
+    align,
     gap,
     className,
     ...restProps
-  }: Props<E>,
+  }: FlexProps<E>,
   forwardRef?: PolymorphicRef<E>
 ) => {
   const Component = as || DEFAULT_ELEMENT
@@ -42,12 +51,5 @@ const Flex: FlexComponent = <E extends ElementType = typeof DEFAULT_ELEMENT>(
     </Component>
   )
 }
-
-/**
- * @description
- * forwardRef로 인해 컴포넌트의 타입이 추론되지 않아
- * 타입 단언을 해줍니다.
- */
-type FlexComponent = PolymorphicForwardRefComponent<Partial<FlexProps>>
 
 export default forwardRef(Flex) as FlexComponent

@@ -1,9 +1,10 @@
-import { cx, css } from '@emotion/css'
-import { FlexProps } from '.'
 import { HTMLAttributes } from 'react'
+import { cx, css } from '@emotion/css'
+
+import { FlexStyleProps } from '.'
 
 const getStyle = (
-  { direction, justify, align, gap }: FlexProps,
+  { direction, justify, align, gap }: FlexStyleProps,
   className: HTMLAttributes<HTMLElement>['className']
 ) => {
   return cx(

@@ -1,9 +1,9 @@
-import styled from '@emotion/styled'
-import React, { FormEvent, FormHTMLAttributes } from 'react'
+import React, { ComponentPropsWithoutRef, FormEvent } from 'react'
+
+import Flex from '../Flex'
 
 interface Props<T extends DefaultForm>
-  extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
-  children: React.ReactNode
+  extends Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'> {
   onSubmitForm?: (data: T) => void
 }
 
@@ -29,15 +29,15 @@ const Form = <T extends DefaultForm>({
   }
 
   return (
-    <Form.Wrapper {...formAttributes} onSubmit={handleSubmit}>
+    <Flex
+      as="form"
+      direction="column"
+      {...formAttributes}
+      onSubmit={handleSubmit}
+    >
       {children}
-    </Form.Wrapper>
+    </Flex>
   )
 }
 
 export default Form
-
-Form.Wrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-`

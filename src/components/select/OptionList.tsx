@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { MouseEvent, SelectHTMLAttributes, useEffect } from 'react'
+import { ComponentPropsWithoutRef, MouseEvent, useEffect } from 'react'
 
 import { useOptions, useSetSelectedOption } from './context/consumer'
 import HiddenSelect from './HiddenSelect'
@@ -8,7 +8,7 @@ import { SelectBasic } from './shared'
 
 interface Props
   extends Pick<SelectBasic, 'isOpen'>,
-    SelectHTMLAttributes<HTMLSelectElement> {}
+    ComponentPropsWithoutRef<'select'> {}
 
 const OptionList = ({ isOpen, ...selectAttributes }: Props) => {
   const { defaultValue } = selectAttributes
