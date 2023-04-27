@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { getProduct } from '@/services/axios/product'
 import { productKey } from '@/services/reactQuery/product/key'
 import { queryClient } from '@/services/reactQuery/queryClient'
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

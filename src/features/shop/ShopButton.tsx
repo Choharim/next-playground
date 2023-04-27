@@ -1,6 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled'
 
-import RowButton, { RowButtonProps } from '@/components/button/atomic/RowButton'
+import RowButton, { RowButtonProps } from '@/components/button/AtomicButton'
 import { THEME } from '@/styles/theme'
 import { css } from '@emotion/react'
 

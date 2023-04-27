@@ -1,5 +1,5 @@
 import { getLayout } from '@/components/layouts/Layout'
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import useToast from '@/hooks/useToast'
 
 import ToastContainer from '@/components/toast/ToastContainer'

@@ -2,7 +2,7 @@ import { InferGetStaticPropsType } from 'next'
 import styled from '@emotion/styled'
 import { dehydrate } from '@tanstack/react-query'
 
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import { productKey } from '@/services/reactQuery/product/key'
 import { getProducts } from '@/services/axios/product'
 import { queryClient } from '@/services/reactQuery/queryClient'

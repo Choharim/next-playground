@@ -5,7 +5,7 @@ import { BsFillTriangleFill } from 'react-icons/bs'
 
 import { FOLDER } from '@/features/recursive/constant'
 import { Folder } from '@/features/recursive/type'
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 type RecursiveBoxProps = {

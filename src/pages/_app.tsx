@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
-import { AppPropsWithLayout } from '@/types/app'
+import { AppPropsWithLayout } from '@/shared/types/layout'
 import { wrapper } from '@/services/redux/store'
 
 import ErrorBoundary from '@/components/ErrorBoundary'

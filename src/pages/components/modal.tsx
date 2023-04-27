@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 import useConfirm from '@/hooks/useConfirm'
 import useBlockLeaving from '@/hooks/useBlockLeaving'

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { GetLayout } from '@/types/app'
+import { GetLayout } from '@/shared/types/layout'
 
 import Header, { HeaderProps } from './Header'
 import Navigation from './Navigation'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
 
-import { NextPageWithLayout } from '@/types/app'
+import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 import Frame from '@/features/components/Frame'
