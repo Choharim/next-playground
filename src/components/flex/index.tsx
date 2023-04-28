@@ -20,6 +20,31 @@ export type FlexProps<E extends ElementType> = PolymorphicComponentProps<
   Partial<FlexStyleProps>
 >
 
+const Flex = forwardRef(
+  <E extends ElementType>(
+    {
+      as,
+      children,
+      direction,
+      justify,
+      align,
+      gap,
+      className,
+      ...restProps
+    }: FlexProps<E>,
+    forwardRef: PolymorphicRef<E>
+  ) => {
+    const Component = as || DEFAULT_ELEMENT
+    const style = getStyle({ direction, justify, align, gap }, className)
+
+    return (
+      <Component {...restProps} className={style} ref={forwardRef}>
+        {children}
+      </Component>
+    )
+  }
+)
+
 /**
  * @description
  * forwardRef로 인해 컴포넌트의 타입이 추론되지 않아
@@ -29,27 +54,6 @@ export type FlexComponent = PolymorphicForwardRefComponent<
   Partial<FlexStyleProps>
 >
 
-const Flex: FlexComponent = <E extends ElementType = typeof DEFAULT_ELEMENT>(
-  {
-    as,
-    children,
-    direction,
-    justify,
-    align,
-    gap,
-    className,
-    ...restProps
-  }: FlexProps<E>,
-  forwardRef?: PolymorphicRef<E>
-) => {
-  const Component = as || DEFAULT_ELEMENT
-  const style = getStyle({ direction, justify, align, gap }, className)
+export default Flex as FlexComponent
 
-  return (
-    <Component {...restProps} className={style} ref={forwardRef}>
-      {children}
-    </Component>
-  )
-}
-
-export default forwardRef(Flex) as FlexComponent
+Flex.displayName = 'Flex'
