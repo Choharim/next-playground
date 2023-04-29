@@ -3,7 +3,7 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import useToast from '@/hooks/useToast'
 
 import ToastContainer from '@/components/toast/ToastContainer'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button/Button'
 import { Variety } from '@/components/toast/type'
 import { css } from '@emotion/react'
 

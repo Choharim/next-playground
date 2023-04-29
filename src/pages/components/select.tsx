@@ -9,7 +9,7 @@ import RowLabel from '@/components/form/atomic/RowLabel'
 import Frame from '@/features/components/Frame'
 import { SelectBasic } from '@/components/select/shared'
 import Form from '@/components/form/Form'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button/Button'
 import SelectProvider from '@/components/select/context/selectProvider'
 
 const ANIMAL_OPTIONS: SelectBasic['options'] = [

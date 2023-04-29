@@ -8,7 +8,7 @@ import useBlockLeaving from '@/hooks/useBlockLeaving'
 
 import Frame from '@/features/components/Frame'
 import ConfirmModal from '@/components/modal/ConfirmModal'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button/Button'
 
 const ModalPage: NextPageWithLayout = () => {
   const router = useRouter()

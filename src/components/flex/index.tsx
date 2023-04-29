@@ -6,7 +6,7 @@ import {
 } from '@/shared/types/polymorphic'
 import getStyle from './getStyle'
 
-const DEFAULT_ELEMENT = 'div'
+const DEFAULT_FLEX_ELEMENT = 'div'
 
 export interface FlexStyleProps {
   direction: CSSProperties['flexDirection']
@@ -20,30 +20,29 @@ export type FlexProps<E extends ElementType> = PolymorphicComponentProps<
   Partial<FlexStyleProps>
 >
 
-const Flex = forwardRef(
-  <E extends ElementType>(
-    {
-      as,
-      children,
-      direction,
-      justify,
-      align,
-      gap,
-      className,
-      ...restProps
-    }: FlexProps<E>,
-    forwardRef: PolymorphicRef<E>
-  ) => {
-    const Component = as || DEFAULT_ELEMENT
-    const style = getStyle({ direction, justify, align, gap }, className)
+const Flex = <E extends ElementType>(
+  {
+    as,
+    children,
+    direction,
+    justify,
+    align,
+    gap,
+    className,
 
-    return (
-      <Component {...restProps} className={style} ref={forwardRef}>
-        {children}
-      </Component>
-    )
-  }
-)
+    ...restProps
+  }: FlexProps<E | typeof DEFAULT_FLEX_ELEMENT>,
+  forwardRef: PolymorphicRef<E>
+) => {
+  const Component = as || DEFAULT_FLEX_ELEMENT
+  const style = getStyle({ direction, justify, align, gap }, className)
+
+  return (
+    <Component {...restProps} className={style} ref={forwardRef}>
+      {children}
+    </Component>
+  )
+}
 
 /**
  * @description
@@ -53,7 +52,4 @@ const Flex = forwardRef(
 export type FlexComponent = PolymorphicForwardRefComponent<
   Partial<FlexStyleProps>
 >
-
-export default Flex as FlexComponent
-
-Flex.displayName = 'Flex'
+export default forwardRef(Flex) as FlexComponent

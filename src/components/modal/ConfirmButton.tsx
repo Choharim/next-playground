@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { THEME } from '@/styles/theme'
 
-import Button from '@/components/button/Button'
+import Button from '@/components/Button/Button'
 
 const DEFAULT_TEXT: { [key in ButtonType]: string } = {
   cancel: '취소',

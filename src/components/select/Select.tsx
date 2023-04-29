@@ -16,7 +16,6 @@ import { useIsOpenState } from './shared'
 import ToggleIcon from './ToggleIcon'
 import SelectedOption from './SelectedOption'
 import OptionList from './OptionList'
-import ExtendableFlex from '../Flex/ExtendableFlex'
 
 const ToggleIconType = (<ToggleIcon />).type
 function getToggleIcon(children: ReactNode) {
@@ -56,8 +55,6 @@ const Select = ({
 
   return (
     <Box
-      justify="space-between"
-      align="center"
       className={className}
       ref={selectRef}
       isError={isError}
@@ -77,7 +74,7 @@ export default Select
 
 Select.ToggleIcon = ToggleIcon
 
-const Box = styled(ExtendableFlex)<Pick<Props, 'isError'>>`
+const Box = styled('div')<Pick<Props, 'isError'>>`
   position: relative;
   width: 100%;
   height: 32px;

@@ -5,7 +5,7 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 import Frame from '@/features/components/Frame'
-import Button from '@/components/button/Button'
+import Button from '@/components/Button/Button'
 import Form from '@/components/form/Form'
 import RowLabel from '@/components/form/atomic/RowLabel'
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'

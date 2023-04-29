@@ -56,4 +56,5 @@ const Box = styled.div<Pick<Props, 'variety'>>`
 const Text = styled.p`
   color: inherit;
   ${({ theme }) => theme.font.body_1};
+  white-space: nowrap;
 `

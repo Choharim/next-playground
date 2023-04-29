@@ -1,6 +1,8 @@
 import styled, { CSSObject } from '@emotion/styled'
 
-import RowButton, { RowButtonProps } from '@/components/button/AtomicButton'
+import AtomicButton, {
+  AtomicButtonProps,
+} from '@/components/Button/AtomicButton'
 import { THEME } from '@/styles/theme'
 import { css } from '@emotion/react'
 
@@ -26,7 +28,7 @@ const getVariety = (variety: Variety<Shape>) => {
   }
 }
 
-interface Props extends RowButtonProps {
+interface Props extends AtomicButtonProps {
   variety: Variety<Shape>
 }
 
@@ -74,7 +76,7 @@ const getStyle = (themeColor: ThemeColor): { [key in Shape]: CSSObject } => ({
   },
 })
 
-const CustomButton = styled(RowButton)<{
+const CustomButton = styled(AtomicButton)<{
   themeColor?: ThemeColor
   shape: Shape
 }>`
