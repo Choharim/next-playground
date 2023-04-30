@@ -3,7 +3,7 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import useToast from '@/hooks/useToast'
 
 import ToastContainer from '@/components/toast/ToastContainer'
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
 import { Variety } from '@/components/toast/type'
 import { css } from '@emotion/react'
 
@@ -42,6 +42,5 @@ export default ToastPage
 ToastPage.getLayout = getLayout
 
 const buttonStyle = css`
-  height: 48px;
   width: 100px;
 `

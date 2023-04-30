@@ -1,22 +1,21 @@
-import { THEME } from '@/styles/theme'
-import { CSSObject } from '@emotion/react'
+import { CSSObject, Theme } from '@emotion/react'
 
 import { Variety } from './type'
 
-export const VARIETY: { [key in Variety]: CSSObject } = {
+export const getVariety = (theme: Theme): { [key in Variety]: CSSObject } => ({
   confirm: {
-    backgroundColor: THEME.color.primary200,
-    color: THEME.color.white,
+    backgroundColor: theme.color.primary200,
+    color: theme.color.white,
   },
   error: {
-    backgroundColor: THEME.color.warning,
-    color: THEME.color.white,
+    backgroundColor: theme.color.warning,
+    color: theme.color.white,
   },
   normal: {
-    backgroundColor: THEME.color.primary200,
-    color: THEME.color.white,
+    backgroundColor: theme.color.primary200,
+    color: theme.color.white,
   },
-}
+})
 
 export const DESC: { [key in Variety]: string } = {
   confirm: '✅ 확인되었습니다.',

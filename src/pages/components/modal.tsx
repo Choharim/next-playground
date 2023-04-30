@@ -8,7 +8,7 @@ import useBlockLeaving from '@/hooks/useBlockLeaving'
 
 import Frame from '@/features/components/Frame'
 import ConfirmModal from '@/components/modal/ConfirmModal'
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
 
 const ModalPage: NextPageWithLayout = () => {
   const router = useRouter()
@@ -33,12 +33,12 @@ const ModalPage: NextPageWithLayout = () => {
   return (
     <Frame title="Confirm modal">
       <ButtonContainer>
-        <CustomButton variety="outline" onClick={showModal}>
+        <Button variety="outline" onClick={showModal}>
           모달 열기
-        </CustomButton>
-        <CustomButton variety="outline" onClick={goToBack}>
+        </Button>
+        <Button variety="outline" onClick={goToBack}>
           뒤로
-        </CustomButton>
+        </Button>
       </ButtonContainer>
 
       <ConfirmModal isOpen={isOpen} onCancel={onCancel} onConfirm={onConfirm}>
@@ -68,11 +68,6 @@ const CustomDesc = styled(ConfirmModal.BodyDesc)`
   color: ${({ theme }) => theme.color.grey600};
   ${({ theme }) => theme.font.body_3};
   margin-top: 5px;
-`
-
-const CustomButton = styled(Button)`
-  width: 200px;
-  height: 48px;
 `
 
 const ButtonContainer = styled.div`

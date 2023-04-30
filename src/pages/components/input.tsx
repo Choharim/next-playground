@@ -5,11 +5,12 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 import Frame from '@/features/components/Frame'
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
 import Form from '@/components/form/Form'
 import RowLabel from '@/components/form/atomic/RowLabel'
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
 import HookFormInput from '@/components/input/HookFormInput'
+import { css } from '@emotion/css'
 
 const UNCONTORLL_INPUT_ID = 'uncontrollInput'
 const CONTORLL_INPUT_ID = 'controllInput'
@@ -46,15 +47,23 @@ const InputPage: NextPageWithLayout = () => {
             type="number"
           />
 
-          <ConfirmButton type="submit" variety="contain">
+          <Button
+            type="submit"
+            variety="contain"
+            className={ConfirmButtonStyle}
+          >
             확인
-          </ConfirmButton>
+          </Button>
         </Form>
 
         <SearchInput enterSubmit={enterSubmit}>
-          <SearchButton key={SUBMIT_BUTTON_KEY} variety="contain">
+          <Button
+            key={SUBMIT_BUTTON_KEY}
+            variety="contain"
+            className={SearchButtonStyle}
+          >
             검색
-          </SearchButton>
+          </Button>
         </SearchInput>
       </Frame>
 
@@ -69,9 +78,13 @@ const InputPage: NextPageWithLayout = () => {
             value={value}
           />
 
-          <ConfirmButton type="submit" variety="contain">
+          <Button
+            type="submit"
+            variety="contain"
+            className={ConfirmButtonStyle}
+          >
             확인
-          </ConfirmButton>
+          </Button>
         </Form>
 
         <SearchInput
@@ -79,9 +92,13 @@ const InputPage: NextPageWithLayout = () => {
           setValue={setSearchValue}
           value={searchValue}
         >
-          <SearchButton key={SUBMIT_BUTTON_KEY} variety="contain">
+          <Button
+            key={SUBMIT_BUTTON_KEY}
+            variety="contain"
+            className={SearchButtonStyle}
+          >
             검색
-          </SearchButton>
+          </Button>
         </SearchInput>
       </Frame>
 
@@ -99,12 +116,11 @@ InputPage.getLayout = getLayout
 const CustomLabel = styled(RowLabel)`
   margin-bottom: 4px;
 `
-const ConfirmButton = styled(Button)`
-  padding: 10px;
+const ConfirmButtonStyle = css`
   margin-top: 10px;
 `
 
-const SearchButton = styled(Button)`
+const SearchButtonStyle = css`
   padding: 5px 10px;
   width: fit-content;
   white-space: nowrap;

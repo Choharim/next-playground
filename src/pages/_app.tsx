@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { Hydrate, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import GlobalStyleProvider from '@/styles/GlobalStyleProvider'
+import GlobalStyleProvider from '@/theme/GlobalStyleProvider'
 import { queryClient } from '@/services/reactQuery/queryClient'
 import { AppPropsWithLayout } from '@/shared/types/layout'
 import { wrapper } from '@/services/redux/store'

@@ -7,6 +7,7 @@ import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
 import Form from '@/components/form/Form'
+import Button from '@/components/Button'
 
 const Search = () => {
   const rounter = useRouter()
@@ -46,8 +47,4 @@ export default Search
 
 const CustomSearchInput = styled(Input)`
   display: flex;
-`
-
-const Button = styled.button`
-  border: 1px solid pink;
 `

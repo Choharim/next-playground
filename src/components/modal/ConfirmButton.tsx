@@ -1,9 +1,8 @@
 import React, { ButtonHTMLAttributes, ReactElement } from 'react'
-import styled from '@emotion/styled'
 
-import { THEME } from '@/styles/theme'
-
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
+import { Theme, useTheme } from '@emotion/react'
+import { css } from '@emotion/css'
 
 const DEFAULT_TEXT: { [key in ButtonType]: string } = {
   cancel: '취소',
@@ -23,29 +22,31 @@ const ConfirmButton = ({
   onClick,
   buttonType = 'confirm',
 }: Props): ReactElement<Props> => {
+  const theme = useTheme()
+
   return (
-    <CustomButton variety="contain" buttonType={buttonType} onClick={onClick}>
+    <Button
+      variety="contain"
+      className={css`
+        ${buttonType === 'cancel' ? getCancelButtonStyle(theme) : undefined}
+      `}
+      onClick={onClick}
+    >
       {children || DEFAULT_TEXT[buttonType]}
-    </CustomButton>
+    </Button>
   )
 }
 
 export default ConfirmButton
 
-const CANCEL_STYLE = {
-  color: THEME.color.white,
-  backgroundColor: THEME.color.grey400,
+const getCancelButtonStyle = (theme: Theme) => ({
+  color: theme.color.white,
+  backgroundColor: theme.color.grey400,
 
   ':is(:hover, :focus)': {
-    backgroundColor: THEME.color.grey500,
+    backgroundColor: theme.color.grey500,
   },
   ':active': {
-    backgroundColor: THEME.color.grey600,
+    backgroundColor: theme.color.grey600,
   },
-}
-
-const CustomButton = styled(Button)<Pick<Props, 'buttonType'>>`
-  height: 48px;
-
-  ${({ buttonType }) => buttonType === 'cancel' && CANCEL_STYLE}
-`
+})

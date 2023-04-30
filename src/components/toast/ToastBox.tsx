@@ -2,7 +2,7 @@ import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 
-import { TOAST_TIMEOUT, TOAST_TOP_POSITION, VARIETY } from './constant'
+import { TOAST_TIMEOUT, TOAST_TOP_POSITION, getVariety } from './constant'
 import { Variety } from './type'
 
 type Props = {
@@ -45,7 +45,7 @@ const Box = styled.div<Pick<Props, 'variety'>>`
   width: fit-content;
   min-height: 32px;
 
-  ${({ variety }) => VARIETY[variety]};
+  ${({ variety, theme }) => variety && getVariety(theme)[variety]};
 
   animation: ${fadeIn} ${ANIMATED_DURATION}ms ease,
     ${slideIn} ${ANIMATED_DURATION}ms ease,

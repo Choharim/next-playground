@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import Button from '../Button/Button'
+import Button from '../Button'
 import Input from './Input'
 
 type FormData = {

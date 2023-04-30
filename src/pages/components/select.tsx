@@ -9,8 +9,9 @@ import RowLabel from '@/components/form/atomic/RowLabel'
 import Frame from '@/features/components/Frame'
 import { SelectBasic } from '@/components/select/shared'
 import Form from '@/components/form/Form'
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
 import SelectProvider from '@/components/select/context/selectProvider'
+import { css } from '@emotion/css'
 
 const ANIMAL_OPTIONS: SelectBasic['options'] = [
   { text: '오리', value: 'duck' },
@@ -55,9 +56,9 @@ const SelectPage: NextPageWithLayout = () => {
             </CustomSelect>
           </SelectProvider>
 
-          <CustomButton type="submit" variety="contain">
+          <Button type="submit" variety="contain" className={CustomButtonStyle}>
             확인
-          </CustomButton>
+          </Button>
         </Form>
 
         <Label htmlFor={FRUIT_SELECT_ID}>과일</Label>
@@ -84,7 +85,6 @@ const Label = styled(RowLabel)`
 const CustomSelect = styled(Select)`
   width: 300px;
 `
-const CustomButton = styled(Button)`
-  height: 48px;
+const CustomButtonStyle = css`
   margin-top: 10px;
 `
