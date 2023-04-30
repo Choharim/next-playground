@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 import Button from '.'
 import Spiner from '../Spiner'
 import Flex from '../Flex'
