@@ -13,20 +13,13 @@ type Props = CombineType<
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   (
-    {
-      variety = 'contain',
-      color,
-      size,
-      className,
-      children,
-      ...buttonAttributes
-    },
+    { variety = 'contain', color, size, className, children, ...attributes },
     ref
   ) => {
     const theme = useButtonTheme({ variety, color, size }, className)
 
     return (
-      <BaseButton {...buttonAttributes} className={theme} ref={ref}>
+      <BaseButton {...attributes} className={theme} ref={ref}>
         {children}
       </BaseButton>
     )

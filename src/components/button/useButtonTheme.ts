@@ -15,8 +15,10 @@ const useButtonTheme = (
     css`
       border-radius: 4px;
 
-      ${!!variety && getVariety(theme)[variety]}
-
+      ${!!variety &&
+      css`
+        ${getVariety(theme)[variety]}
+      `}
       transition: 150ms ease;
     `,
     css`

@@ -11,7 +11,7 @@ const getVariety = (
     color: theme.color.white,
     backgroundColor: theme.color.primary500,
 
-    ':is(:hover)': {
+    ':hover': {
       backgroundColor: theme.color.primary600,
     },
     ':active': {
@@ -26,7 +26,7 @@ const getVariety = (
     border: `1px solid ${theme.color.primary500}`,
     color: theme.color.primary500,
 
-    ':is(:hover)': {
+    ':hover': {
       backgroundColor: theme.color.primary50,
     },
     ':active': {
@@ -41,7 +41,7 @@ const getVariety = (
   text: {
     color: theme.color.primary500,
 
-    ':is(:hover)': {
+    ':hover': {
       backgroundColor: theme.color.grey200,
     },
     ':active': {
