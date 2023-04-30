@@ -11,7 +11,7 @@ type WithAsProp<E extends ElementType> = {
 
 export type PolymorphicComponentProps<
   E extends ElementType,
-  Props
+  Props = unknown
 > = CombineType<ComponentPropsWithoutRef<E>, Props & WithAsProp<E>>
 
 export type PolymorphicRef<E extends ElementType> =
