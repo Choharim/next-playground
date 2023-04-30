@@ -1,12 +1,17 @@
 import { CSSProperties, ElementType, forwardRef } from 'react'
+
 import {
   PolymorphicComponentProps,
-  PolymorphicForwardRefComponent,
   PolymorphicRef,
 } from '@/shared/types/polymorphic'
 import getStyle from './getStyle'
 
-const DEFAULT_FLEX_ELEMENT = 'div'
+const DEFAULT_TAG: ElementTag = 'div'
+
+type ElementTag = Extract<
+  ElementType,
+  'div' | 'form' | 'section' | 'nav' | 'article' | 'aside' | 'ol' | 'ul'
+>
 
 export interface FlexStyleProps {
   direction: CSSProperties['flexDirection']
@@ -15,41 +20,37 @@ export interface FlexStyleProps {
   gap: CSSProperties['gap']
 }
 
-export type FlexProps<E extends ElementType> = PolymorphicComponentProps<
+export type FlexProps<E extends ElementTag> = PolymorphicComponentProps<
   E,
   Partial<FlexStyleProps>
 >
 
-const Flex = <E extends ElementType>(
-  {
-    as,
-    children,
-    direction,
-    justify,
-    align,
-    gap,
-    className,
+const Flex = forwardRef(
+  <E extends ElementTag = typeof DEFAULT_TAG>(
+    {
+      as,
+      children,
+      direction,
+      justify,
+      align,
+      gap,
+      className,
 
-    ...restProps
-  }: FlexProps<E | typeof DEFAULT_FLEX_ELEMENT>,
-  forwardRef: PolymorphicRef<E>
-) => {
-  const Component = as || DEFAULT_FLEX_ELEMENT
-  const style = getStyle({ direction, justify, align, gap }, className)
+      ...restProps
+    }: FlexProps<E>,
+    forwardRef: PolymorphicRef<E>
+  ) => {
+    const Element = (as || DEFAULT_TAG) as ElementType
+    const style = getStyle({ direction, justify, align, gap }, className)
 
-  return (
-    <Component {...restProps} className={style} ref={forwardRef}>
-      {children}
-    </Component>
-  )
-}
+    return (
+      <Element {...restProps} className={style} ref={forwardRef}>
+        {children}
+      </Element>
+    )
+  }
+)
 
-/**
- * @description
- * forwardRef로 인해 컴포넌트의 타입이 추론되지 않아
- * 타입 단언을 해줍니다.
- */
-export type FlexComponent = PolymorphicForwardRefComponent<
-  Partial<FlexStyleProps>
->
-export default forwardRef(Flex) as FlexComponent
+export default Flex
+
+Flex.displayName = 'Flex'
