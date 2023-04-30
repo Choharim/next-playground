@@ -1,19 +1,34 @@
-import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
-import useButtonStyle from './useButtonStyle'
-import { Variety } from './type'
+import React, { ComponentProps, forwardRef } from 'react'
 
-export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  variety: Variety
-}
+import BaseButton from './BaseButton'
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variety, children, className, ...buttonAttributes }, forwardRef) => {
-    const style = useButtonStyle({ variety }, className)
+import { CombineType } from '@/shared/types/extendable'
+import useButtonTheme from './useButtonTheme'
+import { ButtonTheme } from './type'
+
+type Props = CombineType<
+  ComponentProps<typeof BaseButton>,
+  Partial<ButtonTheme>
+>
+
+const Button = forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      variety = 'contain',
+      color,
+      size,
+      className,
+      children,
+      ...buttonAttributes
+    },
+    ref
+  ) => {
+    const theme = useButtonTheme({ variety, color, size }, className)
 
     return (
-      <button {...buttonAttributes} className={style} ref={forwardRef}>
+      <BaseButton {...buttonAttributes} className={theme} ref={ref}>
         {children}
-      </button>
+      </BaseButton>
     )
   }
 )

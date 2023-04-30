@@ -2,7 +2,7 @@ import { CSSObject, Theme } from '@emotion/react'
 
 import { Variety } from './type'
 
-export const getVariety = (
+const getVariety = (
   theme: Theme
 ): {
   [key in Variety]: CSSObject
@@ -42,10 +42,10 @@ export const getVariety = (
     color: theme.color.primary500,
 
     ':is(:hover)': {
-      backgroundColor: theme.color.primary50,
+      backgroundColor: theme.color.grey200,
     },
     ':active': {
-      backgroundColor: theme.color.primary100,
+      backgroundColor: theme.color.grey300,
     },
     ':disabled': {
       backgroundColor: theme.color.grey100,
@@ -53,3 +53,5 @@ export const getVariety = (
     },
   },
 })
+
+export default getVariety
