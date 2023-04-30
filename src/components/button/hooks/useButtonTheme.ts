@@ -1,9 +1,9 @@
 import { HTMLAttributes } from 'react'
 import { cx, css } from '@emotion/css'
-import getVariety from './getVariety'
+import getVariety from '../utils/getVariety'
 import { useTheme } from '@emotion/react'
-import { ButtonTheme } from './type'
-import getSize from './getSize'
+import { ButtonTheme } from '../type'
+import getSize from '../utils/getSize'
 
 const useButtonTheme = (
   { variety, color, size = 'medium' }: Partial<ButtonTheme>,

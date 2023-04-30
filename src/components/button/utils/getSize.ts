@@ -1,5 +1,5 @@
 import { CSSObject } from '@emotion/react'
-import { Size } from './type'
+import { Size } from '../type'
 
 const SIZE: Record<Size, CSSObject> = {
   small: {

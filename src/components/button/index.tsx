@@ -3,7 +3,7 @@ import React, { ComponentProps, forwardRef } from 'react'
 import BaseButton from './BaseButton'
 
 import { CombineType } from '@/shared/types/extendable'
-import useButtonTheme from './useButtonTheme'
+import useButtonTheme from './hooks/useButtonTheme'
 import { ButtonTheme } from './type'
 
 type Props = CombineType<

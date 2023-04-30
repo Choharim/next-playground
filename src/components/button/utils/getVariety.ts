@@ -1,6 +1,6 @@
 import { CSSObject, Theme } from '@emotion/react'
 
-import { Variety } from './type'
+import { Variety } from '../type'
 
 const getVariety = (
   theme: Theme
