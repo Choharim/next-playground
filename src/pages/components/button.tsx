@@ -1,28 +1,74 @@
-import styled from '@emotion/styled'
-
 import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 import Frame from '@/features/components/Frame'
-import Button from '@/components/Button/Button'
+import Button from '@/components/Button'
+import { css } from '@emotion/css'
+import LoadingButton from '@/components/Button/LoadingButton'
+import { useEffect, useState } from 'react'
 
 const ButtonPage: NextPageWithLayout = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIsLoading((prev) => !prev)
+    }, 2000)
+
+    return () => {
+      if (id) clearInterval(id)
+    }
+  }, [])
+
+  const clickButton = () => {
+    console.log('clicked!')
+  }
   return (
     <Frame title="버튼 종류">
-      <CustomButton variety="contain">contain</CustomButton>
-      <CustomButton variety="contain" disabled>
+      <Button variety="contain" className={ButtonStyle} onClick={clickButton}>
+        contain
+      </Button>
+      <Button
+        variety="contain"
+        disabled
+        className={ButtonStyle}
+        onClick={clickButton}
+      >
         disabled contain
-      </CustomButton>
+      </Button>
 
-      <CustomButton variety="outline">outline</CustomButton>
-      <CustomButton variety="outline" disabled>
+      <Button variety="outline" className={ButtonStyle} onClick={clickButton}>
+        outline
+      </Button>
+      <Button
+        variety="outline"
+        disabled
+        className={ButtonStyle}
+        onClick={clickButton}
+      >
         disabled outline
-      </CustomButton>
+      </Button>
 
-      <CustomButton variety="text">text</CustomButton>
-      <CustomButton variety="text" disabled>
+      <Button variety="text" className={ButtonStyle} onClick={clickButton}>
+        text
+      </Button>
+      <Button
+        variety="text"
+        disabled
+        className={ButtonStyle}
+        onClick={clickButton}
+      >
         disabled text
-      </CustomButton>
+      </Button>
+
+      <LoadingButton
+        isLoading={isLoading}
+        variety="text"
+        className={ButtonStyle}
+        onClick={clickButton}
+      >
+        text
+      </LoadingButton>
     </Frame>
   )
 }
@@ -31,8 +77,6 @@ export default ButtonPage
 
 ButtonPage.getLayout = getLayout
 
-const CustomButton = styled(Button)`
-  height: 48px;
+const ButtonStyle = css`
   width: 200px;
-  ${({ theme }) => theme.font.body_1};
 `
