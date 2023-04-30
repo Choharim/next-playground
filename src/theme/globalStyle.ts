@@ -20,14 +20,6 @@ export const globalStyle = css`
     text-decoration: none;
   }
 
-  button,
-  input,
-  select,
-  textarea {
-    font-family: inherit;
-    outline: none;
-  }
-
   a,
   button,
   svg {

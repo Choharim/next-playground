@@ -3,7 +3,7 @@ import localFont from '@next/font/local'
 import { Global, ThemeProvider } from '@emotion/react'
 
 import { globalStyle } from './globalStyle'
-import { THEME } from './theme'
+import { THEME } from '.'
 
 const pretandardFont = localFont({
   src: './fonts/PretendardVariable.woff2',
