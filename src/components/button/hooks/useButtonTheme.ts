@@ -1,13 +1,14 @@
-import { HTMLAttributes } from 'react'
 import { cx, css } from '@emotion/css'
-import getVariety from '../utils/getVariety'
 import { useTheme } from '@emotion/react'
-import { ButtonTheme } from '../type'
+
+import getVariety from '../utils/getVariety'
 import getSize from '../utils/getSize'
+import { ButtonTheme } from '../type'
+import { ClassName } from '@/shared/types/element'
 
 const useButtonTheme = (
-  { variety, color, size = 'medium' }: Partial<ButtonTheme>,
-  className: HTMLAttributes<HTMLElement>['className']
+  { variety, size = 'medium' }: Partial<ButtonTheme>,
+  className: ClassName
 ) => {
   const theme = useTheme()
 
@@ -20,9 +21,6 @@ const useButtonTheme = (
         ${getVariety(theme)[variety]}
       `}
       transition: 150ms ease;
-    `,
-    css`
-      color: ${!!color ? theme.color[color] : undefined};
       ${getSize(size)};
     `,
     className
