@@ -6,8 +6,8 @@ import { getLayout } from '@/components/layouts/Layout'
 
 import Frame from '@/features/components/Frame'
 import Button from '@/components/Button'
-import Form from '@/components/form/Form'
-import RowLabel from '@/components/form/atomic/RowLabel'
+import Form from '@/components/Form'
+import Label from '@/components/Form/Label'
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
 import HookFormInput from '@/components/input/HookFormInput'
 import { css } from '@emotion/css'
@@ -39,7 +39,9 @@ const InputPage: NextPageWithLayout = () => {
     <>
       <Frame title="비제어 컴포넌트">
         <Form onSubmitForm={submitUncontrollForm}>
-          <CustomLabel htmlFor={UNCONTORLL_INPUT_ID}>폼 입력 창</CustomLabel>
+          <Label isRequired htmlFor={UNCONTORLL_INPUT_ID}>
+            폼 입력 창
+          </Label>
           <Input
             name={UNCONTORLL_INPUT_ID}
             id={UNCONTORLL_INPUT_ID}
@@ -69,7 +71,7 @@ const InputPage: NextPageWithLayout = () => {
 
       <Frame title="제어 컴포넌트">
         <Form onSubmitForm={submitControllForm}>
-          <CustomLabel htmlFor={CONTORLL_INPUT_ID}>폼 입력 창</CustomLabel>
+          <Label htmlFor={CONTORLL_INPUT_ID}>폼 입력 창</Label>
           <Input
             id={CONTORLL_INPUT_ID}
             name={CONTORLL_INPUT_ID}
@@ -113,9 +115,6 @@ export default InputPage
 
 InputPage.getLayout = getLayout
 
-const CustomLabel = styled(RowLabel)`
-  margin-bottom: 4px;
-`
 const ConfirmButtonStyle = css`
   margin-top: 10px;
 `

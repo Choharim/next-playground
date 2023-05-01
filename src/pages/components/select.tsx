@@ -5,10 +5,10 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
 
 import Select from '@/components/select/Select'
-import RowLabel from '@/components/form/atomic/RowLabel'
+import Label from '@/components/Form/Label'
 import Frame from '@/features/components/Frame'
 import { SelectBasic } from '@/components/select/shared'
-import Form from '@/components/form/Form'
+import Form from '@/components/Form'
 import Button from '@/components/Button'
 import SelectProvider from '@/components/select/context/selectProvider'
 import { css } from '@emotion/css'
@@ -42,7 +42,9 @@ const SelectPage: NextPageWithLayout = () => {
     <>
       <Frame title="드롭다운">
         <Form onSubmitForm={submitForm}>
-          <Label htmlFor={ANIMAL_SELECT_ID}>동물</Label>
+          <Label variety="header_4" htmlFor={ANIMAL_SELECT_ID}>
+            동물
+          </Label>
 
           <SelectProvider options={ANIMAL_OPTIONS}>
             <CustomSelect
@@ -77,10 +79,6 @@ const SelectPage: NextPageWithLayout = () => {
 export default SelectPage
 
 SelectPage.getLayout = getLayout
-
-const Label = styled(RowLabel)`
-  ${({ theme }) => theme.font.header_4};
-`
 
 const CustomSelect = styled(Select)`
   width: 300px;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
 import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
-import Form from '@/components/form/Form'
+import Form from '@/components/Form'
 import Button from '@/components/Button'
 
 const Search = () => {
