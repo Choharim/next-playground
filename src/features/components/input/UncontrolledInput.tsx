@@ -1,4 +1,4 @@
-import Form from '@/components/Form'
+import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Form/Label'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
@@ -6,15 +6,14 @@ import Text from '@/components/Text'
 import { css } from '@emotion/css'
 import SearchInput from '@/components/Input/SearchInput'
 
-const UNCONTORLL_INPUT_ID = 'uncontrollInput'
+const NAME_INPUT_ID = 'nameInput'
+const AGE_INPUT_ID = 'ageInput'
 
-type Form = {
-  [UNCONTORLL_INPUT_ID]: { value: string }
-}
+const FORM_FIELD_NAMES = [NAME_INPUT_ID, AGE_INPUT_ID] as const
 
 const UncontrolledInput = () => {
-  const submitUncontrollForm = (target: Form) => {
-    console.log(target[UNCONTORLL_INPUT_ID]?.value)
+  const submitUncontrollForm = (data: FormData<typeof FORM_FIELD_NAMES>) => {
+    console.log(data)
   }
 
   const enterSubmit = (target: string) => {
@@ -23,11 +22,16 @@ const UncontrolledInput = () => {
 
   return (
     <>
-      <Form onSubmitForm={submitUncontrollForm}>
-        <Label isRequired htmlFor={UNCONTORLL_INPUT_ID}>
-          폼 입력 창
+      <Form onSubmit={submitUncontrollForm} fieldNames={FORM_FIELD_NAMES}>
+        <Label isRequired htmlFor={NAME_INPUT_ID}>
+          이름
         </Label>
-        <Input id={UNCONTORLL_INPUT_ID} name={UNCONTORLL_INPUT_ID} />
+        <Input id={NAME_INPUT_ID} name={NAME_INPUT_ID} />
+
+        <Label isRequired htmlFor={AGE_INPUT_ID}>
+          나이
+        </Label>
+        <Input type="number" id={AGE_INPUT_ID} name={AGE_INPUT_ID} />
 
         <Button type="submit" variety="contain" className={ConfirmButtonStyle}>
           확인

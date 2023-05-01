@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Form from '@/components/Form'
+import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Form/Label'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
@@ -10,16 +10,14 @@ import SearchInput from '@/components/Input/SearchInput'
 
 const CONTORLL_INPUT_ID = 'controllInput'
 
-type Form = {
-  [CONTORLL_INPUT_ID]: { value: string }
-}
+const FORM_FIELD_NAMES = [CONTORLL_INPUT_ID] as const
 
 const ControlledInput = () => {
   const [value, setValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
 
-  const submitControllForm = (target: Form) => {
-    console.log(target[CONTORLL_INPUT_ID]?.value)
+  const submitControllForm = (target: FormData<typeof FORM_FIELD_NAMES>) => {
+    console.log(target)
   }
 
   const enterSubmit = (target: string) => {
@@ -28,7 +26,7 @@ const ControlledInput = () => {
 
   return (
     <>
-      <Form onSubmitForm={submitControllForm}>
+      <Form onSubmit={submitControllForm} fieldNames={FORM_FIELD_NAMES}>
         <Label htmlFor={CONTORLL_INPUT_ID}>폼 입력 창</Label>
         <Input
           id={CONTORLL_INPUT_ID}

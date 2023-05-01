@@ -8,7 +8,7 @@ import Select from '@/components/select/Select'
 import Label from '@/components/Form/Label'
 import Frame from '@/features/components/Frame'
 import { SelectBasic } from '@/components/select/shared'
-import Form from '@/components/Form'
+import Form, { FormData } from '@/components/Form'
 import Button from '@/components/Button'
 import SelectProvider from '@/components/select/context/selectProvider'
 import { css } from '@emotion/css'
@@ -27,21 +27,20 @@ const FRUIT_OPTIONS: SelectBasic['options'] = [
 const ANIMAL_SELECT_ID = 'animals'
 const FRUIT_SELECT_ID = 'fruits'
 
-type Form = {
-  [ANIMAL_SELECT_ID]: { value: string }
-}
+const FORM_FIELDS_NAMES = [ANIMAL_SELECT_ID] as const
+
 const SelectPage: NextPageWithLayout = () => {
   const [selectedOption, setSelectedOption] = useState('')
 
   console.log(selectedOption)
 
-  const submitForm = (target: Form) => {
-    console.log(target[ANIMAL_SELECT_ID]?.value)
+  const submitForm = (target: FormData<typeof FORM_FIELDS_NAMES>) => {
+    console.log(target)
   }
   return (
     <>
       <Frame title="드롭다운">
-        <Form onSubmitForm={submitForm}>
+        <Form onSubmit={submitForm} fieldNames={FORM_FIELDS_NAMES}>
           <Label variety="header_4" htmlFor={ANIMAL_SELECT_ID}>
             동물
           </Label>
