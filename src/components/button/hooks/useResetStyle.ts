@@ -1,9 +1,8 @@
 import { css, cx } from '@emotion/css'
-import { HTMLAttributes } from 'react'
 
-export const useResetStyle = (
-  className: HTMLAttributes<HTMLElement>['className']
-) => {
+import { ClassName } from '@/shared/types/element'
+
+export const useResetStyle = (className: ClassName) => {
   return cx(
     css`
       width: 100%;
