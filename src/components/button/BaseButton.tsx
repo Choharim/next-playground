@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
-import { useResetStyle } from './hooks/useResetStyle'
+import useResetStyle from './hooks/useResetStyle'
 
 type Props = ComponentPropsWithoutRef<'button'>
 
