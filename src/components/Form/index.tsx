@@ -2,30 +2,38 @@ import React, { ComponentPropsWithoutRef, FormEvent } from 'react'
 
 import Flex from '../Flex'
 
-interface Props<T extends DefaultForm>
-  extends Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'> {
-  onSubmitForm?: (data: T) => void
+export type FormData<T extends readonly string[]> = {
+  [key in T[number]]: { value?: string }
 }
 
 /**
- * @note
- * child input에 지정한 name을 key로 전달합니다.
+ * @description
+ * - fieldNames
+ * form 관련 요소에 지정한 name을 배열로 전달합니다.
  */
-interface DefaultForm {
-  [key: string]: { value: string }
+interface Props<T extends readonly string[]>
+  extends Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'> {
+  onSubmit: (data: FormData<T>) => void
+  fieldNames: T
 }
 
-const Form = <T extends DefaultForm>({
+const Form = <T extends readonly string[]>({
   children,
-  onSubmitForm,
+  onSubmit,
+  fieldNames,
   ...formAttributes
 }: Props<T>) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const target = e.currentTarget as typeof e.currentTarget & T
+    const target = e.currentTarget as typeof e.currentTarget & FormData<T>
 
-    onSubmitForm?.(target)
+    const formData = fieldNames.reduce(
+      (prev, name) => ({ ...prev, [name]: target[name]?.value }),
+      {}
+    ) as FormData<T>
+
+    onSubmit(formData)
   }
 
   return (
