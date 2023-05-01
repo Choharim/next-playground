@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 
 import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
-import Input, { SUBMIT_BUTTON_KEY } from '@/components/input/Input'
 import Form from '@/components/Form'
 import Button from '@/components/Button'
+import SearchInput from '@/components/Input/SearchInput'
 
 const Search = () => {
   const rounter = useRouter()
@@ -32,19 +31,15 @@ const Search = () => {
 
   return (
     <Form>
-      <CustomSearchInput
-        enterSubmit={enterSubmit}
+      <SearchInput
+        onEnterSubmit={enterSubmit}
         value={value}
         setValue={setValue}
       >
-        <Button key={SUBMIT_BUTTON_KEY}>제출</Button>
-      </CustomSearchInput>
+        {({ onSubmit }) => <Button onClick={onSubmit}>제출</Button>}
+      </SearchInput>
     </Form>
   )
 }
 
 export default Search
-
-const CustomSearchInput = styled(Input)`
-  display: flex;
-`
