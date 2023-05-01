@@ -7,7 +7,7 @@ import { ButtonTheme } from '../type'
 import { ClassName } from '@/shared/types/element'
 
 const useButtonTheme = (
-  { variety, size = 'medium' }: Partial<ButtonTheme>,
+  { variety, size }: Partial<ButtonTheme>,
   className: ClassName
 ) => {
   const theme = useTheme()
@@ -21,7 +21,11 @@ const useButtonTheme = (
         ${getVariety(theme)[variety]}
       `}
       transition: 150ms ease;
-      ${getSize(size)};
+
+      ${!!size &&
+      css`
+        ${getSize(size)}
+      `};
     `,
     className
   )

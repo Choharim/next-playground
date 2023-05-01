@@ -3,13 +3,13 @@ import { Size } from '../type'
 
 const SIZE: Record<Size, CSSObject> = {
   small: {
-    height: '32px',
+    height: '30px',
   },
   medium: {
-    height: '48px',
+    height: '40px',
   },
   large: {
-    height: '60px',
+    height: '50px',
   },
 }
 const getSize = (size: Size) => {
