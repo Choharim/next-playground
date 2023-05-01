@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react'
 import { LabelThemeProps } from './Label'
 import { ClassName } from '@/shared/types/element'
 
-export const useLabelTheme = (
+const useLabelTheme = (
   { isRequired }: LabelThemeProps,
   className: ClassName
 ) => {
@@ -28,3 +28,5 @@ export const useLabelTheme = (
     className
   )
 }
+
+export default useLabelTheme

@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 
 import Text, { TextProps } from '../Text'
 import { CombineType } from '@/shared/types/extendable'
-import { useLabelTheme } from './useLabelTheme'
+import useLabelTheme from './useLabelTheme'
 
 export type LabelThemeProps = {
   isRequired: boolean
