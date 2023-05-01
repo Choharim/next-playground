@@ -1,3 +1,4 @@
+import Text from '@/components/Text'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -8,7 +9,7 @@ type Props = {
 const Frame = ({ title, children }: Props) => {
   return (
     <FrameWrapper>
-      <Title>{title}</Title>
+      <Text variety="header_3">{title}</Text>
       <FrameContents>{children}</FrameContents>
     </FrameWrapper>
   )
@@ -20,13 +21,8 @@ const FrameWrapper = styled.div`
   padding: 24px;
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid ${({ theme }) => theme.color.grey400};
+    border-bottom: 1px solid ${({ theme }) => theme.color.grey300};
   }
-`
-
-const Title = styled.h1`
-  ${({ theme }) => theme.font.header_2}
-  margin-bottom: 10px;
 `
 
 const FrameContents = styled.div`
@@ -34,4 +30,5 @@ const FrameContents = styled.div`
   grid-template-rows: auto;
   justify-content: center;
   gap: 20px;
+  margin-top: 10px;
 `

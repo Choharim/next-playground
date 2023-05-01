@@ -16,7 +16,7 @@ type ElementTag = Extract<
 
 export type TextThemeProps = {
   variety: FontKey
-  color: ColorKey
+  color: ColorKey | 'inherit'
 }
 
 export type TextProps<E extends ElementTag> = PolymorphicComponentProps<

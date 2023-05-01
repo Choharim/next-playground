@@ -12,7 +12,7 @@ const getTextTheme = (
   return cx(
     css`
       ${FONT[variety]}
-      color: ${COLOR[color]};
+      color: ${color === 'inherit' ? 'inherit' : COLOR[color]};
     `,
     className
   )
