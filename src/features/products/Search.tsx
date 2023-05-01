@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
-import Form from '@/components/Form'
 import Button from '@/components/Button'
 import SearchInput from '@/components/Input/SearchInput'
 
@@ -30,15 +29,13 @@ const Search = () => {
   }
 
   return (
-    <Form>
-      <SearchInput
-        onEnterSubmit={enterSubmit}
-        value={value}
-        setValue={setValue}
-      >
-        {({ onSubmit }) => <Button onClick={onSubmit}>제출</Button>}
-      </SearchInput>
-    </Form>
+    <SearchInput onEnterSubmit={enterSubmit} value={value} setValue={setValue}>
+      {({ onSubmit }) => (
+        <Button onClick={onSubmit} size="small">
+          제출
+        </Button>
+      )}
+    </SearchInput>
   )
 }
 
