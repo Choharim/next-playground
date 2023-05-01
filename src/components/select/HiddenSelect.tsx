@@ -1,26 +1,36 @@
-import { SelectHTMLAttributes } from 'react'
+import { ChangeEvent, ComponentProps } from 'react'
 import styled from '@emotion/styled'
 
 import { useOptions, useSelectedOption } from './context/consumer'
 
-import RowOption from './atomic/RowOption'
-import RowSelect from './atomic/RowSelect'
-
-type Props = SelectHTMLAttributes<HTMLSelectElement>
-
-const HiddenSelect = ({ ...selectAttributes }: Props) => {
+const HiddenSelect = ({
+  defaultValue,
+  ...selectAttributes
+}: ComponentProps<'select'>) => {
   const selectedOption = useSelectedOption()
   const options = useOptions()
 
+  /**
+   * @note
+   * select에 value 속성을 부여하기 위해서는 onChange 함수가 존재해야 합니다.
+   */
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    selectAttributes.onChange?.(e)
+  }
+
   return (
     <Wrapper>
-      <RowSelect {...selectAttributes} value={selectedOption}>
+      <select
+        {...selectAttributes}
+        onChange={handleChange}
+        value={selectedOption || defaultValue}
+      >
         {options.map((option) => (
-          <RowOption key={option.value} value={option.value}>
+          <option key={option.value} value={option.value}>
             {option.text}
-          </RowOption>
+          </option>
         ))}
-      </RowSelect>
+      </select>
     </Wrapper>
   )
 }
