@@ -6,7 +6,8 @@ import { Confirm } from '@/hooks/useConfirm'
 
 import Body, { Desc, Title } from './ConfirmBody'
 import ConfirmButton from './ConfirmButton'
-import ModalPortal from './ModalPortal'
+import Portal from '../Portal'
+import { MODAL_PORTAL_ID } from '@/pages/_document'
 interface Props extends Confirm {
   children: React.ReactElement
 }
@@ -17,13 +18,13 @@ const ConfirmModal = ({ isOpen, onCancel, onConfirm, children }: Props) => {
     onCancel()
   }
   return (
-    <ModalPortal>
+    <Portal id={MODAL_PORTAL_ID}>
       {isOpen && (
         <Overlay onClick={clickFallback}>
           {cloneElement(children, { ...children.props, onCancel, onConfirm })}
         </Overlay>
       )}
-    </ModalPortal>
+    </Portal>
   )
 }
 

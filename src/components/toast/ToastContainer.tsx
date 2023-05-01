@@ -4,7 +4,8 @@ import { DESC, TOAST_TOP_POSITION } from './constant'
 import { Toast } from './type'
 
 import ToastBox from './ToastBox'
-import ToastPortal from './ToastPortal'
+import Portal from '../Portal'
+import { TOAST_PORTAL_ID } from '@/pages/_document'
 
 type Props = {
   toasts: Toast[]
@@ -12,7 +13,7 @@ type Props = {
 
 const ToastContainer = ({ toasts }: Props) => {
   return (
-    <ToastPortal>
+    <Portal id={TOAST_PORTAL_ID}>
       <Container>
         {toasts.map(({ id, variety, desc }) => (
           <ToastBox key={id} variety={variety}>
@@ -20,7 +21,7 @@ const ToastContainer = ({ toasts }: Props) => {
           </ToastBox>
         ))}
       </Container>
-    </ToastPortal>
+    </Portal>
   )
 }
 
