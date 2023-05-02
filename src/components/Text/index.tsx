@@ -1,4 +1,4 @@
-import React, { ElementType, forwardRef } from 'react'
+import { ElementType, forwardRef } from 'react'
 
 import {
   PolymorphicComponentProps,
@@ -19,13 +19,13 @@ export type TextThemeProps = {
   color: ColorKey | 'inherit'
 }
 
-export type TextProps<E extends ElementTag> = PolymorphicComponentProps<
+export type TextProps<E extends ElementType> = PolymorphicComponentProps<
   E,
   Partial<TextThemeProps>
 >
 
 const Text = forwardRef(
-  <E extends ElementTag = typeof DEFAULT_TAG>(
+  <E extends ElementType>(
     {
       as,
       children,
@@ -33,12 +33,11 @@ const Text = forwardRef(
       variety = 'body_1',
       color = 'black',
       ...attributes
-    }: TextProps<E>,
+    }: TextProps<E | typeof DEFAULT_TAG>,
     ref: PolymorphicRef<E>
   ) => {
     const theme = getTextTheme({ variety, color }, className)
-
-    const Element = (as || DEFAULT_TAG) as ElementType
+    const Element = as || DEFAULT_TAG
 
     return (
       <Element {...attributes} className={theme} ref={ref}>
@@ -48,6 +47,8 @@ const Text = forwardRef(
   }
 )
 
-export default Text
+export default Text as <E extends ElementTag>(
+  props: TextProps<E> & { ref?: PolymorphicRef<E> }
+) => ReturnType<typeof Text>
 
 Text.displayName = 'Text'
