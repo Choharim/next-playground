@@ -24,7 +24,7 @@ export const OptionContext = createContext<OptionContextProps | undefined>(
 
 export type OptionContextProps = Pick<
   ComponentProps<typeof Dropdown>,
-  'options' | 'selectedValue' | 'setSelectedValue'
+  'options' | 'selectedValue' | 'setSelectedValue' | 'placeholder'
 >
 
 const Provider = ({
@@ -32,6 +32,7 @@ const Provider = ({
   selectedValue,
   setSelectedValue,
   children,
+  placeholder,
 }: PropsWithChildren<OptionContextProps>) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -53,8 +54,8 @@ const Provider = ({
   )
 
   const optionContextValue: OptionContextProps = useMemo(
-    () => ({ options, selectedValue, setSelectedValue }),
-    [options, selectedValue, setSelectedValue]
+    () => ({ options, selectedValue, setSelectedValue, placeholder }),
+    [options, selectedValue, setSelectedValue, placeholder]
   )
 
   return (

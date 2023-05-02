@@ -60,3 +60,16 @@ export const useSetSelectedValue = () => {
 
   return context.setSelectedValue
 }
+
+export const useLabel = () => {
+  const context = useContext(OptionContext)
+
+  if (context === undefined) {
+    throw Error('it must be used within a OptionContext')
+  }
+
+  const { options, selectedValue, placeholder } = context
+  const label = options.find((option) => option.value === selectedValue)?.label
+
+  return (label || placeholder) ?? ''
+}

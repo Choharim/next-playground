@@ -1,11 +1,13 @@
 import { css, cx } from '@emotion/css'
-import { ComponentProps } from 'react'
+import { ComponentProps, useEffect } from 'react'
 
 import Provider from './context/Provider'
 import Trigger from './Trigger'
 import OptionList from './OptionList'
 import Flex from '../Flex'
 import Option from './Option'
+import { CombineType } from '@/shared/types/extendable'
+import { RequireOnlyOne } from '@/shared/types/narrow'
 
 export interface OptionData {
   label: string
@@ -18,14 +20,26 @@ interface Props<T = string> extends Omit<ComponentProps<'select'>, 'value'> {
   setSelectedValue: (value: T) => void
 }
 
+type DropdownProps = CombineType<
+  Props,
+  RequireOnlyOne<{ placeholder: string; defaultValue: string }>
+>
+
 const Dropdown = ({
   options,
   selectedValue,
   setSelectedValue,
   className,
   children,
+  defaultValue,
   ...selectAttributes
-}: Props) => {
+}: DropdownProps) => {
+  const { placeholder } = selectAttributes
+
+  useEffect(() => {
+    if (!!defaultValue) setSelectedValue(String(defaultValue ?? ''))
+  }, [defaultValue, setSelectedValue])
+
   const handleChange = () => {
     /**
      * select element에 value prop을 전달하기 위해서는 onChange를 전달해야 합니다.
@@ -37,6 +51,7 @@ const Dropdown = ({
       options={options}
       selectedValue={selectedValue}
       setSelectedValue={setSelectedValue}
+      placeholder={placeholder}
     >
       <Flex
         direction="column"
@@ -57,6 +72,8 @@ const Dropdown = ({
             display: none;
           `}
         >
+          {!!placeholder && <option>{placeholder}</option>}
+
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}

@@ -1,11 +1,19 @@
 import { ReactElement, useRef } from 'react'
 
-import { useIsOpen, useOnClose, useOnToggle } from './context/consumer'
+import {
+  useIsOpen,
+  useLabel,
+  useOnClose,
+  useOnToggle,
+} from './context/consumer'
 import useClickOutside from '@/hooks/useClickOutside'
 import { TriggerContextProps } from './context/Provider'
 
+interface Args extends Pick<TriggerContextProps, 'isOpen'> {
+  label: string
+}
 interface Props {
-  render: (args: Pick<TriggerContextProps, 'isOpen'>) => ReactElement
+  render: (args: Args) => ReactElement
 }
 
 const Trigger = ({ render }: Props) => {
@@ -13,12 +21,13 @@ const Trigger = ({ render }: Props) => {
   const isOpen = useIsOpen()
   const onToggle = useOnToggle()
   const onClose = useOnClose()
+  const label = useLabel()
 
   useClickOutside({ target: ref, callabck: onClose })
 
   return (
     <div ref={ref} onClick={onToggle}>
-      {render({ isOpen })}
+      {render({ isOpen, label })}
     </div>
   )
 }
