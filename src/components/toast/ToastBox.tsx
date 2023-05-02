@@ -40,9 +40,11 @@ from {
 const ANIMATED_DURATION = 300
 
 const Box = styled.div<Pick<Props, 'variety'>>`
+  display: flex;
+  justify-content: center;
   padding: 10px 12px;
   border-radius: 4px;
-  width: fit-content;
+  min-width: 200px;
   min-height: 32px;
 
   ${({ variety, theme }) => variety && getVariety(theme)[variety]};
