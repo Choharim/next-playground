@@ -8,6 +8,7 @@ const useResetStyle = (className: ClassName) => {
       width: 100%;
       outline: none;
       border: none;
+      cursor: inherit;
 
       /* Chrome, Safari, Edge, Opera */
 

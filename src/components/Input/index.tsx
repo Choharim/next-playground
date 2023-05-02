@@ -1,4 +1,4 @@
-import React, { useRef, ChangeEvent, ComponentProps } from 'react'
+import React, { useRef, ChangeEvent, ComponentProps, MouseEvent } from 'react'
 
 import BaseInput from './BaseInput'
 import Flex from '../Flex'
@@ -36,12 +36,14 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
       setValue?.(e.target.value)
     }
 
-    const focusInput = () => {
+    const handleClick = (e: MouseEvent<HTMLInputElement>) => {
+      inputAttributes.onClick?.(e)
+
       inputRef.current?.focus()
     }
 
     return (
-      <Flex onClick={focusInput} className={theme}>
+      <Flex onClick={handleClick} className={theme}>
         <BaseInput
           {...inputAttributes}
           ref={combinedRef}
