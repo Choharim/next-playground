@@ -1,12 +1,12 @@
 import { css, cx } from '@emotion/css'
 
-import { TextThemeProps } from '.'
+import { TypoThemeProps } from '.'
 import { COLOR } from '@/theme/color'
 import { FONT } from '@/theme/font'
 import { ClassName } from '@/shared/types/element'
 
-const getTextTheme = (
-  { variety, color }: TextThemeProps,
+const getTypoTheme = (
+  { variety, color }: TypoThemeProps,
   className: ClassName
 ) => {
   return cx(
@@ -18,4 +18,4 @@ const getTextTheme = (
   )
 }
 
-export default getTextTheme
+export default getTypoTheme

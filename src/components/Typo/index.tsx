@@ -5,7 +5,7 @@ import {
   PolymorphicRef,
 } from '@/shared/types/polymorphic'
 import { ColorKey, FontKey } from '@/theme/type'
-import getTextTheme from './getTextTheme'
+import getTypoTheme from './getTypoTheme'
 
 const DEFAULT_TAG: ElementTag = 'span'
 
@@ -14,17 +14,17 @@ type ElementTag = Extract<
   'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'
 >
 
-export type TextThemeProps = {
+export type TypoThemeProps = {
   variety: FontKey
   color: ColorKey | 'inherit'
 }
 
-export type TextProps<E extends ElementType> = PolymorphicComponentProps<
+export type TypoProps<E extends ElementType> = PolymorphicComponentProps<
   E,
-  Partial<TextThemeProps>
+  Partial<TypoThemeProps>
 >
 
-const Text = forwardRef(
+const Typo = forwardRef(
   <E extends ElementType>(
     {
       as,
@@ -33,10 +33,10 @@ const Text = forwardRef(
       variety = 'body_1',
       color = 'black',
       ...attributes
-    }: TextProps<E | typeof DEFAULT_TAG>,
+    }: TypoProps<E | typeof DEFAULT_TAG>,
     ref: PolymorphicRef<E>
   ) => {
-    const theme = getTextTheme({ variety, color }, className)
+    const theme = getTypoTheme({ variety, color }, className)
     const Element = as || DEFAULT_TAG
 
     return (
@@ -47,8 +47,8 @@ const Text = forwardRef(
   }
 )
 
-export default Text as <E extends ElementTag>(
-  props: TextProps<E> & { ref?: PolymorphicRef<E> }
-) => ReturnType<typeof Text>
+export default Typo as <E extends ElementTag>(
+  props: TypoProps<E> & { ref?: PolymorphicRef<E> }
+) => ReturnType<typeof Typo>
 
-Text.displayName = 'Text'
+Typo.displayName = 'Typo'
