@@ -69,7 +69,10 @@ const Dropdown = ({
           value={selectedValue}
           onChange={handleChange}
           className={css`
-            display: none;
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
           `}
         >
           {!!placeholder && <option>{placeholder}</option>}
