@@ -47,6 +47,11 @@ const Typo = forwardRef(
   }
 )
 
+/**
+ * @description
+ * forwardRef에 제네릭을 적용하면 prop 타입이 추론되지 않아
+ * 타입 단언을 합니다.
+ */
 export default Typo as <E extends ElementTag>(
   props: TypoProps<E> & { ref?: PolymorphicRef<E> }
 ) => ReturnType<typeof Typo>
