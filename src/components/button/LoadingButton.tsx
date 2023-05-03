@@ -1,8 +1,9 @@
 import { ComponentProps, forwardRef } from 'react'
+import { css } from '@emotion/css'
+
 import Button from '.'
 import Spiner from '../Spiner'
 import Flex from '../Flex'
-import { css } from '@emotion/css'
 
 interface Props
   extends ComponentProps<typeof Button>,
@@ -20,22 +21,12 @@ const LoadingButton = forwardRef<HTMLButtonElement, Props>(
           {isLoading ? (
             <Spiner spinerColor={spinerColor} spinerSize={spinerSize} />
           ) : (
-            <Flex
-              className={css`
-                width: ${spinerSize}px;
-                height: ${spinerSize}px;
-              `}
-            ></Flex>
+            <Flex className={DummySpaceStyle({ spinerSize })} />
           )}
 
           {children}
 
-          <Flex
-            className={css`
-              width: ${spinerSize}px;
-              height: ${spinerSize}px;
-            `}
-          ></Flex>
+          <Flex className={DummySpaceStyle({ spinerSize })} />
         </Flex>
       </Button>
     )
@@ -45,3 +36,8 @@ const LoadingButton = forwardRef<HTMLButtonElement, Props>(
 export default LoadingButton
 
 LoadingButton.displayName = 'LoadingButton'
+
+const DummySpaceStyle = ({ spinerSize }: ComponentProps<typeof Spiner>) => css`
+  width: ${spinerSize}px;
+  height: ${spinerSize}px;
+`
