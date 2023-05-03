@@ -1,11 +1,13 @@
-import styled from '@emotion/styled'
 import Link from 'next/link'
+import { useTheme } from '@emotion/react'
+import { css } from '@emotion/css'
 
-import Chip from '../chip/Chip'
+import Chip from '../Chip'
+import Flex from '../Flex'
 
 const PAGES: { [key in PageDirection]: string[] } = {
   '': [''],
-  components: ['button', 'input', 'modal', 'toast', 'dropdown'],
+  components: ['button', 'chip', 'input', 'dropdown', 'modal', 'toast'],
   products: [''],
   recursive: ['folder'],
   shop: ['order', ''],
@@ -26,35 +28,32 @@ const getPath = (direction: string, page: string) => {
 }
 
 const Navigation = () => {
+  const theme = useTheme()
+
   return (
-    <HorizontalBox>
+    <Flex
+      as="nav"
+      direction="column"
+      gap="10px"
+      className={css`
+        padding: 10px;
+        height: 100%;
+        width: fit-content;
+
+        ${theme.shadow.dropBox};
+      `}
+    >
       {PAGE_DIRECTIONS.map((direction) =>
         PAGES[direction].map((page) => (
           <Link key={page} href={getPath(direction, page)}>
-            <CustomChip>
+            <Chip typoVariety="body_4">
               {direction} / {page}
-            </CustomChip>
+            </Chip>
           </Link>
         ))
       )}
-    </HorizontalBox>
+    </Flex>
   )
 }
 
 export default Navigation
-
-const HorizontalBox = styled.nav`
-  padding: 10px;
-  height: 100%;
-  width: fit-content;
-
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.color.white};
-  ${({ theme }) => theme.shadow.dropBox};
-`
-
-const CustomChip = styled(Chip)`
-  white-space: nowrap;
-  margin: 10px 0;
-`
