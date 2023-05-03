@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import Text, { TextProps } from '../Text'
+import Typo, { TypoProps } from '../Typo'
 import { CombineType } from '@/shared/types/extendable'
 import useLabelTheme from './useLabelTheme'
 
@@ -9,7 +9,7 @@ export type LabelThemeProps = {
 }
 
 type Props = CombineType<
-  Omit<TextProps<'label'>, 'as'>,
+  Omit<TypoProps<'label'>, 'as'>,
   Partial<LabelThemeProps>
 >
 
@@ -18,9 +18,9 @@ const Label = forwardRef<HTMLLabelElement, Props>(
     const theme = useLabelTheme({ isRequired }, className)
 
     return (
-      <Text {...labelAttributes} className={theme} as="label" ref={ref}>
+      <Typo {...labelAttributes} className={theme} as="label" ref={ref}>
         {children}
-      </Text>
+      </Typo>
     )
   }
 )

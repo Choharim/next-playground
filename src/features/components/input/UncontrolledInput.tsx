@@ -2,7 +2,7 @@ import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Form/Label'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-import Text from '@/components/Text'
+import Typo from '@/components/Typo'
 import { css } from '@emotion/css'
 import SearchInput from '@/components/Input/SearchInput'
 
@@ -45,9 +45,9 @@ const UncontrolledInput = () => {
             className={SearchButtonStyle}
             onClick={onSubmit}
           >
-            <Text color="inherit" variety="body_4">
+            <Typo color="inherit" variety="body_4">
               검색
-            </Text>
+            </Typo>
           </Button>
         )}
       </SearchInput>

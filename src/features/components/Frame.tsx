@@ -1,4 +1,4 @@
-import Text from '@/components/Text'
+import Typo from '@/components/Typo'
 import styled from '@emotion/styled'
 import React from 'react'
 
@@ -9,7 +9,7 @@ type Props = {
 const Frame = ({ title, children }: Props) => {
   return (
     <FrameWrapper>
-      <Text variety="header_3">{title}</Text>
+      <Typo variety="header_3">{title}</Typo>
       <FrameContents>{children}</FrameContents>
     </FrameWrapper>
   )

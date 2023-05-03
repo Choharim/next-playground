@@ -12,7 +12,7 @@ type Props = {
 const ToastBox = ({ children, variety }: Props) => {
   return (
     <Box variety={variety}>
-      <Text>{children}</Text>
+      <Typo>{children}</Typo>
     </Box>
   )
 }
@@ -55,7 +55,7 @@ const Box = styled.div<Pick<Props, 'variety'>>`
       ${TOAST_TIMEOUT - ANIMATED_DURATION}ms;
 `
 
-const Text = styled.p`
+const Typo = styled.p`
   color: inherit;
   ${({ theme }) => theme.font.body_1};
   white-space: nowrap;
