@@ -23,3 +23,18 @@ const getVariety = (
   },
 })
 export default getVariety
+
+export const getCheckedVariety = (
+  theme: Theme
+): {
+  [key in Variety]: CSSObject
+} => ({
+  outline: {
+    color: theme.color.primary400,
+    backgroundColor: theme.color.primary50,
+  },
+  fill: {
+    color: theme.color.white,
+    backgroundColor: theme.color.primary500,
+  },
+})
