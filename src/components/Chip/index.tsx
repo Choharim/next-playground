@@ -1,23 +1,26 @@
-import React, { ElementType, forwardRef } from 'react'
+import { ElementType, forwardRef } from 'react'
+
+import Typo, { TypoProps, TypoThemeProps } from '../Typo'
+
 import useChipTheme from './hooks/useChipTheme'
 import { PolymorphicRef } from '@/shared/types/polymorphic'
-import { Size, Variety } from './type'
-import Typo, { TypoProps } from '../Typo'
 import { CombineType } from '@/shared/types/extendable'
 
 const DEFAULT_TAG: ElementTag = 'span'
 type ElementTag = Extract<ElementType, 'span' | 'label'>
 
+type Variety = 'outline' | 'fill'
+type Size = 'small' | 'medium'
 export interface ChipThemeProps {
   variety: Variety
-  clickable: boolean
   size: Size
+  clickable: boolean
 }
 
 type CustomTypoProps<E extends ElementTag> = Omit<
   TypoProps<E>,
-  'variety' | 'color'
-> & { typoVariety?: TypoProps<E>['variety'] }
+  keyof TypoThemeProps
+> & { typoVariety?: TypoThemeProps['variety'] }
 
 export type ChipProps<E extends ElementTag> = CombineType<
   CustomTypoProps<E>,
@@ -27,30 +30,32 @@ export type ChipProps<E extends ElementTag> = CombineType<
 const Chip = forwardRef(
   <E extends ElementTag>(
     {
-      className,
-      children,
-      clickable,
       as = DEFAULT_TAG,
+
+      clickable,
       variety = 'outline',
       size = 'medium',
       typoVariety = 'body_1',
+
+      children,
+      className,
       ...attributes
     }: ChipProps<E>,
     forwardRef: PolymorphicRef<E>
   ) => {
     const { onClick } = attributes
     const theme = useChipTheme(
-      { variety, clickable: clickable || typeof onClick === 'function', size },
+      { variety, size, clickable: clickable || typeof onClick === 'function' },
       className
     )
 
     return (
       <Typo
         {...attributes}
-        className={theme}
-        variety={typoVariety}
         ref={forwardRef}
         as={as}
+        className={theme}
+        variety={typoVariety}
       >
         {children}
       </Typo>

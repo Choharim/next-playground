@@ -9,8 +9,8 @@ const Check = () => {
   const [checkedForChip, setCheckedForChip] = useState(false)
   const [checkedForBox, setCheckedForBox] = useState(false)
 
-  const toggleCheckedForChip = () => {
-    setCheckedForChip((prev) => !prev)
+  const toggleCheckedForChip = (e: ChangeEvent<HTMLInputElement>) => {
+    setCheckedForChip(e.currentTarget.checked)
   }
 
   const toggleCheckedForBox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,20 @@ const Check = () => {
   return (
     <>
       <Frame title="checkChip">
-        <CheckChip onClick={toggleCheckedForChip} checked={checkedForChip}>
+        <CheckChip
+          htmlFor="checkChip1"
+          onChange={toggleCheckedForChip}
+          checked={checkedForChip}
+        >
+          CheckChip
+        </CheckChip>
+
+        <CheckChip
+          htmlFor="checkChip2"
+          variety="fill"
+          onChange={toggleCheckedForChip}
+          checked={checkedForChip}
+        >
           CheckChip
         </CheckChip>
       </Frame>

@@ -7,7 +7,7 @@ import getVariety from '../utils/getVariety'
 import getSize from '../utils/getSize'
 
 const useChipTheme = (
-  { variety, clickable, size }: ChipThemeProps,
+  { variety, size, clickable }: ChipThemeProps,
   className: ClassName
 ) => {
   const theme = useTheme()
@@ -18,12 +18,12 @@ const useChipTheme = (
       justify-content: center;
       align-items: center;
 
-      width: fit-content;
       border-radius: 16px;
+      width: fit-content;
       white-space: nowrap;
 
       ${getSize()[size]};
-      ${getVariety(theme)[variety]}
+      ${getVariety(theme)[variety]['default']}
 
       ${clickable
         ? css`

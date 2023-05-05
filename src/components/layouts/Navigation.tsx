@@ -49,6 +49,7 @@ const Navigation = () => {
         PAGES[direction].map((page) => (
           <Link key={page} href={getPath(direction, page)}>
             <CheckChip
+              htmlFor="navigationChip"
               typoVariety="body_4"
               checked={router.pathname === getPath(direction, page)}
             >
