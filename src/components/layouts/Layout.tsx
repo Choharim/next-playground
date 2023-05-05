@@ -47,10 +47,10 @@ export const getLayout: GetLayout = (page, pageProps) => (
 const Main = styled.main`
   width: 100%;
   height: 100%;
-
-  margin: 0 auto;
-  display: flex;
   min-height: 100vh;
+
+  display: flex;
+  margin: 0 auto;
   overflow-x: hidden;
 `
 

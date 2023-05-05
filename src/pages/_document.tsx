@@ -5,7 +5,7 @@ export const TOAST_PORTAL_ID = 'toast-portal'
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="ko">
       <Head />
       <body>
         <Main />

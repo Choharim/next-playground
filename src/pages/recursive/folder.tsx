@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { css } from '@emotion/react'
+import { css } from '@emotion/css'
 import { BsFillTriangleFill } from 'react-icons/bs'
 
 import { FOLDER } from '@/features/recursive/constant'
@@ -23,7 +23,7 @@ const RecursiveBox = ({ data, order }: RecursiveBoxProps) => {
   return (
     <Box>
       {isParent && (
-        <ToggleIcon onClick={toggleOpen} css={isOpen && toggleStyle} />
+        <ToggleIcon onClick={toggleOpen} className={toggleStyle(isOpen)} />
       )}
 
       <Name>
@@ -62,7 +62,10 @@ const ToggleIcon = styled(BsFillTriangleFill)`
   padding: 2px;
   cursor: pointer;
 `
-const toggleStyle = css`
-  transform: rotate(180deg);
+const toggleStyle = (isOpen: boolean) => css`
+  ${isOpen &&
+  css`
+    transform: rotate(180deg);
+  `}
 `
 const Name = styled.span``

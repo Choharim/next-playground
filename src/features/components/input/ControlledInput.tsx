@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Form, { FormData } from '@/components/Form'
-import Label from '@/components/Form/Label'
+import Label from '@/components/Label'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import { css } from '@emotion/css'

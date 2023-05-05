@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { useTheme } from '@emotion/react'
 
-import { LabelThemeProps } from './Label'
+import { LabelThemeProps } from '.'
 import { ClassName } from '@/shared/types/element'
 
 const useLabelTheme = (

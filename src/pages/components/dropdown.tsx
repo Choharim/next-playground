@@ -9,7 +9,7 @@ import { getLayout } from '@/components/layouts/Layout'
 import { NextPageWithLayout } from '@/shared/types/layout'
 import Frame from '@/features/components/Frame'
 import Form, { FormData } from '@/components/Form'
-import Label from '@/components/Form/Label'
+import Label from '@/components/Label'
 import Button from '@/components/Button'
 
 const ANIMAL_SELECT_ID = 'animals'

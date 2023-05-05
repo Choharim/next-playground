@@ -15,7 +15,7 @@ type Props = CombineType<
 
 const Label = forwardRef<HTMLLabelElement, Props>(
   (
-    { children, isRequired = false, className, ...labelAttributes },
+    { isRequired = false, className, children, ...labelAttributes },
     forwardRef
   ) => {
     const theme = useLabelTheme({ isRequired }, className)
