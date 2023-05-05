@@ -42,16 +42,15 @@ const Flex = forwardRef(
       justify,
       align,
       gap,
-      className,
       ...restProps
     }: FlexProps<E | typeof DEFAULT_TAG>,
     forwardRef: PolymorphicRef<E>
   ) => {
     const Element = as || DEFAULT_TAG
-    const style = getStyle({ direction, justify, align, gap }, className)
+    const style = getStyle({ direction, justify, align, gap })
 
     return (
-      <Element {...restProps} className={style} ref={forwardRef}>
+      <Element {...restProps} css={style} ref={forwardRef}>
         {children}
       </Element>
     )

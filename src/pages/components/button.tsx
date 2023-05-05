@@ -1,11 +1,12 @@
-import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/layouts/Layout'
+import { css } from '@emotion/react'
+import { useEffect, useState } from 'react'
 
 import Frame from '@/features/components/Frame'
 import Button from '@/components/Button'
-import { css } from '@emotion/css'
 import LoadingButton from '@/components/Button/LoadingButton'
-import { useEffect, useState } from 'react'
+
+import { NextPageWithLayout } from '@/shared/types/layout'
+import { getLayout } from '@/components/layouts/Layout'
 
 const ButtonPage: NextPageWithLayout = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -25,46 +26,41 @@ const ButtonPage: NextPageWithLayout = () => {
   }
   return (
     <Frame title="버튼 종류">
-      <Button variety="contain" className={ButtonStyle} onClick={clickButton}>
+      <Button variety="contain" css={ButtonStyle} onClick={clickButton}>
         contain
       </Button>
       <Button
         variety="contain"
         disabled
-        className={ButtonStyle}
+        css={ButtonStyle}
         onClick={clickButton}
       >
         disabled contain
       </Button>
 
-      <Button variety="outline" className={ButtonStyle} onClick={clickButton}>
+      <Button variety="outline" css={ButtonStyle} onClick={clickButton}>
         outline
       </Button>
       <Button
         variety="outline"
         disabled
-        className={ButtonStyle}
+        css={ButtonStyle}
         onClick={clickButton}
       >
         disabled outline
       </Button>
 
-      <Button variety="text" className={ButtonStyle} onClick={clickButton}>
+      <Button variety="text" css={ButtonStyle} onClick={clickButton}>
         text
       </Button>
-      <Button
-        variety="text"
-        disabled
-        className={ButtonStyle}
-        onClick={clickButton}
-      >
+      <Button variety="text" disabled css={ButtonStyle} onClick={clickButton}>
         disabled text
       </Button>
 
       <LoadingButton
         isLoading={isLoading}
         variety="text"
-        className={ButtonStyle}
+        css={ButtonStyle}
         onClick={clickButton}
       >
         text

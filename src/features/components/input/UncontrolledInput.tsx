@@ -1,9 +1,10 @@
+import { css } from '@emotion/react'
+
 import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Label'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import Typo from '@/components/Typo'
-import { css } from '@emotion/css'
 import SearchInput from '@/components/Input/SearchInput'
 
 const NAME_INPUT_ID = 'nameInput'
@@ -33,18 +34,14 @@ const UncontrolledInput = () => {
         </Label>
         <Input type="number" id={AGE_INPUT_ID} name={AGE_INPUT_ID} />
 
-        <Button type="submit" variety="contain" className={ConfirmButtonStyle}>
+        <Button type="submit" variety="contain" css={ConfirmButtonStyle}>
           확인
         </Button>
       </Form>
 
       <SearchInput onEnterSubmit={enterSubmit}>
         {({ onSubmit }) => (
-          <Button
-            variety="contain"
-            className={SearchButtonStyle}
-            onClick={onSubmit}
-          >
+          <Button variety="contain" css={SearchButtonStyle} onClick={onSubmit}>
             <Typo color="inherit" variety="body_4">
               검색
             </Typo>

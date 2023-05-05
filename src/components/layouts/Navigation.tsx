@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { useTheme } from '@emotion/react'
-import { css } from '@emotion/css'
+import { css, useTheme } from '@emotion/react'
 import { useRouter } from 'next/router'
 
 import Flex from '../Flex'
@@ -37,7 +36,7 @@ const Navigation = () => {
       as="nav"
       direction="column"
       gap="10px"
-      className={css`
+      css={css`
         padding: 10px;
         height: 100%;
         width: fit-content;

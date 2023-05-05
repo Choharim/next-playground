@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import localFont from '@next/font/local'
 import { Global, ThemeProvider } from '@emotion/react'
 

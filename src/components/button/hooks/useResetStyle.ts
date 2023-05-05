@@ -1,22 +1,16 @@
-import { css, cx } from '@emotion/css'
+import { css } from '@emotion/react'
 
-import { ClassName } from '@/shared/types/element'
+const useResetStyle = () => {
+  return css`
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
 
-const useResetStyle = (className: ClassName) => {
-  return cx(
-    css`
-      width: 100%;
-      font-family: inherit;
-      background-color: inherit;
-      outline: none;
-      border: none;
-
-      &:disabled {
-        cursor: not-allowed;
-      }
-    `,
-    className
-  )
+    &:disabled {
+      cursor: not-allowed;
+    }
+  `
 }
 
 export default useResetStyle

@@ -1,5 +1,4 @@
-import { css, cx } from '@emotion/css'
-import { Theme, useTheme } from '@emotion/react'
+import { Theme, css, useTheme } from '@emotion/react'
 import { ComponentProps } from 'react'
 
 import { CombineType } from '@/shared/types/extendable'
@@ -8,7 +7,7 @@ import { useSelectedValue, useSetSelectedValue } from './context/consumer'
 
 type Props = CombineType<ComponentProps<'li'>, Pick<OptionData, 'value'>>
 
-const Option = ({ value, children, className, ...attributes }: Props) => {
+const Option = ({ value, children, ...attributes }: Props) => {
   const theme = useTheme()
   const setSelectedValue = useSetSelectedValue()
   const selectedValue = useSelectedValue()
@@ -22,7 +21,7 @@ const Option = ({ value, children, className, ...attributes }: Props) => {
     <li
       {...attributes}
       onClick={clickOption}
-      className={cx(getStyle({ theme, isSelected }), className)}
+      css={getStyle({ theme, isSelected })}
       role="option"
       aria-selected={isSelected}
     >

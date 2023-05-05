@@ -1,5 +1,4 @@
-import { css, keyframes } from '@emotion/css'
-import { useTheme } from '@emotion/react'
+import { css, keyframes, useTheme } from '@emotion/react'
 
 import { SpinerTheme } from '.'
 

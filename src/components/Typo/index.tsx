@@ -29,18 +29,17 @@ const Typo = forwardRef(
     {
       as,
       children,
-      className,
       variety = 'body_1',
       color = 'black',
       ...attributes
     }: TypoProps<E | typeof DEFAULT_TAG>,
     forwardRef: PolymorphicRef<E>
   ) => {
-    const theme = getTypoTheme({ variety, color }, className)
+    const theme = getTypoTheme({ variety, color })
     const Element = as || DEFAULT_TAG
 
     return (
-      <Element {...attributes} className={theme} ref={forwardRef}>
+      <Element {...attributes} css={theme} ref={forwardRef}>
         {children}
       </Element>
     )

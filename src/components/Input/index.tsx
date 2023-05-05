@@ -25,7 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     forwardRef
   ) => {
     const { disabled } = inputAttributes
-    const theme = useInputTheme({ isError, disabled }, className)
+    const theme = useInputTheme({ isError, disabled })
     const inputRef = useRef<HTMLInputElement>(null)
 
     const combinedRef = useCombineRefs<HTMLInputElement>(forwardRef, inputRef)
@@ -43,7 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     }
 
     return (
-      <Flex onClick={handleClick} className={theme}>
+      <Flex onClick={handleClick} css={theme} className={className}>
         <BaseInput
           {...inputAttributes}
           ref={combinedRef}

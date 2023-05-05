@@ -1,8 +1,7 @@
 import React, { ButtonHTMLAttributes, ReactElement } from 'react'
+import { Theme, css, useTheme } from '@emotion/react'
 
 import Button from '@/components/Button'
-import { Theme, useTheme } from '@emotion/react'
-import { css } from '@emotion/css'
 
 const DEFAULT_TEXT: { [key in ButtonType]: string } = {
   cancel: '취소',
@@ -27,8 +26,8 @@ const ConfirmButton = ({
   return (
     <Button
       variety="contain"
-      className={css`
-        ${buttonType === 'cancel' ? getCancelButtonStyle(theme) : undefined}
+      css={css`
+        ${buttonType === 'cancel' && getCancelButtonStyle(theme)}
       `}
       onClick={onClick}
     >

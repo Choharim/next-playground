@@ -4,6 +4,7 @@ import React, {
   ReactElement,
   useRef,
 } from 'react'
+
 import Input from '.'
 
 interface Props extends Omit<ComponentProps<typeof Input>, 'children'> {

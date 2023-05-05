@@ -1,5 +1,5 @@
-import { css } from '@emotion/css'
 import { ChangeEvent, ComponentProps, forwardRef } from 'react'
+import { css } from '@emotion/react'
 
 import Chip, { ChipProps } from '.'
 
@@ -19,18 +19,11 @@ export type CheckChipProps = CombineType<
 
 const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
   (
-    {
-      variety = 'outline',
-      checked,
-      onChange,
-      className,
-      children,
-      ...labelAttributes
-    },
+    { variety = 'outline', checked, onChange, children, ...labelAttributes },
     forwardRef
   ) => {
     const { htmlFor } = labelAttributes
-    const theme = useCheckChipTheme({ checked, variety }, className)
+    const theme = useCheckChipTheme({ checked, variety })
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       /**
@@ -47,7 +40,7 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
         as="label"
         clickable
         variety={variety}
-        className={theme}
+        css={theme}
       >
         {children}
 
@@ -56,7 +49,7 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
           id={htmlFor}
           onChange={handleInputChange}
           checked={checked}
-          className={HiddenInputStyle}
+          css={HiddenInputStyle}
         />
       </Chip>
     )

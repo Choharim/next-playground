@@ -42,4 +42,5 @@ const getVariety = (
     },
   },
 })
+
 export default getVariety

@@ -1,6 +1,5 @@
 import { ReactElement } from 'react'
-import { css } from '@emotion/css'
-import { Theme, useTheme } from '@emotion/react'
+import { css, Theme, useTheme } from '@emotion/react'
 
 import Flex from '../Flex'
 
@@ -23,8 +22,7 @@ const OptionList = ({ children }: Props) => {
       direction="column"
       as="ul"
       role="listbox"
-      tabIndex={0}
-      className={getStyle({ theme, isOpen })}
+      css={getStyle({ theme, isOpen })}
     >
       {children({ selectedValue, options })}
     </Flex>

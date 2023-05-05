@@ -1,24 +1,19 @@
-import { css, cx } from '@emotion/css'
-import { useTheme } from '@emotion/react'
+import { css, useTheme } from '@emotion/react'
 
 import { CheckChipProps } from '../CheckChip'
-import { ClassName } from '@/shared/types/element'
 import getVariety from '../utils/getVariety'
 
-const useCheckChipTheme = (
-  { variety, checked }: Required<Pick<CheckChipProps, 'variety' | 'checked'>>,
-  className: ClassName
-) => {
+const useCheckChipTheme = ({
+  variety,
+  checked,
+}: Required<Pick<CheckChipProps, 'variety' | 'checked'>>) => {
   const theme = useTheme()
 
-  return cx(
-    css`
-      position: relative;
+  return css`
+    position: relative;
 
-      ${checked && getVariety(theme)[variety]['checked']};
-    `,
-    className
-  )
+    ${checked && getVariety(theme)[variety]['checked']};
+  `
 }
 
 export default useCheckChipTheme

@@ -12,7 +12,7 @@ const Spiner = ({
 }: Partial<SpinerTheme>) => {
   const theme = useSpinerTheme({ spinerColor, spinerSize })
 
-  return <span role="status" className={theme} />
+  return <span role="status" css={theme} />
 }
 
 export default Spiner

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { css } from '@emotion/css'
+import { css } from '@emotion/react'
+
 import { BsFillTriangleFill } from 'react-icons/bs'
 
 import { FOLDER } from '@/features/recursive/constant'
@@ -23,7 +24,7 @@ const RecursiveBox = ({ data, order }: RecursiveBoxProps) => {
   return (
     <Box>
       {isParent && (
-        <ToggleIcon onClick={toggleOpen} className={toggleStyle(isOpen)} />
+        <ToggleIcon onClick={toggleOpen} css={toggleStyle(isOpen)} />
       )}
 
       <Name>

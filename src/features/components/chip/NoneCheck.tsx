@@ -1,4 +1,4 @@
-import { css } from '@emotion/css'
+import { css } from '@emotion/react'
 
 import Chip from '@/components/Chip'
 import Frame from '../Frame'
@@ -29,7 +29,7 @@ const NoneCheck = () => {
           variety="fill"
           typoVariety="subtitle_1"
           size="medium"
-          className={CustomStyle}
+          css={CustomStyle}
         >
           custom medium fill
         </Chip>
@@ -58,7 +58,7 @@ const NoneCheck = () => {
           typoVariety="subtitle_1"
           size="medium"
           onClick={clickChip}
-          className={CustomStyle}
+          css={CustomStyle}
         >
           custom medium fill
         </Chip>

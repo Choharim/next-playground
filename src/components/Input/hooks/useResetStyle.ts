@@ -1,25 +1,20 @@
-import { css, cx } from '@emotion/css'
+import { css } from '@emotion/react'
 
-import { ClassName } from '@/shared/types/element'
+const useResetStyle = () => {
+  return css`
+    width: 100%;
+    outline: none;
+    border: none;
+    cursor: inherit;
 
-const useResetStyle = (className: ClassName) => {
-  return cx(
-    css`
-      width: 100%;
-      outline: none;
-      border: none;
-      cursor: inherit;
+    /* Chrome, Safari, Edge, Opera */
 
-      /* Chrome, Safari, Edge, Opera */
-
-      ::-webkit-inner-spin-button,
-      ::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-    `,
-    className
-  )
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  `
 }
 
 export default useResetStyle

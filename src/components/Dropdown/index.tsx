@@ -1,5 +1,5 @@
-import { css, cx } from '@emotion/css'
 import { ComponentProps, useEffect } from 'react'
+import { css } from '@emotion/react'
 
 import Provider from './context/Provider'
 import Trigger from './Trigger'
@@ -55,12 +55,10 @@ const Dropdown = ({
     >
       <Flex
         direction="column"
-        className={cx(
-          css`
-            position: relative;
-          `,
-          className
-        )}
+        className={className}
+        css={css`
+          position: relative;
+        `}
       >
         {children}
 
@@ -68,7 +66,7 @@ const Dropdown = ({
           {...selectAttributes}
           value={selectedValue}
           onChange={handleChange}
-          className={css`
+          css={css`
             visibility: hidden;
             position: absolute;
             top: 0;

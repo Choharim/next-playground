@@ -1,16 +1,16 @@
-import { css } from '@emotion/css'
 import { useState } from 'react'
 import { BsFillTriangleFill } from 'react-icons/bs'
+import { css } from '@emotion/react'
 
 import Dropdown from '@/components/Dropdown'
 import Input from '@/components/Input'
-
-import { getLayout } from '@/components/layouts/Layout'
-import { NextPageWithLayout } from '@/shared/types/layout'
 import Frame from '@/features/components/Frame'
 import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Label'
 import Button from '@/components/Button'
+
+import { getLayout } from '@/components/layouts/Layout'
+import { NextPageWithLayout } from '@/shared/types/layout'
 
 const ANIMAL_SELECT_ID = 'animals'
 
@@ -44,7 +44,7 @@ const DropdownPage: NextPageWithLayout = () => {
           name={ANIMAL_SELECT_ID}
           placeholder="선택하세요."
           // defaultValue={OPTIONS[2].value}
-          className={css`
+          css={css`
             width: 300px;
           `}
         >
@@ -53,12 +53,12 @@ const DropdownPage: NextPageWithLayout = () => {
               <Input
                 readOnly
                 value={label}
-                className={css`
+                css={css`
                   cursor: pointer;
                 `}
               >
                 <BsFillTriangleFill
-                  className={
+                  css={
                     isOpen
                       ? css`
                           transform: rotate(180deg);

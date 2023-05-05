@@ -1,32 +1,24 @@
-import { css, cx } from '@emotion/css'
-import { useTheme } from '@emotion/react'
+import { css, useTheme } from '@emotion/react'
 
 import { LabelThemeProps } from '.'
-import { ClassName } from '@/shared/types/element'
 
-const useLabelTheme = (
-  { isRequired }: LabelThemeProps,
-  className: ClassName
-) => {
+const useLabelTheme = ({ isRequired }: LabelThemeProps) => {
   const theme = useTheme()
 
-  return cx(
-    css`
-      margin-bottom: 4px;
-      &:empty {
-        display: none;
-      }
+  return css`
+    margin-bottom: 4px;
+    &:empty {
+      display: none;
+    }
 
-      ${isRequired &&
-      css`
-        &::after {
-          content: '*';
-          color: ${theme.color.warning};
-        }
-      `}
-    `,
-    className
-  )
+    ${isRequired &&
+    css`
+      &::after {
+        content: '*';
+        color: ${theme.color.warning};
+      }
+    `}
+  `
 }
 
 export default useLabelTheme

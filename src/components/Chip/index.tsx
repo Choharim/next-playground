@@ -38,23 +38,23 @@ const Chip = forwardRef(
       typoVariety = 'body_1',
 
       children,
-      className,
       ...attributes
     }: ChipProps<E>,
     forwardRef: PolymorphicRef<E>
   ) => {
     const { onClick } = attributes
-    const theme = useChipTheme(
-      { variety, size, clickable: clickable || typeof onClick === 'function' },
-      className
-    )
+    const theme = useChipTheme({
+      variety,
+      size,
+      clickable: clickable || typeof onClick === 'function',
+    })
 
     return (
       <Typo
         {...attributes}
         ref={forwardRef}
         as={as}
-        className={theme}
+        css={theme}
         variety={typoVariety}
       >
         {children}

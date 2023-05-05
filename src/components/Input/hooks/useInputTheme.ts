@@ -1,45 +1,37 @@
 import { ComponentProps } from 'react'
 import Input from '..'
-import { ClassName } from '@/shared/types/element'
-import { css, cx } from '@emotion/css'
-import { useTheme } from '@emotion/react'
+import { css, useTheme } from '@emotion/react'
 
-const useInputTheme = (
-  {
-    isError,
-    disabled,
-  }: Pick<ComponentProps<typeof Input>, 'isError' | 'disabled'>,
-  className: ClassName
-) => {
+const useInputTheme = ({
+  isError,
+  disabled,
+}: Pick<ComponentProps<typeof Input>, 'isError' | 'disabled'>) => {
   const theme = useTheme()
 
-  return cx(
+  return css`
+    padding: 12px;
+    height: 48px;
+    border-radius: 4px;
+    cursor: text;
+
+    ${disabled &&
     css`
-      padding: 12px;
-      height: 48px;
-      border-radius: 4px;
-      cursor: text;
+      background-color: ${theme.color.grey100};
+      cursor: default;
+    `}
 
-      ${disabled &&
-      css`
-        background-color: ${theme.color.grey100};
-        cursor: default;
-      `}
+    ${isError
+      ? css`
+          border: 1px solid ${theme.color.warning};
+        `
+      : css`
+          border: 1px solid ${theme.color.grey300};
 
-      ${isError
-        ? css`
-            border: 1px solid ${theme.color.warning};
-          `
-        : css`
-            border: 1px solid ${theme.color.grey300};
-
-            &:focus-within {
-              border: 1px solid ${theme.color.primary400};
-            }
-          `}
-    `,
-    className
-  )
+          &:focus-within {
+            border: 1px solid ${theme.color.primary400};
+          }
+        `}
+  `
 }
 
 export default useInputTheme

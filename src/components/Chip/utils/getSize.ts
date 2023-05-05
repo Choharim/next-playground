@@ -1,4 +1,5 @@
 import { CSSObject } from '@emotion/react'
+
 import { ChipThemeProps } from '..'
 
 const getSize = (): { [key in ChipThemeProps['size']]: CSSObject } => ({

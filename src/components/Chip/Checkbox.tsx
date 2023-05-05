@@ -1,9 +1,11 @@
 import React, { ComponentProps } from 'react'
+import { css } from '@emotion/react'
+
+import Flex from '../Flex'
+
 import { CombineType } from '@/shared/types/extendable'
 import useCheckboxTheme from './hooks/useCheckboxTheme'
-import { css } from '@emotion/css'
 import { RequiredFields } from '@/shared/types/narrow'
-import Flex from '../Flex'
 
 export interface CheckboxThemeProps {
   size?: string
@@ -19,11 +21,10 @@ const Checkbox = ({
   size = '24px',
   isError,
   children,
-  className,
   ...inputAttributes
 }: CheckboxProps) => {
   const { id } = inputAttributes
-  const theme = useCheckboxTheme({ isError }, className)
+  const theme = useCheckboxTheme({ isError })
 
   return (
     <Flex
@@ -31,18 +32,18 @@ const Checkbox = ({
       gap="10px"
       as="label"
       htmlFor={id}
-      className={css`
+      css={css`
         cursor: pointer;
       `}
     >
       <div
-        className={css`
+        css={css`
           position: relative;
           min-height: ${size};
           min-width: ${size};
         `}
       >
-        <input {...inputAttributes} type="checkbox" className={theme} />
+        <input {...inputAttributes} type="checkbox" css={theme} />
       </div>
 
       {children}

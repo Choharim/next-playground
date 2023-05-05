@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 
 import Typo, { TypoProps } from '../Typo'
+
 import { CombineType } from '@/shared/types/extendable'
 import useLabelTheme from './useLabelTheme'
 
@@ -14,14 +15,11 @@ type Props = CombineType<
 >
 
 const Label = forwardRef<HTMLLabelElement, Props>(
-  (
-    { isRequired = false, className, children, ...labelAttributes },
-    forwardRef
-  ) => {
-    const theme = useLabelTheme({ isRequired }, className)
+  ({ isRequired = false, children, ...labelAttributes }, forwardRef) => {
+    const theme = useLabelTheme({ isRequired })
 
     return (
-      <Typo {...labelAttributes} className={theme} as="label" ref={forwardRef}>
+      <Typo {...labelAttributes} css={theme} as="label" ref={forwardRef}>
         {children}
       </Typo>
     )
