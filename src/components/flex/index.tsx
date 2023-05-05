@@ -10,7 +10,15 @@ const DEFAULT_TAG: ElementTag = 'div'
 
 type ElementTag = Extract<
   ElementType,
-  'div' | 'form' | 'section' | 'nav' | 'article' | 'aside' | 'ol' | 'ul'
+  | 'div'
+  | 'form'
+  | 'section'
+  | 'nav'
+  | 'article'
+  | 'aside'
+  | 'ol'
+  | 'ul'
+  | 'label'
 >
 
 export interface FlexStyleProps {
