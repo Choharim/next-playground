@@ -6,6 +6,7 @@ import Trigger from './Trigger'
 import OptionList from './OptionList'
 import Flex from '../Flex'
 import Option from './Option'
+
 import { CombineType } from '@/shared/types/extendable'
 import { RequireOnlyOne } from '@/shared/types/narrow'
 
@@ -22,7 +23,7 @@ interface Props<T = string> extends Omit<ComponentProps<'select'>, 'value'> {
 
 type DropdownProps = CombineType<
   Props,
-  RequireOnlyOne<{ placeholder: string; defaultValue: string }>
+  RequireOnlyOne<Pick<ComponentProps<'select'>, 'placeholder' | 'defaultValue'>>
 >
 
 const Dropdown = ({
@@ -31,10 +32,9 @@ const Dropdown = ({
   setSelectedValue,
   className,
   children,
-  defaultValue,
   ...selectAttributes
 }: DropdownProps) => {
-  const { placeholder } = selectAttributes
+  const { placeholder, defaultValue } = selectAttributes
 
   useEffect(() => {
     if (!!defaultValue) setSelectedValue(String(defaultValue ?? ''))

@@ -4,37 +4,27 @@ import { OptionContext, TriggerContext } from './Provider'
 export const useIsOpen = () => {
   const context = useContext(TriggerContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a TriggerContext')
   }
 
   return context.isOpen
 }
 
-export const useOnToggle = () => {
+export const useTriggerActions = () => {
   const context = useContext(TriggerContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a TriggerContext')
   }
 
-  return context.onToggle
-}
-
-export const useOnClose = () => {
-  const context = useContext(TriggerContext)
-
-  if (context === undefined) {
-    throw Error('it must be used within a TriggerContext')
-  }
-
-  return context.onClose
+  return { onToggle: context.onToggle, onClose: context.onClose }
 }
 
 export const useOptions = () => {
   const context = useContext(OptionContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a OptionContext')
   }
 
@@ -44,7 +34,7 @@ export const useOptions = () => {
 export const useSelectedValue = () => {
   const context = useContext(OptionContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a OptionContext')
   }
 
@@ -54,7 +44,7 @@ export const useSelectedValue = () => {
 export const useSetSelectedValue = () => {
   const context = useContext(OptionContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a OptionContext')
   }
 
@@ -64,7 +54,7 @@ export const useSetSelectedValue = () => {
 export const useLabel = () => {
   const context = useContext(OptionContext)
 
-  if (context === undefined) {
+  if (context === null) {
     throw Error('it must be used within a OptionContext')
   }
 

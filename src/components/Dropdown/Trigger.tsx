@@ -1,11 +1,6 @@
 import { ReactElement, useRef } from 'react'
 
-import {
-  useIsOpen,
-  useLabel,
-  useOnClose,
-  useOnToggle,
-} from './context/consumer'
+import { useIsOpen, useLabel, useTriggerActions } from './context/consumer'
 import useClickOutside from '@/hooks/useClickOutside'
 import { TriggerContextProps } from './context/Provider'
 
@@ -19,8 +14,7 @@ interface Props {
 const Trigger = ({ render }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
   const isOpen = useIsOpen()
-  const onToggle = useOnToggle()
-  const onClose = useOnClose()
+  const { onClose, onToggle } = useTriggerActions()
   const label = useLabel()
 
   useClickOutside({ target: ref, callabck: onClose })

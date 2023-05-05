@@ -1,4 +1,4 @@
-import React, {
+import {
   ComponentProps,
   PropsWithChildren,
   createContext,
@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
+
 import Dropdown from '..'
 
 export interface TriggerContextProps {
@@ -14,18 +15,14 @@ export interface TriggerContextProps {
   onToggle: () => void
 }
 
-export const TriggerContext = createContext<TriggerContextProps | undefined>(
-  undefined
-)
-
-export const OptionContext = createContext<OptionContextProps | undefined>(
-  undefined
-)
-
 export type OptionContextProps = Pick<
   ComponentProps<typeof Dropdown>,
   'options' | 'selectedValue' | 'setSelectedValue' | 'placeholder'
 >
+
+export const TriggerContext = createContext<TriggerContextProps | null>(null)
+
+export const OptionContext = createContext<OptionContextProps | null>(null)
 
 const Provider = ({
   options,

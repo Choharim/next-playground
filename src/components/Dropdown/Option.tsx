@@ -44,12 +44,13 @@ const getStyle = ({
   padding: 6px 8px;
   border-radius: inherit;
 
-  &:hover {
-    background-color: ${theme.color.grey200};
-  }
-
-  ${isSelected &&
-  css`
-    background-color: ${theme.color.primary100};
-  `}
+  ${isSelected
+    ? css`
+        background-color: ${theme.color.primary100};
+      `
+    : css`
+        &:hover {
+          background-color: ${theme.color.grey200};
+        }
+      `}
 `
