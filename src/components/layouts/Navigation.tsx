@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { useTheme } from '@emotion/react'
 import { css } from '@emotion/css'
+import { useRouter } from 'next/router'
 
-import Chip from '../Chip'
 import Flex from '../Flex'
+import CheckChip from '../Chip/CheckChip'
 
 const PAGES: { [key in PageDirection]: string[] } = {
   '': [''],
@@ -28,6 +29,7 @@ const getPath = (direction: string, page: string) => {
 }
 
 const Navigation = () => {
+  const router = useRouter()
   const theme = useTheme()
 
   return (
@@ -46,9 +48,12 @@ const Navigation = () => {
       {PAGE_DIRECTIONS.map((direction) =>
         PAGES[direction].map((page) => (
           <Link key={page} href={getPath(direction, page)}>
-            <Chip typoVariety="body_4">
+            <CheckChip
+              typoVariety="body_4"
+              checked={router.pathname === getPath(direction, page)}
+            >
               {direction} / {page}
-            </Chip>
+            </CheckChip>
           </Link>
         ))
       )}
