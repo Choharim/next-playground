@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/css'
+import { useTheme } from '@emotion/react'
 
 import { SpinerTheme } from '.'
-import { useTheme } from '@emotion/react'
 
 export const useSpinerTheme = ({
   spinerColor: color,
