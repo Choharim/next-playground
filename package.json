@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.21.0",
-    "@emotion/css": "^11.10.6",
+    "@emotion/babel-preset-css-prop": "^11.10.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@next/font": "13.1.6",
