@@ -22,13 +22,13 @@ interface Props
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
     { isError, setValue, children, className, ...inputAttributes },
-    forwardedRef
+    forwardRef
   ) => {
     const { disabled } = inputAttributes
     const theme = useInputTheme({ isError, disabled }, className)
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const combinedRef = useCombineRefs<HTMLInputElement>(forwardedRef, inputRef)
+    const combinedRef = useCombineRefs<HTMLInputElement>(forwardRef, inputRef)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       inputAttributes.onChange?.(e)

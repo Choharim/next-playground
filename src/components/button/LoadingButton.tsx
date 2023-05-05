@@ -13,10 +13,10 @@ interface Props
 const LoadingButton = forwardRef<HTMLButtonElement, Props>(
   (
     { isLoading, spinerColor, spinerSize = 22, children, ...buttonAttributes },
-    ref
+    forwardRef
   ) => {
     return (
-      <Button {...buttonAttributes} disabled={isLoading} ref={ref}>
+      <Button {...buttonAttributes} disabled={isLoading} ref={forwardRef}>
         <Flex align="center" justify="center" gap="5px">
           {isLoading ? (
             <Spiner spinerColor={spinerColor} spinerSize={spinerSize} />

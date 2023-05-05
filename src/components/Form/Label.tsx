@@ -14,11 +14,14 @@ type Props = CombineType<
 >
 
 const Label = forwardRef<HTMLLabelElement, Props>(
-  ({ children, isRequired = false, className, ...labelAttributes }, ref) => {
+  (
+    { children, isRequired = false, className, ...labelAttributes },
+    forwardRef
+  ) => {
     const theme = useLabelTheme({ isRequired }, className)
 
     return (
-      <Typo {...labelAttributes} className={theme} as="label" ref={ref}>
+      <Typo {...labelAttributes} className={theme} as="label" ref={forwardRef}>
         {children}
       </Typo>
     )

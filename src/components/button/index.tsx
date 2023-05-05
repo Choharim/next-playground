@@ -27,12 +27,12 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       children,
       ...buttonAttributes
     },
-    ref
+    forwardRef
   ) => {
     const theme = useButtonTheme({ variety, size }, className)
 
     return (
-      <BaseButton {...buttonAttributes} className={theme} ref={ref}>
+      <BaseButton {...buttonAttributes} className={theme} ref={forwardRef}>
         {children}
       </BaseButton>
     )

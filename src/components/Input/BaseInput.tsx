@@ -9,10 +9,10 @@ import useResetStyle from './hooks/useResetStyle'
 const BaseInput = forwardRef<
   HTMLInputElement,
   ComponentPropsWithoutRef<'input'>
->(({ className, ...attributes }, ref) => {
+>(({ className, ...attributes }, forwardRef) => {
   const style = useResetStyle(className)
 
-  return <input {...attributes} className={style} ref={ref} />
+  return <input {...attributes} className={style} ref={forwardRef} />
 })
 
 export default BaseInput

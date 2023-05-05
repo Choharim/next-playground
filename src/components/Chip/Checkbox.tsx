@@ -16,21 +16,21 @@ type CheckboxProps = CombineType<
 >
 
 const Checkbox = ({
-  children,
-  className,
   size = '24px',
   isError,
+  children,
+  className,
   ...inputAttributes
 }: CheckboxProps) => {
   const { id } = inputAttributes
-  const theme = useCheckboxTheme({ size, isError }, className)
+  const theme = useCheckboxTheme({ isError }, className)
 
   return (
     <Flex
-      as="label"
-      htmlFor={id}
       align="center"
       gap="10px"
+      as="label"
+      htmlFor={id}
       className={css`
         cursor: pointer;
       `}
