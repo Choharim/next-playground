@@ -6,7 +6,7 @@ import Flex from '@/components/Flex'
 
 import { getLayout } from '@/components/layouts/Layout'
 import { NextPageWithLayout } from '@/shared/types/layout'
-import useToast from '@/hooks/useToast'
+import useToast from '@/components/toast/useToast'
 import { Variety } from '@/components/toast/type'
 
 const ToastPage: NextPageWithLayout = () => {

@@ -7,7 +7,7 @@ import React, {
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import { Confirm } from '@/hooks/useConfirm'
+import { Confirm } from '@/components/modal/useConfirm'
 
 import ConfirmButton from './ConfirmButton'
 

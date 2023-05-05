@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { NextPageWithLayout } from '@/shared/types/layout'
 import { getLayout } from '@/components/layouts/Layout'
-import useConfirm from '@/hooks/useConfirm'
+import useConfirm from '@/components/modal/useConfirm'
 import useBlockLeaving from '@/hooks/useBlockLeaving'
 
 import Frame from '@/features/components/Frame'

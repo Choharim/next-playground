@@ -2,7 +2,7 @@ import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { cloneElement, MouseEvent } from 'react'
 
-import { Confirm } from '@/hooks/useConfirm'
+import { Confirm } from '@/components/modal/useConfirm'
 
 import Body, { Desc, Title } from './ConfirmBody'
 import ConfirmButton from './ConfirmButton'
