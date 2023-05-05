@@ -1,11 +1,10 @@
 import { CSSObject, Theme } from '@emotion/react'
-
-import { Variety } from '../type'
+import { ButtonTheme } from '..'
 
 const getVariety = (
   theme: Theme
 ): {
-  [key in Variety]: CSSObject
+  [key in ButtonTheme['variety']]: CSSObject
 } => ({
   contain: {
     color: theme.color.white,

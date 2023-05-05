@@ -12,7 +12,7 @@ interface Props
 }
 const LoadingButton = forwardRef<HTMLButtonElement, Props>(
   (
-    { children, isLoading, spinerColor, spinerSize = 22, ...buttonAttributes },
+    { isLoading, spinerColor, spinerSize = 22, children, ...buttonAttributes },
     ref
   ) => {
     return (

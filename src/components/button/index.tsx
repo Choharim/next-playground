@@ -1,10 +1,17 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 
 import BaseButton from './BaseButton'
 
 import { CombineType } from '@/shared/types/extendable'
 import useButtonTheme from './hooks/useButtonTheme'
-import { ButtonTheme } from './type'
+
+type Variety = 'outline' | 'contain' | 'text'
+type Size = 'small' | 'medium' | 'large'
+
+export interface ButtonTheme {
+  variety: Variety
+  size: Size
+}
 
 type Props = CombineType<
   ComponentProps<typeof BaseButton>,
@@ -18,14 +25,14 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       size = 'medium',
       className,
       children,
-      ...attributes
+      ...buttonAttributes
     },
     ref
   ) => {
     const theme = useButtonTheme({ variety, size }, className)
 
     return (
-      <BaseButton {...attributes} className={theme} ref={ref}>
+      <BaseButton {...buttonAttributes} className={theme} ref={ref}>
         {children}
       </BaseButton>
     )

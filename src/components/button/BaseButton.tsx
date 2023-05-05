@@ -4,11 +4,11 @@ import useResetStyle from './hooks/useResetStyle'
 type Props = ComponentPropsWithoutRef<'button'>
 
 const BaseButton = forwardRef<HTMLButtonElement, Props>(
-  ({ children, className, ...attributes }, ref) => {
+  ({ children, className, ...buttonAttributes }, ref) => {
     const resetStyle = useResetStyle(className)
 
     return (
-      <button {...attributes} className={resetStyle} ref={ref}>
+      <button {...buttonAttributes} className={resetStyle} ref={ref}>
         {children}
       </button>
     )

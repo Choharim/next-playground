@@ -1,7 +1,7 @@
 import { CSSObject } from '@emotion/react'
-import { Size } from '../type'
+import { ButtonTheme } from '..'
 
-const SIZE: Record<Size, CSSObject> = {
+const SIZE: Record<ButtonTheme['size'], CSSObject> = {
   small: {
     height: '30px',
   },
@@ -12,7 +12,7 @@ const SIZE: Record<Size, CSSObject> = {
     height: '50px',
   },
 }
-const getSize = (size: Size) => {
+const getSize = (size: ButtonTheme['size']) => {
   return SIZE[size]
 }
 
