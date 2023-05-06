@@ -9,3 +9,7 @@ export type RequireOnlyOne<T, Keys extends keyof T = keyof T> = Pick<
 
 export type RequiredFields<T, U extends keyof T> = Required<Pick<T, U>> &
   Omit<T, U>
+
+export type RequiredAtLeastOne<T> = {
+  [K in keyof T]: { [L in K]: T[L] } & { [L in Exclude<keyof T, K>]?: T[L] }
+}[keyof T]
