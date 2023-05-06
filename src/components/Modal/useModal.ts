@@ -4,29 +4,28 @@ type PromiseType = {
   resolve: (value: boolean) => void
 } | null
 
-export type Confirm = {
+export interface ModalProps {
+  isOpen: boolean
+  showModal: () => Promise<boolean>
   onConfirm: () => void
   onCancel: () => void
-  isOpen: boolean
+  onClose: () => void
 }
 
-interface UseConfirmReturn extends Confirm {
-  confirm: () => Promise<boolean>
-}
-const useConfirm = (): UseConfirmReturn => {
+const useModal = (): ModalProps => {
   const [promise, setPromise] = useState<PromiseType>(null)
 
-  const confirm = () =>
+  const showModal = () =>
     new Promise<boolean>((resolve) => {
       setPromise({ resolve })
     })
 
-  const onClose = () => {
-    setPromise(null)
-  }
-
   const answer = (isConfirm: boolean) => {
     promise?.resolve(isConfirm)
+  }
+
+  const onClose = () => {
+    setPromise(null)
   }
 
   const onConfirm = () => {
@@ -39,7 +38,7 @@ const useConfirm = (): UseConfirmReturn => {
     onClose()
   }
 
-  return { confirm, onConfirm, onCancel, isOpen: !!promise }
+  return { showModal, onConfirm, onCancel, onClose, isOpen: !!promise }
 }
 
-export default useConfirm
+export default useModal
