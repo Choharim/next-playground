@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { createWrapper, HYDRATE } from 'next-redux-wrapper'
 
-import counter from './counter/slice'
+import notification from './notification/slice'
 
 const rootReducer = combineReducers({
-  counter: counter,
+  notification,
 })
 
 const reducer: typeof rootReducer = (state, action) => {
