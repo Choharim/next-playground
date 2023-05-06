@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import localFont from '@next/font/local'
 import { Global, ThemeProvider } from '@emotion/react'
 
-import { globalStyle } from './globalStyle'
+import resetStyle from './resetStyle'
 import { THEME } from '.'
 
 const pretandardFont = localFont({
@@ -21,7 +21,7 @@ const GlobalStyleProvider = ({ children }: Props) => {
           font-family: ${pretandardFont.style.fontFamily};
         }
       `}</style>
-      <Global styles={globalStyle} />
+      <Global styles={resetStyle} />
       <ThemeProvider theme={THEME}>{children}</ThemeProvider>
     </>
   )

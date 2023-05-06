@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-export const globalStyle = css`
+const resetStyle = css`
   * {
     padding: 0;
     margin: 0;
@@ -38,3 +38,5 @@ export const globalStyle = css`
     height: 100%;
   }
 `
+
+export default resetStyle
