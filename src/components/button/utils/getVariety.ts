@@ -1,12 +1,9 @@
 import { CSSObject, Theme } from '@emotion/react'
+
 import { ButtonTheme } from '..'
 
-const getVariety = (
-  theme: Theme
-): {
-  [key in ButtonTheme['variety']]: CSSObject
-} => ({
-  contain: {
+const VARIETY: Record<ButtonTheme['variety'], (theme: Theme) => CSSObject> = {
+  contain: (theme) => ({
     color: theme.color.white,
     backgroundColor: theme.color.primary500,
 
@@ -20,8 +17,8 @@ const getVariety = (
       color: theme.color.grey500,
       backgroundColor: theme.color.grey200,
     },
-  },
-  outline: {
+  }),
+  outline: (theme) => ({
     border: `1px solid ${theme.color.primary500}`,
     color: theme.color.primary500,
 
@@ -36,8 +33,8 @@ const getVariety = (
       color: theme.color.grey500,
       backgroundColor: theme.color.grey200,
     },
-  },
-  text: {
+  }),
+  text: (theme) => ({
     color: theme.color.primary500,
 
     ':hover': {
@@ -50,7 +47,11 @@ const getVariety = (
       backgroundColor: theme.color.grey100,
       color: theme.color.grey500,
     },
-  },
-})
+  }),
+}
+
+const getVariety = (variety: ButtonTheme['variety'], theme: Theme) => {
+  return VARIETY[variety](theme)
+}
 
 export default getVariety

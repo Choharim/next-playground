@@ -1,9 +1,12 @@
 import { ComponentProps, forwardRef } from 'react'
+import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import BaseButton from './BaseButton'
 
+import getVariety from './utils/getVariety'
+import getSize from './utils/getSize'
 import { CombineType } from '@/shared/types/extendable'
-import useButtonTheme from './hooks/useButtonTheme'
 
 type Variety = 'outline' | 'contain' | 'text'
 type Size = 'small' | 'medium' | 'large'
@@ -13,22 +16,25 @@ export interface ButtonTheme {
   size: Size
 }
 
-type Props = CombineType<
+type ButtonProps = CombineType<
   ComponentProps<typeof BaseButton>,
   Partial<ButtonTheme>
 >
 
-const Button = forwardRef<HTMLButtonElement, Props>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { variety = 'contain', size = 'medium', children, ...buttonAttributes },
     forwardRef
   ) => {
-    const theme = useButtonTheme({ variety, size })
-
     return (
-      <BaseButton {...buttonAttributes} css={theme} ref={forwardRef}>
+      <ThemeButton
+        {...buttonAttributes}
+        variety={variety}
+        size={size}
+        ref={forwardRef}
+      >
         {children}
-      </BaseButton>
+      </ThemeButton>
     )
   }
 )
@@ -36,3 +42,13 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 export default Button
 
 Button.displayName = 'Button'
+
+const ThemeButton = styled(BaseButton)<ButtonTheme>`
+  border-radius: 4px;
+
+  ${({ theme, variety, size }) => css`
+    ${getVariety(variety, theme)};
+    ${getSize(size)};
+  `};
+  transition: 150ms ease;
+`

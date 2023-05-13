@@ -1,20 +1,29 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
+import styled from '@emotion/styled'
 
-import useResetStyle from './hooks/useResetStyle'
+type BaseButtonProps = ComponentPropsWithoutRef<'button'>
 
-type Props = ComponentPropsWithoutRef<'button'>
-
-const BaseButton = forwardRef<HTMLButtonElement, Props>(
+const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
   ({ children, ...buttonAttributes }, forwardRef) => {
-    const resetStyle = useResetStyle()
-
     return (
-      <button {...buttonAttributes} css={resetStyle} ref={forwardRef}>
+      <Button {...buttonAttributes} ref={forwardRef}>
         {children}
-      </button>
+      </Button>
     )
   }
 )
+
+const Button = styled.button`
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+`
 
 export default BaseButton
 
