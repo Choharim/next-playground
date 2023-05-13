@@ -1,21 +1,4 @@
-import { CSSObject, Theme } from '@emotion/react'
-
 import { Variety } from './type'
-
-export const getVariety = (theme: Theme): { [key in Variety]: CSSObject } => ({
-  confirm: {
-    backgroundColor: theme.color.primary200,
-    color: theme.color.white,
-  },
-  error: {
-    backgroundColor: theme.color.warning,
-    color: theme.color.white,
-  },
-  normal: {
-    backgroundColor: theme.color.primary200,
-    color: theme.color.white,
-  },
-})
 
 export const TOAST_PORTAL_ID = 'toast-portal'
 

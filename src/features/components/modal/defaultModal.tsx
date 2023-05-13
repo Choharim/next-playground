@@ -1,9 +1,10 @@
+import styled from '@emotion/styled'
+
 import Button from '@/components/Button'
 import Modal from '@/components/Modal'
+import Flex from '@/components/Flex'
 
 import useModal from '@/components/Modal/useModal'
-import Flex from '@/components/Flex'
-import { css } from '@emotion/react'
 
 const DefaultModal = () => {
   const { isOpen, showModal, onClose } = useModal()
@@ -23,18 +24,17 @@ const DefaultModal = () => {
         기본 모달 열기
       </Button>
       <Modal isOpen={isOpen} onClickFallback={onClose}>
-        <Flex
-          direction="column"
-          css={css`
-            width: 500px;
-            height: 600px;
-          `}
-        >
+        <ModalContents direction="column">
           {'안녕하세요'.repeat(250)}
-        </Flex>
+        </ModalContents>
       </Modal>
     </>
   )
 }
 
 export default DefaultModal
+
+const ModalContents = styled(Flex)`
+  width: 500px;
+  height: 600px;
+`

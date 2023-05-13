@@ -1,5 +1,6 @@
 import { ReactElement } from 'react'
-import { css, Theme, useTheme } from '@emotion/react'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Flex from '../Flex'
 
@@ -12,48 +13,40 @@ type Props = {
   ) => ReactElement[]
 }
 const OptionList = ({ children }: Props) => {
-  const theme = useTheme()
   const isOpen = useIsOpen()
   const selectedValue = useSelectedValue()
   const options = useOptions()
 
   return (
-    <Flex
-      direction="column"
-      as="ul"
-      role="listbox"
-      css={getStyle({ theme, isOpen })}
-    >
+    <OptionContainer direction="column" as="ul" role="listbox" isOpen={isOpen}>
       {children({ selectedValue, options })}
-    </Flex>
+    </OptionContainer>
   )
 }
 
 export default OptionList
 
-const getStyle = ({
-  theme,
-  isOpen,
-}: { theme: Theme } & Pick<TriggerContextProps, 'isOpen'>) => css`
+const OptionContainer = styled(Flex)<Pick<TriggerContextProps, 'isOpen'>>`
   position: absolute;
   top: calc(100% + 5px);
   left: 0px;
 
   width: 100%;
   border-radius: 4px;
-  background-color: ${theme.color.white};
-  ${theme.shadow.dropBox};
-  ${theme.zIndex.dropBox};
+  background-color: ${({ theme }) => theme.color.white};
+  ${({ theme }) => theme.shadow.dropBox};
+  ${({ theme }) => theme.zIndex.dropBox};
 
-  ${isOpen
-    ? css`
-        opacity: 1;
-        visibility: visible;
-      `
-    : css`
-        opacity: 0;
-        visibility: hidden;
-      `}
+  ${({ isOpen }) =>
+    isOpen
+      ? css`
+          opacity: 1;
+          visibility: visible;
+        `
+      : css`
+          opacity: 0;
+          visibility: hidden;
+        `}
 
   transition: 0.2s ease;
 `

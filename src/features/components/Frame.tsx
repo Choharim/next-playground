@@ -1,6 +1,8 @@
-import Typo from '@/components/Typo'
-import styled from '@emotion/styled'
 import React from 'react'
+import styled from '@emotion/styled'
+
+import Flex from '@/components/Flex'
+import Typo from '@/components/Typo'
 
 type Props = {
   title: string
@@ -8,16 +10,18 @@ type Props = {
 }
 const Frame = ({ title, children }: Props) => {
   return (
-    <FrameWrapper>
+    <FrameWrapper direction="column">
       <Typo variety="header_3">{title}</Typo>
-      <FrameContents>{children}</FrameContents>
+      <FrameContents direction="column" gap="20px">
+        {children}
+      </FrameContents>
     </FrameWrapper>
   )
 }
 
 export default Frame
 
-const FrameWrapper = styled.div`
+const FrameWrapper = styled(Flex)`
   padding: 24px;
 
   &:not(:last-of-type) {
@@ -25,10 +29,8 @@ const FrameWrapper = styled.div`
   }
 `
 
-const FrameContents = styled.div`
-  display: grid;
-  grid-template-rows: auto;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 10px;
+const FrameContents = styled(Flex)`
+  width: 500px;
+  align-self: center;
+  margin-top: 20px;
 `

@@ -39,18 +39,11 @@ const Dialog = ({
 
   return (
     <Modal isOpen={isOpen} onClickFallback={onClickFallback}>
-      <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        css={css`
-          width: 450px;
-          height: 200px;
-        `}
-      >
+      <ContentsWrapper direction="column" align="center" justify="center">
         {children}
-      </Flex>
-      <ButtonContainer isOnlyOneButton={isOnlyOneButton}>
+      </ContentsWrapper>
+
+      <ButtonContainer align="center" isOnlyOneButton={isOnlyOneButton}>
         {hasCancelButton && (
           <DialogButton variety="cancel" onClick={cancel?.callback}>
             {cancel?.text}
@@ -68,9 +61,12 @@ const Dialog = ({
 
 export default Dialog
 
-const ButtonContainer = styled.div<{ isOnlyOneButton: boolean }>`
-  display: flex;
-  align-items: center;
+const ContentsWrapper = styled(Flex)`
+  width: 450px;
+  height: 200px;
+`
+
+const ButtonContainer = styled(Flex)<{ isOnlyOneButton: boolean }>`
   width: 100%;
 
   ${({ isOnlyOneButton }) =>

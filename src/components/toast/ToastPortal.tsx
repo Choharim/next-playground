@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Portal from '../Portal'
 import Flex from '../Flex'
@@ -13,20 +13,20 @@ const ToastPortal = () => {
 
   return (
     <Portal id={TOAST_PORTAL_ID}>
-      <Flex direction="column-reverse" gap="10px" css={ContainerPosition}>
+      <ToastContainer direction="column-reverse" gap="10px">
         {toasts.map(({ id, variety, desc }) => (
           <ToastBox key={id} variety={variety}>
             {DESC[variety] || desc}
           </ToastBox>
         ))}
-      </Flex>
+      </ToastContainer>
     </Portal>
   )
 }
 
 export default ToastPortal
 
-const ContainerPosition = css`
+const ToastContainer = styled(Flex)`
   position: fixed;
   top: ${TOAST_TOP_POSITION}px;
   left: 50%;
