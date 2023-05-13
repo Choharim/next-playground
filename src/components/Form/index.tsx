@@ -1,7 +1,5 @@
 import React, { ComponentPropsWithoutRef, FormEvent } from 'react'
 
-import Flex from '../Flex'
-
 export type FormData<T extends readonly string[]> = {
   [key in T[number]]: { value?: string }
 }
@@ -37,14 +35,9 @@ const Form = <T extends readonly string[]>({
   }
 
   return (
-    <Flex
-      as="form"
-      direction="column"
-      {...formAttributes}
-      onSubmit={handleSubmit}
-    >
+    <form {...formAttributes} onSubmit={handleSubmit}>
       {children}
-    </Flex>
+    </form>
   )
 }
 
