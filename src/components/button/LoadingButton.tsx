@@ -1,16 +1,16 @@
 import { ComponentProps, forwardRef } from 'react'
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Button from '.'
 import Spiner from '../Spiner'
 import Flex from '../Flex'
 
-interface Props
+interface LoadingButtonProps
   extends ComponentProps<typeof Button>,
     ComponentProps<typeof Spiner> {
   isLoading: boolean
 }
-const LoadingButton = forwardRef<HTMLButtonElement, Props>(
+const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
   (
     { isLoading, spinerColor, spinerSize = 22, children, ...buttonAttributes },
     forwardRef
@@ -21,12 +21,12 @@ const LoadingButton = forwardRef<HTMLButtonElement, Props>(
           {isLoading ? (
             <Spiner spinerColor={spinerColor} spinerSize={spinerSize} />
           ) : (
-            <Flex css={DummySpaceStyle({ spinerSize })} />
+            <DummyBox spinerSize={spinerSize} />
           )}
 
           {children}
 
-          <Flex css={DummySpaceStyle({ spinerSize })} />
+          <DummyBox spinerSize={spinerSize} />
         </Flex>
       </Button>
     )
@@ -37,7 +37,9 @@ export default LoadingButton
 
 LoadingButton.displayName = 'LoadingButton'
 
-const DummySpaceStyle = ({ spinerSize }: ComponentProps<typeof Spiner>) => css`
-  width: ${spinerSize}px;
-  height: ${spinerSize}px;
+const DummyBox = styled(Flex)<
+  Pick<ComponentProps<typeof Spiner>, 'spinerColor' | 'spinerSize'>
+>`
+  width: ${({ spinerSize }) => spinerSize}px;
+  height: ${({ spinerSize }) => spinerSize}px;
 `
