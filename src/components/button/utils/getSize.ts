@@ -1,8 +1,8 @@
 import { CSSObject } from '@emotion/react'
 
-import { ButtonTheme } from '..'
+import { ButtonStyle } from '..'
 
-const SIZE: Record<ButtonTheme['size'], CSSObject> = {
+const SIZE: Record<ButtonStyle['size'], CSSObject> = {
   small: {
     height: '30px',
     padding: '0 8px',
@@ -17,7 +17,7 @@ const SIZE: Record<ButtonTheme['size'], CSSObject> = {
   },
 }
 
-const getSize = (size: ButtonTheme['size']) => {
+const getSize = (size: ButtonStyle['size']) => {
   return SIZE[size]
 }
 

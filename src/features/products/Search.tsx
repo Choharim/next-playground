@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
+import styled from '@emotion/styled'
 
 import { useSearchedKeyword, useSearchKeyword } from './context/fillterProvider'
 
@@ -30,13 +31,14 @@ const Search = () => {
 
   return (
     <SearchInput onEnterSubmit={enterSubmit} value={value} setValue={setValue}>
-      {({ onSubmit }) => (
-        <Button onClick={onSubmit} size="small">
-          제출
-        </Button>
-      )}
+      {({ onSubmit }) => <SubmitButton onClick={onSubmit}>제출</SubmitButton>}
     </SearchInput>
   )
 }
 
 export default Search
+
+const SubmitButton = styled(Button)`
+  width: fit-content;
+  height: 100%;
+`

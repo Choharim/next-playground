@@ -11,14 +11,14 @@ import { CombineType } from '@/shared/types/extendable'
 type Variety = 'outline' | 'contain' | 'text'
 type Size = 'small' | 'medium' | 'large'
 
-export interface ButtonTheme {
+export interface ButtonStyle {
   variety: Variety
   size: Size
 }
 
 type ButtonProps = CombineType<
   ComponentProps<typeof BaseButton>,
-  Partial<ButtonTheme>
+  Partial<ButtonStyle>
 >
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -43,7 +43,7 @@ export default Button
 
 Button.displayName = 'Button'
 
-const ThemeButton = styled(BaseButton)<ButtonTheme>`
+const ThemeButton = styled(BaseButton)<ButtonStyle>`
   border-radius: 4px;
 
   ${({ theme, variety, size }) => css`

@@ -1,8 +1,8 @@
 import { CSSObject, Theme } from '@emotion/react'
 
-import { ButtonTheme } from '..'
+import { ButtonStyle } from '..'
 
-const VARIETY: Record<ButtonTheme['variety'], (theme: Theme) => CSSObject> = {
+const VARIETY: Record<ButtonStyle['variety'], (theme: Theme) => CSSObject> = {
   contain: (theme) => ({
     color: theme.color.white,
     backgroundColor: theme.color.primary500,
@@ -50,7 +50,7 @@ const VARIETY: Record<ButtonTheme['variety'], (theme: Theme) => CSSObject> = {
   }),
 }
 
-const getVariety = (variety: ButtonTheme['variety'], theme: Theme) => {
+const getVariety = (variety: ButtonStyle['variety'], theme: Theme) => {
   return VARIETY[variety](theme)
 }
 

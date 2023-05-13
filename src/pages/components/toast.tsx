@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Button from '@/components/Button'
 import Flex from '@/components/Flex'
@@ -17,22 +17,14 @@ const ToastPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <Flex justify="center">
-        <Button
-          onClick={clickButton('confirm')}
-          variety="contain"
-          css={buttonStyle}
-        >
+      <Flex justify="center" gap="20px">
+        <ToastCreationButton onClick={clickButton('confirm')} variety="contain">
           확인 토스트 추가
-        </Button>
+        </ToastCreationButton>
 
-        <Button
-          onClick={clickButton('error')}
-          variety="contain"
-          css={buttonStyle}
-        >
+        <ToastCreationButton onClick={clickButton('error')} variety="contain">
           에러 토스트 추가
-        </Button>
+        </ToastCreationButton>
       </Flex>
     </>
   )
@@ -42,7 +34,6 @@ export default ToastPage
 
 ToastPage.getLayout = getLayout
 
-const buttonStyle = css`
+const ToastCreationButton = styled(Button)`
   width: 200px;
-  margin: 0 10px;
 `

@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import { useEffect, useState } from 'react'
 
 import Frame from '@/features/components/Frame'
@@ -26,43 +25,28 @@ const ButtonPage: NextPageWithLayout = () => {
   }
   return (
     <Frame title="버튼 종류">
-      <Button variety="contain" css={ButtonStyle} onClick={clickButton}>
+      <Button variety="contain" onClick={clickButton}>
         contain
       </Button>
-      <Button
-        variety="contain"
-        disabled
-        css={ButtonStyle}
-        onClick={clickButton}
-      >
+      <Button variety="contain" disabled onClick={clickButton}>
         disabled contain
       </Button>
 
-      <Button variety="outline" css={ButtonStyle} onClick={clickButton}>
+      <Button variety="outline" onClick={clickButton}>
         outline
       </Button>
-      <Button
-        variety="outline"
-        disabled
-        css={ButtonStyle}
-        onClick={clickButton}
-      >
+      <Button variety="outline" disabled onClick={clickButton}>
         disabled outline
       </Button>
 
-      <Button variety="text" css={ButtonStyle} onClick={clickButton}>
+      <Button variety="text" onClick={clickButton}>
         text
       </Button>
-      <Button variety="text" disabled css={ButtonStyle} onClick={clickButton}>
+      <Button variety="text" disabled onClick={clickButton}>
         disabled text
       </Button>
 
-      <LoadingButton
-        isLoading={isLoading}
-        variety="text"
-        css={ButtonStyle}
-        onClick={clickButton}
-      >
+      <LoadingButton isLoading={isLoading} variety="text" onClick={clickButton}>
         text
       </LoadingButton>
     </Frame>
@@ -72,7 +56,3 @@ const ButtonPage: NextPageWithLayout = () => {
 export default ButtonPage
 
 ButtonPage.getLayout = getLayout
-
-const ButtonStyle = css`
-  width: 200px;
-`

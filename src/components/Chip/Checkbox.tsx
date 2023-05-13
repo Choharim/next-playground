@@ -1,5 +1,6 @@
 import React, { ComponentProps } from 'react'
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Flex from '../Flex'
 
@@ -36,15 +37,9 @@ const Checkbox = ({
         cursor: pointer;
       `}
     >
-      <div
-        css={css`
-          position: relative;
-          min-height: ${size};
-          min-width: ${size};
-        `}
-      >
+      <CheckInputWrapper size={size}>
         <input {...inputAttributes} type="checkbox" css={theme} />
-      </div>
+      </CheckInputWrapper>
 
       {children}
     </Flex>
@@ -52,3 +47,10 @@ const Checkbox = ({
 }
 
 export default Checkbox
+
+const CheckInputWrapper = styled.div<Pick<CheckboxThemeProps, 'size'>>`
+  position: relative;
+
+  min-height: ${({ size }) => size};
+  min-width: ${({ size }) => size};
+`

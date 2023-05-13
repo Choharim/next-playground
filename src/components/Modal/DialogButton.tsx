@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Theme, css, useTheme } from '@emotion/react'
+import { Theme } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Button from '@/components/Button'
 
@@ -11,7 +12,7 @@ const DEFAULT_TEXT: { [key in Variety]: string } = {
 type Variety = 'cancel' | 'confirm'
 
 interface Props extends ComponentPropsWithoutRef<'button'> {
-  variety?: Variety
+  variety: Variety
 }
 
 const DialogButton = ({
@@ -19,22 +20,18 @@ const DialogButton = ({
   children,
   ...buttonAttributes
 }: Props) => {
-  const theme = useTheme()
-
   return (
-    <Button
-      variety="contain"
-      css={css`
-        ${variety === 'cancel' && getCancelButtonStyle(theme)}
-      `}
-      {...buttonAttributes}
-    >
+    <AnswerButton variety="contain" answer={variety} {...buttonAttributes}>
       {children || DEFAULT_TEXT[variety]}
-    </Button>
+    </AnswerButton>
   )
 }
 
 export default DialogButton
+
+const AnswerButton = styled(Button)<{ answer: Variety }>`
+  ${({ theme, answer }) => answer === 'cancel' && getCancelButtonStyle(theme)}
+`
 
 const getCancelButtonStyle = (theme: Theme) => ({
   color: theme.color.white,
