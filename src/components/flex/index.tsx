@@ -1,10 +1,11 @@
-import { CSSProperties, ElementType, forwardRef } from 'react'
+import { CSSProperties, ElementType, forwardRef, useMemo } from 'react'
+import styled from '@emotion/styled'
 
 import {
   PolymorphicComponentProps,
+  PolymorphicComponentPropsWithRef,
   PolymorphicRef,
 } from '@/shared/types/polymorphic'
-import getStyle from './getStyle'
 
 const DEFAULT_TAG: ElementTag = 'div'
 
@@ -21,38 +22,48 @@ type ElementTag = Extract<
   | 'label'
 >
 
-export interface FlexStyleProps {
+interface FlexStyle {
   direction: CSSProperties['flexDirection']
   justify: CSSProperties['justifyContent']
   align: CSSProperties['alignItems']
   gap: CSSProperties['gap']
+  wrap: CSSProperties['flexWrap']
 }
 
 export type FlexProps<E extends ElementType> = PolymorphicComponentProps<
   E,
-  Partial<FlexStyleProps>
+  Partial<FlexStyle>
 >
 
 const Flex = forwardRef(
   <E extends ElementType>(
     {
-      as,
-      children,
       direction,
       justify,
       align,
       gap,
-      ...restProps
+      wrap,
+
+      as,
+      children,
+      ...attributes
     }: FlexProps<E | typeof DEFAULT_TAG>,
     forwardRef: PolymorphicRef<E>
   ) => {
-    const Element = as || DEFAULT_TAG
-    const style = getStyle({ direction, justify, align, gap })
+    const styles = useMemo(
+      () => ({ direction, justify, align, gap, wrap }),
+      [direction, justify, align, gap, wrap]
+    )
 
     return (
-      <Element {...restProps} css={style} ref={forwardRef}>
+      <FlexWrapper
+        {...attributes}
+        {...styles}
+        ref={forwardRef}
+        as={as || DEFAULT_TAG}
+      >
         {children}
-      </Element>
+      </FlexWrapper>
     )
   }
 )
@@ -63,7 +74,15 @@ const Flex = forwardRef(
  * 타입 단언을 합니다.
  */
 export default Flex as <E extends ElementTag>(
-  props: FlexProps<E> & { ref?: PolymorphicRef<E> }
+  props: PolymorphicComponentPropsWithRef<E, FlexProps<E>>
 ) => ReturnType<typeof Flex>
 
 Flex.displayName = 'Flex'
+
+const FlexWrapper = styled(DEFAULT_TAG)<Partial<FlexStyle>>`
+  display: flex;
+  flex-direction: ${({ direction }) => direction};
+  justify-content: ${({ justify }) => justify};
+  align-items: ${({ align }) => align};
+  gap: ${({ gap }) => gap};
+`
