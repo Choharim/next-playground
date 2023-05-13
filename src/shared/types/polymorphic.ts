@@ -9,10 +9,15 @@ type WithAsProp<E extends ElementType> = {
   as?: E
 }
 
+type PolymorphicProps<E extends ElementType> = CombineType<
+  ComponentPropsWithoutRef<E>,
+  WithAsProp<E>
+>
+
 export type PolymorphicComponentProps<
   E extends ElementType,
   Props = unknown
-> = CombineType<ComponentPropsWithoutRef<E>, Props & WithAsProp<E>>
+> = CombineType<PolymorphicProps<E>, Props>
 
 export type PolymorphicRef<E extends ElementType> =
   ComponentPropsWithRef<E>['ref']
