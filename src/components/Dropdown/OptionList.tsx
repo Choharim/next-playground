@@ -7,6 +7,8 @@ import Flex from '../Flex'
 import { useIsOpen, useOptions, useSelectedValue } from './context/consumer'
 import { OptionContextProps, TriggerContextProps } from './context/Provider'
 
+type OptionListStyle = Pick<TriggerContextProps, 'isOpen'>
+
 type Props = {
   children: (
     args: Pick<OptionContextProps, 'options' | 'selectedValue'>
@@ -26,7 +28,7 @@ const OptionList = ({ children }: Props) => {
 
 export default OptionList
 
-const OptionContainer = styled(Flex)<Pick<TriggerContextProps, 'isOpen'>>`
+const OptionContainer = styled(Flex)<OptionListStyle>`
   position: absolute;
   top: calc(100% + 5px);
   left: 0px;

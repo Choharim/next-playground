@@ -2,10 +2,10 @@ import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 
 import Portal from '../Portal'
+import ToastBox from './ToastBox'
 import Flex from '../Flex'
 
 import { selectToasts } from '@/services/redux/notification/selector'
-import ToastBox from './ToastBox'
 import { DESC, TOAST_PORTAL_ID, TOAST_TOP_POSITION } from './constant'
 
 const ToastPortal = () => {

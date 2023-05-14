@@ -66,12 +66,7 @@ const Dropdown = ({
           {...selectAttributes}
           value={selectedValue}
           onChange={handleChange}
-          css={css`
-            visibility: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
-          `}
+          css={hiddenSelectStyle}
         >
           {!!placeholder && <option>{placeholder}</option>}
 
@@ -91,3 +86,10 @@ export default Dropdown
 Dropdown.Trigger = Trigger
 Dropdown.OptionList = OptionList
 Dropdown.Option = Option
+
+const hiddenSelectStyle = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  appearance: none;
+`

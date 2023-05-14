@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentProps, forwardRef, useMemo } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
@@ -26,13 +26,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     { variety = 'contain', size = 'medium', children, ...buttonAttributes },
     forwardRef
   ) => {
+    const styles = useMemo(() => ({ variety, size }), [variety, size])
+
     return (
-      <ThemeButton
-        {...buttonAttributes}
-        variety={variety}
-        size={size}
-        ref={forwardRef}
-      >
+      <ThemeButton {...buttonAttributes} {...styles} ref={forwardRef}>
         {children}
       </ThemeButton>
     )

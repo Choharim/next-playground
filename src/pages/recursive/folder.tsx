@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { css } from '@emotion/react'
 
 import { BsFillTriangleFill } from 'react-icons/bs'
+import Typo from '@/components/Typo'
 
 import { FOLDER } from '@/features/recursive/constant'
 import { Folder } from '@/features/recursive/type'
@@ -23,13 +24,11 @@ const RecursiveBox = ({ data, order }: RecursiveBoxProps) => {
 
   return (
     <Box>
-      {isParent && (
-        <ToggleIcon onClick={toggleOpen} css={toggleStyle(isOpen)} />
-      )}
+      {isParent && <ToggleIcon onClick={toggleOpen} isOpen={isOpen} />}
 
-      <Name>
+      <Typo variety="body_1">
         {isParent ? '📁' : '📄'} {data.name} {order}
-      </Name>
+      </Typo>
       {isOpen &&
         data.children.map((child, i) => (
           <RecursiveBox key={i} data={child} order={`${order}-${i + 1}`} />
@@ -59,14 +58,16 @@ const Box = styled.div`
   padding: 10px;
 `
 
-const ToggleIcon = styled(BsFillTriangleFill)`
+type ToggleIconStyle = {
+  isOpen: boolean
+}
+const ToggleIcon = styled(BsFillTriangleFill)<ToggleIconStyle>`
   padding: 2px;
   cursor: pointer;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      transform: rotate(180deg);
+    `}
 `
-const toggleStyle = (isOpen: boolean) => css`
-  ${isOpen &&
-  css`
-    transform: rotate(180deg);
-  `}
-`
-const Name = styled.span``

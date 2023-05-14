@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Chip from '@/components/Chip'
 import Frame from '../Frame'
@@ -25,14 +25,9 @@ const NoneCheck = () => {
           small fill
         </Chip>
 
-        <Chip
-          variety="fill"
-          typoVariety="subtitle_1"
-          size="medium"
-          css={CustomStyle}
-        >
+        <CustomChip variety="fill" typoVariety="subtitle_1" size="medium">
           custom medium fill
-        </Chip>
+        </CustomChip>
       </Frame>
 
       <Frame title="cickable">
@@ -53,15 +48,14 @@ const NoneCheck = () => {
           clickable medium fill
         </Chip>
 
-        <Chip
+        <CustomChip
           variety="fill"
           typoVariety="subtitle_1"
           size="medium"
           onClick={clickChip}
-          css={CustomStyle}
         >
           custom medium fill
-        </Chip>
+        </CustomChip>
       </Frame>
     </>
   )
@@ -69,7 +63,7 @@ const NoneCheck = () => {
 
 export default NoneCheck
 
-const CustomStyle = css`
+const CustomChip = styled(Chip)`
   border: 1px solid pink;
   background-color: white;
   color: pink;

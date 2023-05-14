@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Theme } from '@emotion/react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import Button from '@/components/Button'
@@ -30,17 +30,17 @@ const DialogButton = ({
 export default DialogButton
 
 const AnswerButton = styled(Button)<{ answer: Variety }>`
-  ${({ theme, answer }) => answer === 'cancel' && getCancelButtonStyle(theme)}
+  ${({ theme, answer }) =>
+    answer === 'cancel' &&
+    css`
+      color: ${theme.color.white};
+      background-color: ${theme.color.grey400};
+
+      &:is(:hover, :focus) {
+        backgroundcolor: ${theme.color.grey500};
+      }
+      &:active {
+        backgroundcolor: ${theme.color.grey600};
+      }
+    `}
 `
-
-const getCancelButtonStyle = (theme: Theme) => ({
-  color: theme.color.white,
-  backgroundColor: theme.color.grey400,
-
-  ':is(:hover, :focus)': {
-    backgroundColor: theme.color.grey500,
-  },
-  ':active': {
-    backgroundColor: theme.color.grey600,
-  },
-})

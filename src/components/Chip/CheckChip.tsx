@@ -67,7 +67,7 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
           id={htmlFor}
           onChange={handleInputChange}
           checked={checked}
-          css={HiddenInputStyle}
+          css={hiddenInputStyle}
         />
       </CheckChipWrapper>
     )
@@ -84,7 +84,7 @@ const CheckChipWrapper = styled(Chip)<CheckChipStyle>`
   ${({ checked, variety, theme }) =>
     checked && getVariety({ status: 'checked', variety }, theme)};
 `
-const HiddenInputStyle = css`
+const hiddenInputStyle = css`
   position: absolute;
   top: 50%;
   left: 50%;

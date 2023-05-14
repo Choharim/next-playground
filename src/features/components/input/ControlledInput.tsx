@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import Form, { FormData } from '@/components/Form'
@@ -47,11 +46,7 @@ const ControlledInput = () => {
         value={searchValue}
       >
         {({ onSubmit }) => (
-          <SearchButton
-            variety="contain"
-            css={SearchButtonStyle}
-            onClick={onSubmit}
-          >
+          <SearchButton variety="contain" onClick={onSubmit}>
             <Typo color="inherit" variety="body_4">
               검색
             </Typo>
@@ -63,8 +58,6 @@ const ControlledInput = () => {
 }
 
 export default ControlledInput
-
-const SearchButtonStyle = css``
 
 const ConfirmButton = styled(Button)`
   margin-top: 10px;

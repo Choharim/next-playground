@@ -44,7 +44,7 @@ const Flex = forwardRef(
       gap,
       wrap,
 
-      as,
+      as = DEFAULT_TAG,
       children,
       ...attributes
     }: FlexProps<E | typeof DEFAULT_TAG>,
@@ -56,12 +56,7 @@ const Flex = forwardRef(
     )
 
     return (
-      <FlexWrapper
-        {...attributes}
-        {...styles}
-        ref={forwardRef}
-        as={as || DEFAULT_TAG}
-      >
+      <FlexWrapper {...attributes} {...styles} ref={forwardRef} as={as}>
         {children}
       </FlexWrapper>
     )
