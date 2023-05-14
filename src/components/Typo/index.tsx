@@ -1,11 +1,13 @@
-import { ElementType, forwardRef } from 'react'
+import { ElementType, forwardRef, useMemo } from 'react'
+import styled from '@emotion/styled'
 
 import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/shared/types/polymorphic'
 import { ColorKey, FontKey } from '@/theme/type'
-import getTypoTheme from './getTypoTheme'
+import { FONT } from '@/theme/font'
+import { COLOR } from '@/theme/color'
 
 const DEFAULT_TAG: ElementTag = 'span'
 
@@ -14,34 +16,34 @@ type ElementTag = Extract<
   'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'
 >
 
-export type TypoThemeProps = {
+export type TypoStyle = {
   variety: FontKey
   color: ColorKey | 'inherit'
 }
 
 export type TypoProps<E extends ElementType> = PolymorphicComponentProps<
   E,
-  Partial<TypoThemeProps>
+  Partial<TypoStyle>
 >
 
 const Typo = forwardRef(
   <E extends ElementType>(
     {
-      as,
-      children,
       variety = 'body_1',
       color = 'black',
+
+      as = DEFAULT_TAG,
+      children,
       ...attributes
     }: TypoProps<E | typeof DEFAULT_TAG>,
     forwardRef: PolymorphicRef<E>
   ) => {
-    const theme = getTypoTheme({ variety, color })
-    const Element = as || DEFAULT_TAG
+    const styles = useMemo(() => ({ variety, color }), [variety, color])
 
     return (
-      <Element {...attributes} css={theme} ref={forwardRef}>
+      <TypoWrapper {...attributes} {...styles} ref={forwardRef} as={as}>
         {children}
-      </Element>
+      </TypoWrapper>
     )
   }
 )
@@ -56,3 +58,8 @@ export default Typo as <E extends ElementTag>(
 ) => ReturnType<typeof Typo>
 
 Typo.displayName = 'Typo'
+
+const TypoWrapper = styled(DEFAULT_TAG)<TypoStyle>`
+  ${({ variety }) => FONT[variety]};
+  color: ${({ color }) => (color === 'inherit' ? 'inherit' : COLOR[color])};
+`
