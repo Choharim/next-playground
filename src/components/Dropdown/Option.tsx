@@ -1,14 +1,17 @@
-import { Theme, css, useTheme } from '@emotion/react'
+import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 import { ComponentProps } from 'react'
 
 import { CombineType } from '@/shared/types/extendable'
 import { OptionData } from '.'
 import { useSelectedValue, useSetSelectedValue } from './context/consumer'
 
+type OptionStyle = {
+  isSelected: boolean
+}
 type Props = CombineType<ComponentProps<'li'>, Pick<OptionData, 'value'>>
 
 const Option = ({ value, children, ...attributes }: Props) => {
-  const theme = useTheme()
   const setSelectedValue = useSetSelectedValue()
   const selectedValue = useSelectedValue()
   const isSelected = selectedValue === value
@@ -18,38 +21,33 @@ const Option = ({ value, children, ...attributes }: Props) => {
   }
 
   return (
-    <li
+    <OptionWrapper
       {...attributes}
       onClick={clickOption}
-      css={getStyle({ theme, isSelected })}
       role="option"
       aria-selected={isSelected}
+      isSelected={isSelected}
     >
       {children}
-    </li>
+    </OptionWrapper>
   )
 }
 
 export default Option
 
-const getStyle = ({
-  theme,
-  isSelected,
-}: {
-  theme: Theme
-  isSelected: boolean
-}) => css`
+const OptionWrapper = styled.li<OptionStyle>`
   cursor: pointer;
   padding: 6px 8px;
   border-radius: inherit;
 
-  ${isSelected
-    ? css`
-        background-color: ${theme.color.primary100};
-      `
-    : css`
-        &:hover {
-          background-color: ${theme.color.grey200};
-        }
-      `}
+  ${({ isSelected, theme }) =>
+    isSelected
+      ? css`
+          background-color: ${theme.color.primary100};
+        `
+      : css`
+          &:hover {
+            background-color: ${theme.color.grey200};
+          }
+        `}
 `
