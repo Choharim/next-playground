@@ -91,5 +91,5 @@ const hiddenSelectStyle = css`
   position: absolute;
   top: 0;
   left: 0;
-  appearance: none;
+  visibility: hidden;
 `

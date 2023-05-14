@@ -44,9 +44,6 @@ const DropdownPage: NextPageWithLayout = () => {
           name={ANIMAL_SELECT_ID}
           placeholder="선택하세요."
           // defaultValue={OPTIONS[2].value}
-          css={css`
-            width: 300px;
-          `}
         >
           <Dropdown.Trigger
             render={({ isOpen, label }) => (

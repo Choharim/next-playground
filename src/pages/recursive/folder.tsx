@@ -24,7 +24,20 @@ const RecursiveBox = ({ data, order }: RecursiveBoxProps) => {
 
   return (
     <Box>
-      {isParent && <ToggleIcon onClick={toggleOpen} isOpen={isOpen} />}
+      {isParent && (
+        <BsFillTriangleFill
+          onClick={toggleOpen}
+          css={css`
+            padding: 2px;
+            cursor: pointer;
+
+            ${isOpen &&
+            css`
+              transform: rotate(180deg);
+            `}
+          `}
+        />
+      )}
 
       <Typo variety="body_1">
         {isParent ? '📁' : '📄'} {data.name} {order}
@@ -56,18 +69,4 @@ const Box = styled.div`
   border-radius: 4px;
   margin: 10px;
   padding: 10px;
-`
-
-type ToggleIconStyle = {
-  isOpen: boolean
-}
-const ToggleIcon = styled(BsFillTriangleFill)<ToggleIconStyle>`
-  padding: 2px;
-  cursor: pointer;
-
-  ${({ isOpen }) =>
-    isOpen &&
-    css`
-      transform: rotate(180deg);
-    `}
 `

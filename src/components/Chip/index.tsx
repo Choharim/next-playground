@@ -52,8 +52,17 @@ const Chip = forwardRef(
     )
 
     return (
-      <ChipWrapper {...attributes} {...styles} ref={forwardRef} as={as}>
-        <Typo variety={typoVariety}>{children}</Typo>
+      <ChipWrapper
+        align="center"
+        justify="center"
+        {...attributes}
+        {...styles}
+        ref={forwardRef}
+        as={as}
+      >
+        <Typo wrap="nowrap" variety={typoVariety} color="inherit">
+          {children}
+        </Typo>
       </ChipWrapper>
     )
   }

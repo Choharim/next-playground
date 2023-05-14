@@ -44,6 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
 
     return (
       <InputWrapper
+        align="center"
         onClick={handleClick}
         disabled={disabled}
         isError={isError}

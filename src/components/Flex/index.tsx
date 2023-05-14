@@ -1,5 +1,6 @@
 import { CSSProperties, ElementType, forwardRef, useMemo } from 'react'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import {
   PolymorphicComponentProps,
@@ -76,8 +77,12 @@ Flex.displayName = 'Flex'
 
 const FlexWrapper = styled(DEFAULT_TAG)<Partial<FlexStyle>>`
   display: flex;
-  flex-direction: ${({ direction }) => direction};
-  justify-content: ${({ justify }) => justify};
-  align-items: ${({ align }) => align};
-  gap: ${({ gap }) => gap};
+
+  ${({ direction, justify, align, gap, wrap }) => css`
+    flex-direction: ${direction};
+    justify-content: ${justify};
+    align-items: ${align};
+    gap: ${gap};
+    flex-wrap: ${wrap};
+  `};
 `

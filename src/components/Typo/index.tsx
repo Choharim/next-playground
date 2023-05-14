@@ -1,5 +1,6 @@
-import { ElementType, forwardRef, useMemo } from 'react'
+import { CSSProperties, ElementType, forwardRef, useMemo } from 'react'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import {
   PolymorphicComponentProps,
@@ -19,6 +20,7 @@ type ElementTag = Extract<
 export type TypoStyle = {
   variety: FontKey
   color: ColorKey | 'inherit'
+  wrap: CSSProperties['whiteSpace']
 }
 
 export type TypoProps<E extends ElementType> = PolymorphicComponentProps<
@@ -31,14 +33,17 @@ const Typo = forwardRef(
     {
       variety = 'body_1',
       color = 'black',
-
+      wrap,
       as = DEFAULT_TAG,
       children,
       ...attributes
     }: TypoProps<E | typeof DEFAULT_TAG>,
     forwardRef: PolymorphicRef<E>
   ) => {
-    const styles = useMemo(() => ({ variety, color }), [variety, color])
+    const styles = useMemo(
+      () => ({ variety, color, wrap }),
+      [variety, color, wrap]
+    )
 
     return (
       <TypoWrapper {...attributes} {...styles} ref={forwardRef} as={as}>
@@ -62,4 +67,8 @@ Typo.displayName = 'Typo'
 const TypoWrapper = styled(DEFAULT_TAG)<TypoStyle>`
   ${({ variety }) => FONT[variety]};
   color: ${({ color }) => (color === 'inherit' ? 'inherit' : COLOR[color])};
+
+  ${({ wrap }) => css`
+    white-space: ${wrap};
+  `}
 `
