@@ -1,29 +1,47 @@
-import { ChangeEvent, ComponentProps, forwardRef } from 'react'
+import { ChangeEvent, ComponentProps, forwardRef, useMemo } from 'react'
 import { css } from '@emotion/react'
 
-import Chip, { ChipProps } from '.'
+import Chip, { ChipProps, ChipStyle } from '.'
 
 import { CombineType } from '@/shared/types/extendable'
-import useCheckChipTheme from './hooks/useCheckChipTheme'
 import { RequiredFields } from '@/shared/types/narrow'
+import styled from '@emotion/styled'
+import getVariety from './utils/getVariety'
+
+interface CheckChipStyle
+  extends Omit<ChipStyle, 'clickable'>,
+    Pick<InputProps, 'checked'> {}
 
 type InputProps = RequiredFields<
   Pick<ComponentProps<'input'>, 'onChange' | 'checked'>,
   'checked'
 >
 
-export type CheckChipProps = CombineType<
+type CheckChipProps = CombineType<
   RequiredFields<Omit<ChipProps<'label'>, 'as'>, 'htmlFor'>,
   InputProps
 >
 
 const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
   (
-    { variety = 'outline', checked, onChange, children, ...labelAttributes },
+    {
+      variety = 'outline',
+      size = 'medium',
+      typoVariety = 'body_1',
+
+      checked,
+      onChange,
+      children,
+      ...labelAttributes
+    },
     forwardRef
   ) => {
     const { htmlFor } = labelAttributes
-    const theme = useCheckChipTheme({ checked, variety })
+
+    const styles = useMemo(
+      () => ({ variety, typoVariety, size }),
+      [variety, typoVariety, size]
+    )
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       /**
@@ -34,13 +52,13 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
     }
 
     return (
-      <Chip
+      <CheckChipWrapper
         {...labelAttributes}
-        ref={forwardRef}
+        {...styles}
+        checked={checked}
         as="label"
+        ref={forwardRef}
         clickable
-        variety={variety}
-        css={theme}
       >
         {children}
 
@@ -51,7 +69,7 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
           checked={checked}
           css={HiddenInputStyle}
         />
-      </Chip>
+      </CheckChipWrapper>
     )
   }
 )
@@ -60,6 +78,12 @@ export default CheckChip
 
 CheckChip.displayName = 'CheckChip'
 
+const CheckChipWrapper = styled(Chip)<CheckChipStyle>`
+  position: relative;
+
+  ${({ checked, variety, theme }) =>
+    checked && getVariety({ status: 'checked', variety }, theme)};
+`
 const HiddenInputStyle = css`
   position: absolute;
   top: 50%;
