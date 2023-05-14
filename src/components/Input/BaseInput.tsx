@@ -1,6 +1,5 @@
+import styled from '@emotion/styled'
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
-
-import useResetStyle from './hooks/useResetStyle'
 
 /**
  * @note
@@ -10,11 +9,24 @@ const BaseInput = forwardRef<
   HTMLInputElement,
   ComponentPropsWithoutRef<'input'>
 >(({ ...attributes }, forwardRef) => {
-  const style = useResetStyle()
-
-  return <input {...attributes} css={style} ref={forwardRef} />
+  return <Input {...attributes} ref={forwardRef} />
 })
 
 export default BaseInput
 
 BaseInput.displayName = 'BaseInput'
+
+const Input = styled.input`
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: inherit;
+
+  /* Chrome, Safari, Edge, Opera */
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`
