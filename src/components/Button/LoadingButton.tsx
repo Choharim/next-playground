@@ -21,6 +21,7 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
       isLoading,
       spinnerColor,
       spinnerSize = 22,
+
       children,
       ...buttonAttributes
     },

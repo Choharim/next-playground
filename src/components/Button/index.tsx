@@ -42,6 +42,7 @@ Button.displayName = 'Button'
 
 const ThemeButton = styled(BaseButton)<ButtonStyle>`
   border-radius: 4px;
+
   ${({ theme, variety, size }) => css`
     ${getVariety(variety, theme)};
     ${getSize(size)};
