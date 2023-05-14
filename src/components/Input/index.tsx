@@ -5,7 +5,7 @@ import { css } from '@emotion/react'
 import BaseInput from './BaseInput'
 import Flex from '../Flex'
 
-import useCombineRefs from '@/shared/hooks/useCombineRefs'
+import useCombineRefs from '@/hooks/useCombineRefs'
 
 interface InputStyle {
   isError?: boolean

@@ -1,7 +1,8 @@
-import { ColorKey } from '@/theme/type'
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
+
+import { ColorKey } from '@/styles/type'
 
 interface SpinnerStyle {
   color: ColorKey

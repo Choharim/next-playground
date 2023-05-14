@@ -5,9 +5,9 @@ import {
   PolymorphicComponentProps,
   PolymorphicRef,
 } from '@/shared/types/polymorphic'
-import { ColorKey, FontKey } from '@/theme/type'
-import { FONT } from '@/theme/font'
-import { COLOR } from '@/theme/color'
+import { ColorKey, FontKey } from '@/styles/type'
+import { FONT } from '@/styles/constants/font'
+import { COLOR } from '@/styles/constants/color'
 
 const DEFAULT_TAG: ElementTag = 'span'
 

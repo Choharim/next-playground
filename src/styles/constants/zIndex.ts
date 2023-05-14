@@ -4,4 +4,4 @@ export const Z_INDEX = {
   dropBox: css`
     z-index: 10;
   `,
-}
+} as const

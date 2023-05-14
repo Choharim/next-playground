@@ -1,8 +1,6 @@
 import styled, { CSSObject } from '@emotion/styled'
-
-import { css } from '@emotion/react'
+import { Theme, css } from '@emotion/react'
 import { ComponentProps } from 'react'
-import { THEME } from '@/theme'
 
 const THEME_COLOR = ['primary', 'secondary', 'normal'] as const
 type ThemeColor = (typeof THEME_COLOR)[number]
@@ -52,27 +50,20 @@ const ShopButton = ({
 
 export default ShopButton
 
-const COLOR_STYLE: { [key in ThemeColor]: CSSObject } = {
-  primary: {
-    backgroundColor: THEME.color.primary100,
-    color: THEME.color.white,
-  },
-  secondary: {
-    backgroundColor: THEME.color.primary400,
-    color: THEME.color.white,
-  },
-  normal: {
-    backgroundColor: THEME.color.grey200,
-    color: THEME.color.grey900,
-  },
+const COLOR_STYLE: Record<ThemeColor, (theme: Theme) => CSSObject> = {
+  primary: (theme: Theme) => ({
+    backgroundColor: theme.color.primary100,
+    color: theme.color.white,
+  }),
+  secondary: (theme: Theme) => ({
+    backgroundColor: theme.color.primary400,
+    color: theme.color.white,
+  }),
+  normal: (theme: Theme) => ({
+    backgroundColor: theme.color.grey200,
+    color: theme.color.grey900,
+  }),
 }
-
-const getStyle = (themeColor: ThemeColor): { [key in Shape]: CSSObject } => ({
-  contain: COLOR_STYLE[themeColor],
-  text: {
-    '&:hover': COLOR_STYLE['normal'],
-  },
-})
 
 const CustomButton = styled.button<{
   themeColor?: ThemeColor
@@ -81,9 +72,17 @@ const CustomButton = styled.button<{
   padding: 8px 16px;
   border-radius: 24px;
   width: fit-content;
-  ${({ theme }) => theme.font.subtitle_3};
 
-  ${({ shape, themeColor }) => !!themeColor && getStyle(themeColor)[shape]};
+  ${({ shape, themeColor, theme }) =>
+    shape === 'contain'
+      ? css`
+          ${!!themeColor && COLOR_STYLE[themeColor](theme)}
+        `
+      : css`
+          &:hover {
+            ${COLOR_STYLE['normal'](theme)}
+          }
+        `};
 
   &:disabled {
     ${({ theme }) => css`

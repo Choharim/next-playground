@@ -2,6 +2,7 @@ import { Food } from '@/domain/food/type'
 import styled from '@emotion/styled'
 
 import ShopButton from './ShopButton'
+import Typo from '@/components/Typo'
 
 type Props = {
   food: Food
@@ -39,11 +40,11 @@ const Card = ({
         <>
           <DetailRow>
             <Subtitle>수량</Subtitle>
-            <Price>{quantity ?? 0}</Price>
+            <Typo>{quantity ?? 0}</Typo>
           </DetailRow>
           <TotalWrapper>
             <Subtitle>상품금액</Subtitle>
-            <Price>{price * quantity}</Price>
+            <Typo>{price * quantity}</Typo>
           </TotalWrapper>
         </>
       )
@@ -52,11 +53,11 @@ const Card = ({
         <>
           <DetailRow>
             <Subtitle>잔량</Subtitle>
-            <Price>{stock}</Price>
+            <Typo>{stock}</Typo>
           </DetailRow>
           <DetailRow>
             <Subtitle>수량</Subtitle>
-            <Price>{quantity ?? 0}</Price>
+            <Typo>{quantity ?? 0}</Typo>
           </DetailRow>
         </>
       )
@@ -70,7 +71,7 @@ const Card = ({
       <DetailsWrapper>
         <Details>
           <Name>{name}</Name>
-          <Price>{price} 원</Price>
+          <Typo>{price} 원</Typo>
           {renderInfo()}
         </Details>
         <ButtonContainer>{renderButtons()}</ButtonContainer>
@@ -131,15 +132,8 @@ const DetailRow = styled.div`
   align-items: center;
 `
 
-const Name = styled.span`
-  ${({ theme }) => theme.font.subtitle_1};
-  color: ${({ theme }) => theme.color.grey900};
+const Name = styled(Typo)`
   margin-top: 10px;
-`
-
-const Price = styled.span`
-  ${({ theme }) => theme.font.subtitle_3};
-  color: ${({ theme }) => theme.color.grey900};
 `
 
 const TotalWrapper = styled.div`
@@ -152,11 +146,8 @@ const TotalWrapper = styled.div`
   align-items: center;
 `
 
-const Subtitle = styled.span`
-  ${({ theme }) => theme.font.body_1};
+const Subtitle = styled(Typo)`
   margin-right: 8px;
-
-  color: ${({ theme }) => theme.color.grey500};
 `
 
 const ButtonContainer = styled.div`

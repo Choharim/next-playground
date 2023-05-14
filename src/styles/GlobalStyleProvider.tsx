@@ -1,9 +1,13 @@
 import { ReactNode } from 'react'
 import localFont from '@next/font/local'
-import { Global, ThemeProvider } from '@emotion/react'
+import { Global, Theme, ThemeProvider } from '@emotion/react'
 
-import resetStyle from './resetStyle'
-import { THEME } from '.'
+import { COLOR } from '@/styles/constants/color'
+import resetStyle from '@/styles/resetStyle'
+
+const THEME: Theme = {
+  color: COLOR,
+}
 
 const pretandardFont = localFont({
   src: './fonts/PretendardVariable.woff2',

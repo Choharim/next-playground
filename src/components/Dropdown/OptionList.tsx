@@ -6,6 +6,8 @@ import Flex from '../Flex'
 
 import { useIsOpen, useOptions, useSelectedValue } from './context/consumer'
 import { OptionContextProps, TriggerContextProps } from './context/Provider'
+import { Z_INDEX } from '@/styles/constants/zIndex'
+import { SHADOW } from '@/styles/constants/shadow'
 
 type OptionListStyle = Pick<TriggerContextProps, 'isOpen'>
 
@@ -36,8 +38,8 @@ const OptionContainer = styled(Flex)<OptionListStyle>`
   width: 100%;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.color.white};
-  ${({ theme }) => theme.shadow.dropBox};
-  ${({ theme }) => theme.zIndex.dropBox};
+  ${SHADOW.dropBox};
+  ${Z_INDEX.dropBox};
 
   ${({ isOpen }) =>
     isOpen

@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 import Flex from '../Flex'
 import CheckChip from '../Chip/CheckChip'
 
+import { SHADOW } from '@/styles/constants/shadow'
+
 const PAGES: { [key in PageDirection]: string[] } = {
   '': [''],
   components: ['button', 'chip', 'input', 'dropdown', 'modal', 'toast'],
@@ -56,5 +58,5 @@ const LinkContainer = styled(Flex)`
   height: 100%;
   width: fit-content;
 
-  ${({ theme }) => theme.shadow.dropBox};
+  ${SHADOW.dropBox};
 `
