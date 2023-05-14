@@ -6,7 +6,7 @@ type ValueContext = {
   keyword: string
 }
 type ActionContext = {
-  toggleCategory: (category: Category) => void
+  setCategory: (category?: Category) => void
   searchKeyword: (keyword: string) => void
 }
 
@@ -30,9 +30,8 @@ const FillterProvider = ({ children }: Props) => {
 
   const action = useMemo(
     () => ({
-      toggleCategory(category: Category) {
-        setCategory((prev) => (prev === category ? undefined : category))
-      },
+      setCategory,
+
       searchKeyword(search: string) {
         setKeyword(search)
       },
@@ -59,14 +58,14 @@ export const useChoicedCategory = () => {
   return context.category
 }
 
-export const useToggleCategory = () => {
+export const useSetCategory = () => {
   const context = useContext(filterAction)
 
   if (context === undefined) {
     throw new Error('it must be used within a FillterProvider')
   }
 
-  return context.toggleCategory
+  return context.setCategory
 }
 
 export const useSearchedKeyword = () => {
