@@ -1,30 +1,31 @@
-import { ElementType, forwardRef } from 'react'
+import { ElementType, forwardRef, useMemo } from 'react'
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
-import Typo, { TypoProps, TypoThemeProps } from '../Typo'
+import Typo, { TypoStyle } from '../Typo'
+import Flex, { FlexProps } from '../Flex'
 
-import useChipTheme from './hooks/useChipTheme'
 import { PolymorphicRef } from '@/shared/types/polymorphic'
 import { CombineType } from '@/shared/types/extendable'
+import getSize from './utils/getSize'
+import getVariety from './utils/getVariety'
 
-const DEFAULT_TAG: ElementTag = 'span'
-type ElementTag = Extract<ElementType, 'span' | 'label'>
+const DEFAULT_TAG: ElementTag = 'div'
+
+type ElementTag = Extract<ElementType, 'div' | 'label'>
 
 type Variety = 'outline' | 'fill'
 type Size = 'small' | 'medium'
-export interface ChipThemeProps {
+export interface ChipStyle {
   variety: Variety
   size: Size
   clickable: boolean
+  typoVariety: TypoStyle['variety']
 }
 
-type CustomTypoProps<E extends ElementTag> = Omit<
-  TypoProps<E>,
-  keyof TypoThemeProps
-> & { typoVariety?: TypoThemeProps['variety'] }
-
 export type ChipProps<E extends ElementTag> = CombineType<
-  CustomTypoProps<E>,
-  Partial<ChipThemeProps>
+  FlexProps<E>,
+  Partial<ChipStyle>
 >
 
 const Chip = forwardRef(
@@ -43,22 +44,17 @@ const Chip = forwardRef(
     forwardRef: PolymorphicRef<E>
   ) => {
     const { onClick } = attributes
-    const theme = useChipTheme({
-      variety,
-      size,
-      clickable: clickable || typeof onClick === 'function',
-    })
+    const hasClickHandler = typeof onClick === 'function'
+
+    const styles = useMemo(
+      () => ({ variety, size, clickable: clickable || hasClickHandler }),
+      [variety, size, clickable, hasClickHandler]
+    )
 
     return (
-      <Typo
-        {...attributes}
-        ref={forwardRef}
-        as={as}
-        css={theme}
-        variety={typoVariety}
-      >
-        {children}
-      </Typo>
+      <ChipWrapper {...attributes} {...styles} ref={forwardRef} as={as}>
+        <Typo variety={typoVariety}>{children}</Typo>
+      </ChipWrapper>
     )
   }
 )
@@ -73,3 +69,21 @@ export default Chip as <E extends ElementTag>(
 ) => ReturnType<typeof Chip>
 
 Chip.displayName = 'Chip'
+
+const ChipWrapper = styled(Flex)<Omit<ChipStyle, 'typoVariety'>>`
+  border-radius: 16px;
+  width: fit-content;
+
+  ${({ size }) => getSize(size)};
+  ${({ theme, variety }) => getVariety({ status: 'default', variety }, theme)};
+
+  ${({ clickable }) =>
+    clickable
+      ? css`
+          cursor: pointer;
+        `
+      : css`
+          cursor: default;
+          pointer-events: none;
+        `}
+`

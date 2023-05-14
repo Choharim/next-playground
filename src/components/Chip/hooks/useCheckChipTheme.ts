@@ -12,7 +12,7 @@ const useCheckChipTheme = ({
   return css`
     position: relative;
 
-    ${checked && getVariety(theme)[variety]['checked']};
+    ${checked && getVariety({ status: 'checked', variety }, theme)};
   `
 }
 

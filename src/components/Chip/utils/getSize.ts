@@ -1,8 +1,8 @@
 import { CSSObject } from '@emotion/react'
 
-import { ChipThemeProps } from '..'
+import { ChipStyle } from '..'
 
-const getSize = (): { [key in ChipThemeProps['size']]: CSSObject } => ({
+const SIZE: Record<ChipStyle['size'], CSSObject> = {
   small: {
     padding: '0 8px',
     height: '20px',
@@ -11,5 +11,9 @@ const getSize = (): { [key in ChipThemeProps['size']]: CSSObject } => ({
     padding: '0 12px',
     height: '32px',
   },
-})
+}
+
+const getSize = (size: ChipStyle['size']) => {
+  return SIZE[size]
+}
 export default getSize

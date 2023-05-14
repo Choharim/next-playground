@@ -1,46 +1,48 @@
-import { CSSObject, Theme } from '@emotion/react'
+import { Theme } from '@emotion/react'
 
-import { ChipThemeProps } from '..'
+import { ChipStyle } from '..'
 
-type Status = 'default' | 'checked'
-
-const getVariety = (
-  theme: Theme
-): {
-  [key in ChipThemeProps['variety']]: { [key in Status]: CSSObject }
-} => ({
+const VARIETY_BY_STATUS = {
   outline: {
-    default: {
+    default: (theme: Theme) => ({
       color: theme.color.primary400,
       border: `1px solid ${theme.color.primary400}`,
       ':hover': {
         backgroundColor: theme.color.primary50,
       },
-    },
-    checked: {
+    }),
+    checked: (theme: Theme) => ({
       color: theme.color.primary400,
       backgroundColor: theme.color.primary50,
       ':hover': {
         backgroundColor: theme.color.primary50,
       },
-    },
+    }),
   },
   fill: {
-    default: {
+    default: (theme: Theme) => ({
       color: theme.color.white,
       backgroundColor: theme.color.primary400,
       ':hover': {
         backgroundColor: theme.color.primary500,
       },
-    },
-    checked: {
+    }),
+    checked: (theme: Theme) => ({
       color: theme.color.white,
       backgroundColor: theme.color.primary500,
       ':hover': {
         backgroundColor: theme.color.primary500,
       },
-    },
+    }),
   },
-})
+}
+
+type Status = 'default' | 'checked'
+interface GetVarietyArg extends Pick<ChipStyle, 'variety'> {
+  status: Status
+}
+const getVariety = ({ variety, status }: GetVarietyArg, theme: Theme) => {
+  return VARIETY_BY_STATUS[variety][status](theme)
+}
 
 export default getVariety
