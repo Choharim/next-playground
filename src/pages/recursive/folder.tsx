@@ -8,7 +8,7 @@ import Typo from '@/components/Typo'
 import { FOLDER } from '@/features/recursive/constant'
 import { Folder } from '@/features/recursive/type'
 import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/layouts/Layout'
+import { getLayout } from '@/components/Layout'
 
 type RecursiveBoxProps = {
   data: Folder

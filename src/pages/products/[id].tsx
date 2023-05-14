@@ -4,7 +4,7 @@ import { getProduct } from '@/services/axios/product'
 import { productKey } from '@/services/reactQuery/product/key'
 import { queryClient } from '@/services/reactQuery/queryClient'
 import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/layouts/Layout'
+import { getLayout } from '@/components/Layout'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
