@@ -10,12 +10,7 @@ const DefaultModal = () => {
   const { isOpen, showModal, onClose } = useModal()
 
   const openDialog = async () => {
-    const answer = await showModal()
-    if (answer) {
-      console.log('확인')
-    } else {
-      console.log('취소')
-    }
+    await showModal()
   }
 
   return (

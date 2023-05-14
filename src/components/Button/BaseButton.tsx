@@ -19,6 +19,7 @@ const Button = styled.button`
   outline: none;
   border: none;
   white-space: nowrap;
+
   &:disabled {
     cursor: not-allowed;
   }
