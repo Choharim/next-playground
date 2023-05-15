@@ -1,4 +1,3 @@
-import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { MouseEvent, MouseEventHandler, PropsWithChildren } from 'react'
 
@@ -8,6 +7,7 @@ import Flex from '../Flex'
 import { MODAL_PORTAL_ID } from '@/pages/_document'
 import { ModalProps } from './useModal'
 import { CombineType } from '@/shared/types/extendable'
+import { fadeIn } from '@/styles/utils/animation'
 
 type Props = CombineType<
   Pick<ModalProps, 'isOpen'>,
@@ -39,15 +39,6 @@ const Modal = ({
 }
 
 export default Modal
-
-const fadeIn = keyframes`
-  from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-`
 
 const Overlay = styled(Flex)`
   position: absolute;

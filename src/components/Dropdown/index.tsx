@@ -9,6 +9,7 @@ import Option from './Option'
 
 import { CombineType } from '@/shared/types/extendable'
 import { RequireOnlyOne } from '@/shared/types/narrow'
+import { hiddenElement } from '@/styles/utils/accessibility'
 
 export interface OptionData {
   label: string
@@ -66,7 +67,7 @@ const Dropdown = ({
           {...selectAttributes}
           value={selectedValue}
           onChange={handleChange}
-          css={hiddenSelectStyle}
+          css={hiddenElement}
         >
           {!!placeholder && <option>{placeholder}</option>}
 
@@ -86,10 +87,3 @@ export default Dropdown
 Dropdown.Trigger = Trigger
 Dropdown.OptionList = OptionList
 Dropdown.Option = Option
-
-const hiddenSelectStyle = css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  visibility: hidden;
-`

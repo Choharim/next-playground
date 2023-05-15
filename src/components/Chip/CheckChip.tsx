@@ -1,5 +1,4 @@
 import { ChangeEvent, ComponentProps, forwardRef, useMemo } from 'react'
-import { css } from '@emotion/react'
 
 import Chip, { ChipProps, ChipStyle } from '.'
 
@@ -7,6 +6,7 @@ import { CombineType } from '@/shared/types/extendable'
 import { RequiredFields } from '@/shared/types/narrow'
 import styled from '@emotion/styled'
 import getVariety from './utils/getVariety'
+import { hiddenElement } from '@/styles/utils/accessibility'
 
 interface CheckChipStyle
   extends Omit<ChipStyle, 'clickable'>,
@@ -67,7 +67,7 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
           id={htmlFor}
           onChange={handleInputChange}
           checked={checked}
-          css={hiddenInputStyle}
+          css={hiddenElement}
         />
       </CheckChipWrapper>
     )
@@ -83,10 +83,4 @@ const CheckChipWrapper = styled(Chip)<CheckChipStyle>`
 
   ${({ checked, variety, theme }) =>
     checked && getVariety({ status: 'checked', variety }, theme)};
-`
-const hiddenInputStyle = css`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  appearance: none;
 `

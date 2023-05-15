@@ -1,8 +1,9 @@
-import { css, keyframes } from '@emotion/react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
 
 import { ColorKey } from '@/styles/type'
+import { rotation360 } from '@/styles/utils/animation'
 
 interface SpinnerStyle {
   color: ColorKey
@@ -26,15 +27,6 @@ const Spinner = ({
 
 export default Spinner
 
-const rotation = keyframes`
-   0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-`
-
 const SpinnerWrapper = styled.span<SpinnerStyle>`
   display: inline-block;
   ${({ size, color, theme }) => css`
@@ -45,5 +37,5 @@ const SpinnerWrapper = styled.span<SpinnerStyle>`
   border-bottom-color: transparent;
   border-radius: 50%;
 
-  animation: ${rotation} 1s linear infinite;
+  animation: ${rotation360} 1s linear infinite;
 `
