@@ -9,7 +9,17 @@ import { SHADOW } from '@/styles/constants/shadow'
 
 const PAGES: { [key in PageDirection]: string[] } = {
   '': [''],
-  components: ['button', 'chip', 'input', 'dropdown', 'modal', 'toast'],
+  components: [
+    'button',
+    'chip',
+    'radioGroup',
+    'checkbox',
+    'input',
+    'dropdown',
+    'modal',
+    'toast',
+    'typo',
+  ],
   products: [''],
   recursive: ['folder'],
   shop: ['order', ''],
@@ -38,8 +48,8 @@ const Navigation = () => {
         PAGES[direction].map((page) => (
           <Link key={page} href={getPath(direction, page)}>
             <CheckChip
-              htmlFor="navigationChip"
-              typoVariety="body_4"
+              id="navigationChip"
+              typoVariety="subtitle_2"
               checked={router.pathname === getPath(direction, page)}
             >
               {direction} / {page}
