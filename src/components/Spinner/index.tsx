@@ -2,17 +2,18 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
 
+import getSize, { Size } from './getSize'
 import { ColorKey } from '@/styles/type'
 import { rotation360 } from '@/styles/utils/animation'
 
 interface SpinnerStyle {
   color: ColorKey
-  size: number
+  size: Size
 }
 
 const Spinner = ({
   color = 'primary400',
-  size = 22,
+  size = 'medium',
 }: Partial<SpinnerStyle>) => {
   const styles = useMemo(
     () => ({
@@ -29,11 +30,13 @@ export default Spinner
 
 const SpinnerWrapper = styled.span<SpinnerStyle>`
   display: inline-block;
+
   ${({ size, color, theme }) => css`
-    border: ${size / 7}px solid ${theme.color[color]};
-    width: ${size}px;
-    height: ${size}px;
+    border-color: ${theme.color[color]};
+    ${getSize(size)};
   `}
+
+  border-style: solid;
   border-bottom-color: transparent;
   border-radius: 50%;
 
