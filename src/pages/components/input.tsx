@@ -1,5 +1,4 @@
 import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/Layout'
 
 import Frame from '@/features/components/Frame'
 import HookFormInput from '@/features/components/input/HookFormInput'
@@ -23,5 +22,3 @@ const InputPage: NextPageWithLayout = () => {
 }
 
 export default InputPage
-
-InputPage.getLayout = getLayout

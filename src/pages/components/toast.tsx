@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Button from '@/components/Button'
 import Flex from '@/components/Flex'
 
-import { getLayout } from '@/components/Layout'
 import { NextPageWithLayout } from '@/shared/types/layout'
 import useToast from '@/components/Toast/hooks/useToast'
 import { Variety } from '@/components/Toast/type'
@@ -31,8 +30,6 @@ const ToastPage: NextPageWithLayout = () => {
 }
 
 export default ToastPage
-
-ToastPage.getLayout = getLayout
 
 const ToastCreationButton = styled(Button)`
   width: 200px;

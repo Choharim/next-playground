@@ -9,11 +9,12 @@ import { wrapper } from '@/services/redux/store'
 
 import ErrorBoundary from '@/components/ErrorBoundary'
 import ToastPortal from '@/components/Toast/ToastPortal'
+import { getLayout } from '@/components/Layout'
 
 function App({ Component, ...appProps }: AppPropsWithLayout) {
   const { store, props } = wrapper.useWrappedStore(appProps)
   const { pageProps } = props
-  const getLayout = Component.getLayout || ((page) => page)
+  const _getLayout = Component.getLayout || getLayout
 
   return (
     <>
@@ -24,7 +25,7 @@ function App({ Component, ...appProps }: AppPropsWithLayout) {
               <ReactQueryDevtools initialIsOpen={false} />
 
               <ErrorBoundary fallback={<div>서버 에러</div>}>
-                {getLayout(<Component {...pageProps} />, pageProps)}
+                {_getLayout(<Component {...pageProps} />, pageProps)}
                 <ToastPortal />
               </ErrorBoundary>
             </Hydrate>

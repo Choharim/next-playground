@@ -5,7 +5,6 @@ import Button from '@/components/Button'
 import LoadingButton from '@/components/Button/LoadingButton'
 
 import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/Layout'
 
 const ButtonPage: NextPageWithLayout = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -54,5 +53,3 @@ const ButtonPage: NextPageWithLayout = () => {
 }
 
 export default ButtonPage
-
-ButtonPage.getLayout = getLayout

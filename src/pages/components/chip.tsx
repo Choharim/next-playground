@@ -1,9 +1,7 @@
-import { getLayout } from '@/components/Layout'
 import Check from '@/features/components/chip/Check'
 import NoneCheck from '@/features/components/chip/NoneCheck'
-import { NextPageWithLayout } from '@/shared/types/layout'
 
-const ChipPage: NextPageWithLayout = () => {
+const ChipPage = () => {
   return (
     <>
       <NoneCheck />
@@ -13,5 +11,3 @@ const ChipPage: NextPageWithLayout = () => {
 }
 
 export default ChipPage
-
-ChipPage.getLayout = getLayout

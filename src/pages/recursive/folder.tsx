@@ -8,7 +8,6 @@ import Typo from '@/components/Typo'
 import { FOLDER } from '@/features/recursive/constant'
 import { Folder } from '@/features/recursive/type'
 import { NextPageWithLayout } from '@/shared/types/layout'
-import { getLayout } from '@/components/Layout'
 
 type RecursiveBoxProps = {
   data: Folder
@@ -61,8 +60,6 @@ const FolderPage: NextPageWithLayout = () => {
 }
 
 export default FolderPage
-
-FolderPage.getLayout = getLayout
 
 const Box = styled.div`
   border: 1px solid ${({ theme }) => theme.color.grey400};

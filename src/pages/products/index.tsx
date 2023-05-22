@@ -6,7 +6,6 @@ import { NextPageWithLayout } from '@/shared/types/layout'
 import { productKey } from '@/services/reactQuery/product/key'
 import { getProducts } from '@/services/axios/product'
 import { queryClient } from '@/services/reactQuery/queryClient'
-import { getLayout } from '@/components/Layout'
 
 import FillterProvider from '@/features/products/context/fillterProvider'
 import CategoryChips from '@/features/products/Category'
@@ -51,8 +50,6 @@ const ProductsPage: NextPageWithLayout<
 }
 
 export default ProductsPage
-
-ProductsPage.getLayout = getLayout
 
 const Wrapper = styled.div`
   display: flex;

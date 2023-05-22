@@ -9,7 +9,6 @@ import Form, { FormData } from '@/components/Form'
 import Label from '@/components/Label'
 import Button from '@/components/Button'
 
-import { getLayout } from '@/components/Layout'
 import { NextPageWithLayout } from '@/shared/types/layout'
 
 const ANIMAL_SELECT_ID = 'animals'
@@ -86,5 +85,3 @@ const DropdownPage: NextPageWithLayout = () => {
 }
 
 export default DropdownPage
-
-DropdownPage.getLayout = getLayout
