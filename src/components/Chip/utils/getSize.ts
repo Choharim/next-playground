@@ -4,12 +4,12 @@ import { ChipStyle } from '..'
 
 const SIZE: Record<ChipStyle['size'], CSSObject> = {
   small: {
-    padding: '0 8px',
-    height: '20px',
-  },
-  medium: {
     padding: '0 12px',
     height: '32px',
+  },
+  medium: {
+    padding: '0 14px',
+    height: '38px',
   },
 }
 

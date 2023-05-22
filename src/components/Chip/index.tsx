@@ -80,12 +80,11 @@ export default Chip as <E extends ElementTag>(
 Chip.displayName = 'Chip'
 
 const ChipWrapper = styled(Flex)<Omit<ChipStyle, 'typoVariety'>>`
-  border-radius: 16px;
+  border-radius: 9999px;
   width: fit-content;
 
   ${({ size }) => getSize(size)};
-  ${({ theme, variety }) => getVariety({ status: 'default', variety }, theme)};
-
+  ${({ theme, variety }) => getVariety({ variety }, theme)};
   ${({ clickable }) =>
     clickable
       ? css`
