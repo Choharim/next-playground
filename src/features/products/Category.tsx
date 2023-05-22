@@ -1,5 +1,3 @@
-import React, { ChangeEvent } from 'react'
-
 import Flex from '@/components/Flex'
 import CheckChip from '@/components/Chip/CheckChip'
 
@@ -11,14 +9,13 @@ const Category = () => {
   const setCategory = useSetCategory()
   const choicedCategory = useChoicedCategory()
 
-  const toggleCheckedForChip =
-    (category: Category) => (e: ChangeEvent<HTMLInputElement>) => {
-      if (e.target.checked) {
-        setCategory(category)
-      } else {
-        setCategory()
-      }
+  const toggleCheckedForChip = (category: Category) => (checked: boolean) => {
+    if (checked) {
+      setCategory(category)
+    } else {
+      setCategory()
     }
+  }
 
   return (
     <Flex wrap="wrap" gap="10px">
@@ -26,7 +23,7 @@ const Category = () => {
         <CheckChip
           key={item}
           checked={item === choicedCategory}
-          htmlFor={`${item}-category`}
+          id={`${item}-category`}
           onChange={toggleCheckedForChip(item)}
         >
           {item}
