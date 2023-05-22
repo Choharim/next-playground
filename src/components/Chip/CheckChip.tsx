@@ -1,24 +1,20 @@
-import { ChangeEvent, ComponentProps, forwardRef, useMemo } from 'react'
+import { ChangeEvent, forwardRef, useMemo } from 'react'
+import { css, useTheme } from '@emotion/react'
 
-import Chip, { ChipProps, ChipStyle } from '.'
+import Chip, { ChipProps } from '.'
 
 import { CombineType } from '@/shared/types/extendable'
 import { RequiredFields } from '@/shared/types/narrow'
-import styled from '@emotion/styled'
 import getVariety from './utils/getVariety'
 import { hiddenElement } from '@/styles/utils/accessibility'
 
-interface CheckChipStyle
-  extends Omit<ChipStyle, 'clickable'>,
-    Pick<InputProps, 'checked'> {}
-
-type InputProps = RequiredFields<
-  Pick<ComponentProps<'input'>, 'onChange' | 'checked'>,
-  'checked'
->
+type InputProps = {
+  onChange?: (checked: boolean) => void
+  checked: boolean
+}
 
 type CheckChipProps = CombineType<
-  RequiredFields<Omit<ChipProps<'label'>, 'as'>, 'htmlFor'>,
+  RequiredFields<Omit<ChipProps<'label'>, 'as'>, 'id'>,
   InputProps
 >
 
@@ -32,44 +28,53 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
       checked,
       onChange,
       children,
+      id,
       ...labelAttributes
     },
     forwardRef
   ) => {
-    const { htmlFor } = labelAttributes
+    const theme = useTheme()
 
     const styles = useMemo(
       () => ({ variety, typoVariety, size }),
       [variety, typoVariety, size]
     )
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       /**
        * checked 값을 조절하기 위해서는
        * onChange 핸들러가 연결되어야 합니다.
        */
-      onChange?.(e)
+      onChange?.(e.currentTarget.checked)
     }
 
     return (
-      <CheckChipWrapper
+      <Chip
         {...labelAttributes}
         {...styles}
-        checked={checked}
         as="label"
         ref={forwardRef}
+        htmlFor={id}
         clickable
+        css={css`
+          position: relative;
+
+          ${getVariety(
+            { variety, status: checked ? 'checked' : 'default' },
+            theme
+          )};
+        `}
       >
         {children}
 
         <input
           type="checkbox"
-          id={htmlFor}
-          onChange={handleInputChange}
+          id={id}
+          onChange={handleChange}
           checked={checked}
           css={hiddenElement}
         />
-      </CheckChipWrapper>
+      </Chip>
     )
   }
 )
@@ -77,10 +82,3 @@ const CheckChip = forwardRef<HTMLLabelElement, CheckChipProps>(
 export default CheckChip
 
 CheckChip.displayName = 'CheckChip'
-
-const CheckChipWrapper = styled(Chip)<CheckChipStyle>`
-  position: relative;
-
-  ${({ checked, variety, theme }) =>
-    checked && getVariety({ status: 'checked', variety }, theme)};
-`
