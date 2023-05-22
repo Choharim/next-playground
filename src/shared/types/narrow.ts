@@ -13,3 +13,5 @@ export type RequiredFields<T, U extends keyof T> = Required<Pick<T, U>> &
 export type RequiredAtLeastOne<T> = {
   [K in keyof T]: { [L in K]: T[L] } & { [L in Exclude<keyof T, K>]?: T[L] }
 }[keyof T]
+
+export type PixelSize<T extends number = number> = `${T}px`
