@@ -14,6 +14,7 @@ type Size = 'small' | 'medium' | 'large'
 export interface ButtonStyle {
   variety: Variety
   size: Size
+  shape: 'box' | 'capsule'
 }
 
 type ButtonProps = CombineType<
@@ -23,10 +24,19 @@ type ButtonProps = CombineType<
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variety = 'contain', size = 'medium', children, ...buttonAttributes },
+    {
+      variety = 'contain',
+      size = 'medium',
+      shape = 'box',
+      children,
+      ...buttonAttributes
+    },
     forwardRef
   ) => {
-    const styles = useMemo(() => ({ variety, size }), [variety, size])
+    const styles = useMemo(
+      () => ({ variety, size, shape }),
+      [variety, size, shape]
+    )
 
     return (
       <ThemeButton {...buttonAttributes} {...styles} ref={forwardRef}>
@@ -41,11 +51,23 @@ export default Button
 Button.displayName = 'Button'
 
 const ThemeButton = styled(BaseButton)<ButtonStyle>`
-  border-radius: 4px;
+  ${({ shape }) =>
+    shape === 'box'
+      ? css`
+          border-radius: 4px;
+        `
+      : css`
+          border-radius: 9999px;
+          width: fit-content;
+        `}
 
-  ${({ theme, variety, size }) => css`
+  ${({ theme, variety }) => css`
     ${getVariety(variety, theme)};
+  `};
+
+  ${({ size }) => css`
     ${getSize(size)};
   `};
+
   transition: 150ms ease;
 `
