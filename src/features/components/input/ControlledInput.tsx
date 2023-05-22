@@ -47,7 +47,7 @@ const ControlledInput = () => {
       >
         {({ onSubmit }) => (
           <SearchButton variety="contain" onClick={onSubmit}>
-            <Typo color="inherit" variety="body_4">
+            <Typo color="inherit" variety="subtitle_3">
               검색
             </Typo>
           </SearchButton>

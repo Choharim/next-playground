@@ -28,19 +28,19 @@ export default ToastBox
 
 const ANIMATED_DURATION = 300
 
-const FadeIn = keyframes`
+const fadeIn = keyframes`
 from { 
   opacity: 0;
 }
 `
 
-const FadeOut = keyframes`
+const fadeOut = keyframes`
   to { 
     opacity: 0;
   }
 `
 
-const SlideIn = keyframes`
+const slideIn = keyframes`
 from {
   transform: translateY(${TOAST_TOP_POSITION}px)
 }`
@@ -51,8 +51,8 @@ const ToastWrapper = styled(Flex)<ToastBoxStyle>`
   min-height: 32px;
   border-radius: 4px;
   ${({ theme, variety }) => getVariety(variety, theme)};
-  animation: ${FadeIn} ${ANIMATED_DURATION}ms ease,
-    ${SlideIn} ${ANIMATED_DURATION}ms ease,
-    ${FadeOut} ${ANIMATED_DURATION}ms ease
+  animation: ${fadeIn} ${ANIMATED_DURATION}ms ease,
+    ${slideIn} ${ANIMATED_DURATION}ms ease,
+    ${fadeOut} ${ANIMATED_DURATION}ms ease
       ${TOAST_TIMEOUT - ANIMATED_DURATION}ms;
 `
