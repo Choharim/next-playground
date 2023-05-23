@@ -74,13 +74,13 @@ const RadioInput = styled.input`
 
   border: 1px solid ${({ theme }) => theme.color.grey400};
 
-  &:checked {
-    border: 7px solid ${({ theme }) => theme.color.primary400};
-  }
-
   &:hover {
     background-color: ${({ theme }) => theme.color.grey100};
     cursor: pointer;
+  }
+
+  &:checked {
+    border: 7px solid ${({ theme }) => theme.color.primary400};
   }
 
   &:disabled {
