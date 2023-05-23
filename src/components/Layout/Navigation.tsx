@@ -15,6 +15,7 @@ const PAGES: { [key in PageDirection]: string[] } = {
     'radioGroup',
     'checkbox',
     'input',
+    'switch',
     'dropdown',
     'modal',
     'toast',
