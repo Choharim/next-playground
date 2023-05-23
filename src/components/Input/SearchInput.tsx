@@ -6,6 +6,7 @@ import React, {
 } from 'react'
 
 import Input from '.'
+import { KEYBOARD_KEY } from '@/shared/constants/keyboard'
 
 interface Props extends Omit<ComponentProps<typeof Input>, 'children'> {
   onEnterSubmit?: (value: string) => void
@@ -22,7 +23,7 @@ const SearchInput = ({ children, onEnterSubmit, ...restProps }: Props) => {
   }
 
   const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === KEYBOARD_KEY.enter) {
       handleSubmit()
     }
   }
