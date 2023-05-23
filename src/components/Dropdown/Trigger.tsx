@@ -1,27 +1,17 @@
-import { ReactElement, useRef } from 'react'
+import { PropsWithChildren, useRef } from 'react'
 
-import { useIsOpen, useLabel, useTriggerActions } from './context/consumer'
 import useClickOutside from '@/hooks/useClickOutside'
-import { TriggerContextProps } from './context/Provider'
+import { useTriggerActionContext } from './context/triggerConsumer'
 
-interface Args extends Pick<TriggerContextProps, 'isOpen'> {
-  label: string
-}
-interface Props {
-  render: (args: Args) => ReactElement
-}
+const Trigger = ({ children }: PropsWithChildren) => {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const { onClose, onToggle } = useTriggerActionContext()
 
-const Trigger = ({ render }: Props) => {
-  const ref = useRef<HTMLDivElement>(null)
-  const isOpen = useIsOpen()
-  const { onClose, onToggle } = useTriggerActions()
-  const label = useLabel()
-
-  useClickOutside({ target: ref, callabck: onClose })
+  useClickOutside({ target: wrapperRef, callabck: onClose })
 
   return (
-    <div ref={ref} onClick={onToggle}>
-      {render({ isOpen, label })}
+    <div ref={wrapperRef} onClick={onToggle} role="button">
+      {children}
     </div>
   )
 }

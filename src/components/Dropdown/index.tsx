@@ -1,8 +1,9 @@
 import { ComponentProps, useEffect } from 'react'
 import { css } from '@emotion/react'
 
-import Provider from './context/Provider'
-import Trigger from './Trigger'
+import TriggerProvider from './context/TriggerProvider'
+import OptionProvider from './context/OptionProvider'
+
 import OptionList from './OptionList'
 import Flex from '../Flex'
 import Option from './Option'
@@ -10,6 +11,8 @@ import Option from './Option'
 import { CombineType } from '@/shared/types/extendable'
 import { RequireOnlyOne } from '@/shared/types/narrow'
 import { hiddenElement } from '@/styles/utils/accessibility'
+import Trigger from './Trigger'
+import Value from './Value'
 
 export interface OptionData {
   label: string
@@ -31,14 +34,16 @@ const Dropdown = ({
   options,
   selectedValue,
   setSelectedValue,
-  className,
+
   children,
   ...selectAttributes
 }: DropdownProps) => {
   const { placeholder, defaultValue } = selectAttributes
 
   useEffect(() => {
-    if (!!defaultValue) setSelectedValue(String(defaultValue ?? ''))
+    if (!!defaultValue) {
+      setSelectedValue(String(defaultValue ?? ''))
+    }
   }, [defaultValue, setSelectedValue])
 
   const handleChange = () => {
@@ -48,42 +53,47 @@ const Dropdown = ({
   }
 
   return (
-    <Provider
-      options={options}
-      selectedValue={selectedValue}
-      setSelectedValue={setSelectedValue}
-      placeholder={placeholder}
-    >
-      <Flex
-        direction="column"
-        className={className}
-        css={css`
-          position: relative;
-        `}
-      >
-        {children}
-
-        <select
-          {...selectAttributes}
-          value={selectedValue}
-          onChange={handleChange}
-          css={hiddenElement}
+    <>
+      <TriggerProvider>
+        <OptionProvider
+          options={options}
+          placeholder={placeholder}
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
         >
-          {!!placeholder && <option>{placeholder}</option>}
+          <Flex
+            direction="column"
+            css={css`
+              position: relative;
+            `}
+          >
+            <Trigger>
+              <Value />
+            </Trigger>
+            {children}
+          </Flex>
+        </OptionProvider>
+      </TriggerProvider>
 
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </Flex>
-    </Provider>
+      <select
+        {...selectAttributes}
+        value={selectedValue}
+        onChange={handleChange}
+        css={hiddenElement}
+      >
+        {!!placeholder && <option>{placeholder}</option>}
+
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </>
   )
 }
 
 export default Dropdown
 
-Dropdown.Trigger = Trigger
 Dropdown.OptionList = OptionList
 Dropdown.Option = Option
