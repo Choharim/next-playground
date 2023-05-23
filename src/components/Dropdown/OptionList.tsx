@@ -1,28 +1,74 @@
-import { ReactElement } from 'react'
+import { KeyboardEvent, MouseEvent, ReactElement } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import Flex from '../Flex'
 
-import { useIsOpen, useOptions, useSelectedValue } from './context/consumer'
-import { OptionContextProps, TriggerContextProps } from './context/Provider'
 import { Z_INDEX } from '@/styles/constants/zIndex'
 import { SHADOW } from '@/styles/constants/shadow'
+import { OptionContextValueProps } from './context/OptionProvider'
+import {
+  useOptionActionContext,
+  useOptionValueContext,
+} from './context/optionConsumer'
+import useKeyboardNavigation from './useKeyboardNavigation'
+import { KEYBOARD_KEY } from '@/shared/constants/keyboard'
+import { TriggerValueContextProps } from './context/TriggerProvider'
+import { useTriggerValueContext } from './context/triggerConsumer'
 
-type OptionListStyle = Pick<TriggerContextProps, 'isOpen'>
+type OptionListStyle = Pick<TriggerValueContextProps, 'isOpen'>
+
+type ChildrenArgs = Pick<OptionContextValueProps, 'options' | 'selectedValue'>
 
 type Props = {
-  children: (
-    args: Pick<OptionContextProps, 'options' | 'selectedValue'>
-  ) => ReactElement[]
+  children: (args: ChildrenArgs) => ReactElement[]
 }
 const OptionList = ({ children }: Props) => {
-  const isOpen = useIsOpen()
-  const selectedValue = useSelectedValue()
-  const options = useOptions()
+  const { isOpen, inputRef } = useTriggerValueContext()
+  const { options, selectedValue } = useOptionValueContext()
+  const { setSelectedValue } = useOptionActionContext()
+
+  useKeyboardNavigation()
+
+  const getDatasetValue = (target: EventTarget) => {
+    if (!(target instanceof HTMLLIElement)) return
+
+    return target.dataset.value
+  }
+
+  const handleClick = (e: MouseEvent<HTMLUListElement>) => {
+    const target = e.target
+    const value = getDatasetValue(target)
+
+    if (!!value) {
+      setSelectedValue(value)
+      inputRef.current?.click()
+    }
+  }
+
+  const handleKeydown = (e: KeyboardEvent<HTMLUListElement>) => {
+    const key = e.key
+
+    if (key === KEYBOARD_KEY.enter) {
+      const target = e.target
+      const value = getDatasetValue(target)
+
+      if (!!value) {
+        setSelectedValue(value)
+        inputRef.current?.click()
+      }
+    }
+  }
 
   return (
-    <OptionContainer direction="column" as="ul" role="listbox" isOpen={isOpen}>
+    <OptionContainer
+      direction="column"
+      as="ul"
+      role="listbox"
+      isOpen={isOpen}
+      onClick={handleClick}
+      onKeyDown={handleKeydown}
+    >
       {children({ selectedValue, options })}
     </OptionContainer>
   )

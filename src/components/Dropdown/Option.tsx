@@ -1,32 +1,47 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
-import { ComponentProps } from 'react'
+import { ComponentProps, useEffect, useRef } from 'react'
 
 import { CombineType } from '@/shared/types/extendable'
 import { OptionData } from '.'
-import { useSelectedValue, useSetSelectedValue } from './context/consumer'
+import {
+  useOptionIndex,
+  useOptionValueContext,
+  useOptionActionContext,
+} from './context/optionConsumer'
 
-type OptionStyle = {
-  isSelected: boolean
-}
 type Props = CombineType<ComponentProps<'li'>, Pick<OptionData, 'value'>>
 
 const Option = ({ value, children, ...attributes }: Props) => {
-  const setSelectedValue = useSetSelectedValue()
-  const selectedValue = useSelectedValue()
+  const optionRef = useRef<HTMLLIElement>(null)
+
+  const { setFocusIndex } = useOptionActionContext()
+  const index = useOptionIndex(value)
+  const { focusIndex, selectedValue } = useOptionValueContext()
   const isSelected = selectedValue === value
 
-  const clickOption = () => {
-    setSelectedValue(value)
+  useEffect(() => {
+    if (!optionRef.current) return
+
+    if (index === focusIndex) {
+      optionRef.current.focus()
+    }
+  }, [focusIndex, index])
+
+  const handleFocus = () => {
+    setFocusIndex(index)
   }
 
   return (
     <OptionWrapper
       {...attributes}
-      onClick={clickOption}
       role="option"
+      ref={optionRef}
       aria-selected={isSelected}
       isSelected={isSelected}
+      tabIndex={0}
+      data-value={value}
+      onMouseOver={handleFocus}
     >
       {children}
     </OptionWrapper>
@@ -35,19 +50,25 @@ const Option = ({ value, children, ...attributes }: Props) => {
 
 export default Option
 
+type OptionStyle = {
+  isSelected: boolean
+}
 const OptionWrapper = styled.li<OptionStyle>`
   cursor: pointer;
   padding: 6px 8px;
   border-radius: inherit;
 
+  ${({ theme }) =>
+    css`
+      &:focus {
+        background-color: ${theme.color.grey200};
+        outline: none;
+      }
+    `}
+
   ${({ isSelected, theme }) =>
-    isSelected
-      ? css`
-          background-color: ${theme.color.primary100};
-        `
-      : css`
-          &:hover {
-            background-color: ${theme.color.grey200};
-          }
-        `}
+    isSelected &&
+    css`
+      background-color: ${theme.color.primary100};
+    `}
 `
