@@ -21,7 +21,7 @@ export const useTriggerActionContext = () => {
     throw Error('it must be used within a OptionProvider')
   }
 
-  const { onClose, onToggle } = context
+  const { onClose, onToggle, onOpen } = context
 
-  return { onClose, onToggle }
+  return { onClose, onToggle, onOpen }
 }

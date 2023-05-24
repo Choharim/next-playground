@@ -17,6 +17,7 @@ export interface TriggerValueContextProps {
 export interface TriggerActionContextProps {
   onClose: () => void
   onToggle: () => void
+  onOpen: () => void
 }
 
 export const TriggerValueContext =
@@ -30,6 +31,10 @@ const TriggerProvider = ({ children }: PropsWithChildren) => {
 
   const onClose = useCallback(() => {
     setIsOpen(false)
+  }, [])
+
+  const onOpen = useCallback(() => {
+    setIsOpen(true)
   }, [])
 
   const onToggle = useCallback(() => {
@@ -48,9 +53,10 @@ const TriggerProvider = ({ children }: PropsWithChildren) => {
   const actions: TriggerActionContextProps = useMemo(
     () => ({
       onClose,
+      onOpen,
       onToggle,
     }),
-    [onClose, onToggle]
+    [onClose, onToggle, onOpen]
   )
 
   return (

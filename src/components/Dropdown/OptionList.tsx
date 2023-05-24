@@ -36,27 +36,33 @@ const OptionList = ({ children }: Props) => {
     return target.dataset.value
   }
 
-  const handleClick = (e: MouseEvent<HTMLUListElement>) => {
-    const target = e.target
+  const setValueOnFocusedInput = (target: EventTarget) => {
     const value = getDatasetValue(target)
 
     if (!!value) {
       setSelectedValue(value)
-      inputRef.current?.focus()
+      inputRef.current?.click()
     }
+  }
+
+  const handleClick = (e: MouseEvent<HTMLUListElement>) => {
+    const target = e.target
+
+    setValueOnFocusedInput(target)
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
     const key = e.key
 
     if (key === KEYBOARD_KEY.enter) {
-      const target = e.target
-      const value = getDatasetValue(target)
+      /**
+       * @description
+       * form의 submit을 제한합니다.
+       */
+      e.preventDefault()
 
-      if (!!value) {
-        setSelectedValue(value)
-        inputRef.current?.focus()
-      }
+      const target = e.target
+      setValueOnFocusedInput(target)
     }
   }
 
