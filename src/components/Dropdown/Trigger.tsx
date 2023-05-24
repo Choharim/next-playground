@@ -1,4 +1,4 @@
-import { PropsWithChildren, useRef } from 'react'
+import { KeyboardEvent, PropsWithChildren, useRef } from 'react'
 
 import useClickOutside from '@/hooks/useClickOutside'
 import { useTriggerActionContext } from './context/triggerConsumer'
@@ -9,8 +9,17 @@ const Trigger = ({ children }: PropsWithChildren) => {
 
   useClickOutside({ target: wrapperRef, callabck: onClose })
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    e.preventDefault()
+  }
+
   return (
-    <div ref={wrapperRef} onClick={onToggle} role="button">
+    <div
+      ref={wrapperRef}
+      onClick={onToggle}
+      onKeyDown={handleKeyDown}
+      role="button"
+    >
       {children}
     </div>
   )

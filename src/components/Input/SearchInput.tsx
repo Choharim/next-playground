@@ -22,14 +22,14 @@ const SearchInput = ({ children, onEnterSubmit, ...restProps }: Props) => {
     onEnterSubmit(inputRef.current.value)
   }
 
-  const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === KEYBOARD_KEY.enter) {
       handleSubmit()
     }
   }
 
   return (
-    <Input ref={inputRef} onKeyDown={handleKeydown} {...restProps}>
+    <Input ref={inputRef} onKeyDown={handleKeyDown} {...restProps}>
       {children?.({ onSubmit: handleSubmit })}
     </Input>
   )

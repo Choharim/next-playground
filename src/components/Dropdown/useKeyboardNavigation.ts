@@ -20,7 +20,7 @@ const useKeyboardNavigation = () => {
   useEffect(() => {
     if (!isOpen) return
 
-    const handleKeydown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key
 
       if (key === KEYBOARD_KEY.arrowDown) {
@@ -37,10 +37,10 @@ const useKeyboardNavigation = () => {
         }
       }
     }
-    window.addEventListener('keydown', handleKeydown, true)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener('keydown', handleKeydown, true)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, options.length, focusIndex, setFocusIndex])
 }

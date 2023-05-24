@@ -42,11 +42,11 @@ const OptionList = ({ children }: Props) => {
 
     if (!!value) {
       setSelectedValue(value)
-      inputRef.current?.click()
+      inputRef.current?.focus()
     }
   }
 
-  const handleKeydown = (e: KeyboardEvent<HTMLUListElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
     const key = e.key
 
     if (key === KEYBOARD_KEY.enter) {
@@ -55,7 +55,7 @@ const OptionList = ({ children }: Props) => {
 
       if (!!value) {
         setSelectedValue(value)
-        inputRef.current?.click()
+        inputRef.current?.focus()
       }
     }
   }
@@ -67,7 +67,7 @@ const OptionList = ({ children }: Props) => {
       role="listbox"
       isOpen={isOpen}
       onClick={handleClick}
-      onKeyDown={handleKeydown}
+      onKeyDown={handleKeyDown}
     >
       {children({ selectedValue, options })}
     </OptionContainer>

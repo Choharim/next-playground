@@ -9,6 +9,7 @@ import useCombineRefs from '@/hooks/useCombineRefs'
 
 interface InputStyle {
   isError?: boolean
+  isFocused?: boolean
 }
 
 interface ControlledInputProps {
@@ -22,7 +23,7 @@ interface Props
 
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
-    { isError, setValue, children, className, ...inputAttributes },
+    { isError, isFocused, setValue, children, className, ...inputAttributes },
     forwardRef
   ) => {
     const { disabled } = inputAttributes
@@ -48,6 +49,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
         onClick={handleClick}
         disabled={disabled}
         isError={isError}
+        isFocused={isFocused}
         className={className}
       >
         <BaseInput
@@ -75,7 +77,7 @@ const InputWrapper = styled(Flex)<InputWrapperStyle>`
   border-radius: 4px;
   cursor: text;
 
-  ${({ isError, theme }) =>
+  ${({ isError, theme, isFocused }) =>
     isError
       ? css`
           border: 1px solid ${theme.color.warning};
@@ -83,6 +85,10 @@ const InputWrapper = styled(Flex)<InputWrapperStyle>`
       : css`
           border: 1px solid ${theme.color.grey300};
 
+          ${isFocused &&
+          css`
+            border: 1px solid ${theme.color.primary400};
+          `}
           &:focus-within {
             border: 1px solid ${theme.color.primary400};
           }

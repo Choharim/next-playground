@@ -1,4 +1,4 @@
-import React, { KeyboardEvent } from 'react'
+import React, { KeyboardEvent, useEffect } from 'react'
 import { css } from '@emotion/react'
 
 import Input from '../Input'
@@ -16,13 +16,20 @@ const Value = () => {
   const { inputRef, isOpen } = useTriggerValueContext()
   const { onToggle } = useTriggerActionContext()
 
-  const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const key = e.key
 
     if (key === KEYBOARD_KEY.enter) {
       onToggle()
     }
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus()
+    }
+  }, [isOpen, inputRef])
+
   return (
     <Input
       ref={inputRef}
@@ -31,7 +38,8 @@ const Value = () => {
       css={css`
         cursor: pointer;
       `}
-      onKeyDown={handleKeydown}
+      isFocused={isOpen}
+      onKeyDown={handleKeyDown}
     >
       <div
         css={
