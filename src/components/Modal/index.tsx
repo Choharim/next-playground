@@ -27,11 +27,16 @@ const Modal = ({
     onClickFallback(e)
   }
 
+  const handleBody = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }
   return (
     <Portal id={MODAL_PORTAL_ID}>
       {isOpen && (
         <Overlay align="center" justify="center" onClick={handleFallback}>
-          <ContentsWrapper direction="column">{children}</ContentsWrapper>
+          <ContentsWrapper direction="column" onClick={handleBody}>
+            {children}
+          </ContentsWrapper>
         </Overlay>
       )}
     </Portal>
