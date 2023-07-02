@@ -20,3 +20,13 @@ export const assertField = <
   if (!obj[field]) false
   return true
 }
+
+export const getSameKeyValueObject = <
+  T extends Readonly<Array<string | number | symbol>>
+>(
+  arr: Readonly<T>
+) => {
+  return arr.reduce((acc, curr) => ({ ...acc, [curr]: curr }), {}) as Readonly<{
+    [key in T[number]]: key
+  }>
+}
