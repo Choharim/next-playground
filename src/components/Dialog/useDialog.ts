@@ -5,15 +5,15 @@ const useDialog = () => {
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   const openDialog = useCallback(() => {
-    if (!dialogRef.current) return
+    if (!dialogRef.current || dialogRef.current.open) return
 
     dialogRef.current.showModal()
   }, [])
 
-  const closeDialog = useCallback((answer?: DialogAnswer) => {
+  const closeDialog = useCallback((answer: DialogAnswer = '') => {
     if (!dialogRef.current) return
 
-    dialogRef.current.close(answer ?? '')
+    dialogRef.current.close(answer)
   }, [])
 
   return {

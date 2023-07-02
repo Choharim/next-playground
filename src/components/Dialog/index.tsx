@@ -1,88 +1,92 @@
 import useCombineRefs from '@/hooks/useCombineRefs'
-import { css, keyframes } from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import { KeyboardEvent, PropsWithChildren, forwardRef, useRef } from 'react'
-import Button from '../Button'
+import {
+  KeyboardEvent,
+  PropsWithChildren,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react'
+
+import DialogButtonGroups from './DialogButtonGroups'
+import DialogButton from './DialogButton'
+import { DialogProvider } from './context'
 import { getSameKeyValueObject } from '@/shared/utils/object'
 
 const ANSWER_LIST = ['cancel', 'confirm', ''] as const
 const ANSWER = getSameKeyValueObject(ANSWER_LIST)
 
+const isDialogAnswer = <T extends DialogAnswer>(
+  answer: string
+): answer is T => {
+  return ANSWER_LIST.includes(answer as T)
+}
+
 export type DialogAnswer = (typeof ANSWER_LIST)[number]
 
-export interface DialogProps {
-  onClose?: (status: DialogAnswer) => void
-
-  cancelText?: string
-  confirmText?: string
-  isDarkPattern?: boolean
-  hasOnlyOneButton?: boolean
+interface Props {
+  onClose?: (answer: DialogAnswer) => void
 }
 
-const isDialogAnswer = (answer: string): answer is DialogAnswer => {
-  return ANSWER_LIST.includes(answer as DialogAnswer)
-}
-
-const Dialog = forwardRef<HTMLDialogElement, PropsWithChildren<DialogProps>>(
-  (
-    {
-      onClose,
-
-      isDarkPattern = false,
-      hasOnlyOneButton = false,
-      cancelText = '취소',
-      confirmText = '확인',
-      children,
-    },
-    forwardRef
-  ) => {
+const Dialog = forwardRef<HTMLDialogElement, PropsWithChildren<Props>>(
+  ({ onClose, children }, forwardRef) => {
     const ref = useRef<HTMLDialogElement>(null)
-    const combinedRef = useCombineRefs(forwardRef, ref)
+    const dialogRef = useCombineRefs(forwardRef, ref)
 
-    const keydown = (e: KeyboardEvent<HTMLDialogElement>) => {
+    const handleKeydown = (e: KeyboardEvent<HTMLDialogElement>) => {
       const isEsc = e.key === 'Escape'
 
       if (isEsc) {
-        if (ref.current) ref.current.returnValue = ''
+        if (ref.current) ref.current.returnValue = ANSWER['']
       }
     }
 
-    const close = () => {
-      const answer = ref.current?.returnValue || ''
+    const handleClose = () => {
+      const answer = ref.current?.returnValue ?? ANSWER['']
 
       if (isDialogAnswer(answer)) {
         onClose?.(answer)
       }
     }
 
-    const clickAnswer = (answer: DialogAnswer) => () => {
-      if (!ref.current) return
+    const clickAnswer = useCallback(
+      (answer: DialogAnswer) => () => {
+        if (!ref.current) return
 
-      ref.current.close(answer)
-    }
+        ref.current.close(answer)
+      },
+      []
+    )
+
+    const values = useMemo(
+      () => ({
+        clickAnswer,
+      }),
+      [clickAnswer]
+    )
 
     return (
-      <StyledDialog ref={combinedRef} onClose={close} onKeyDown={keydown}>
-        <Contents>{children}</Contents>
-
-        <ButtonContainer isDarkPattern={isDarkPattern}>
-          {!hasOnlyOneButton && (
-            <Button variety="outline" onClick={clickAnswer(ANSWER.cancel)}>
-              {cancelText}
-            </Button>
-          )}
-          <Button onClick={clickAnswer(ANSWER.confirm)}>{confirmText}</Button>
-        </ButtonContainer>
-      </StyledDialog>
+      <DialogProvider value={values}>
+        <StyledDialog
+          ref={dialogRef}
+          onClose={handleClose}
+          onKeyDown={handleKeydown}
+        >
+          {children}
+        </StyledDialog>
+      </DialogProvider>
     )
   }
 )
 
-export default Dialog
-
 Dialog.displayName = 'Dialog'
 
-const WIDTH_BY_DEVICE = '400px'
+export default Object.assign(Dialog, {
+  ButtonGroups: DialogButtonGroups,
+  Button: DialogButton,
+})
 
 const fadeIn = keyframes`
     from {
@@ -91,7 +95,9 @@ const fadeIn = keyframes`
     to {
       opacity: 1;
     }
-`
+    `
+
+const WIDTH_BY_DEVICE = '400px'
 
 const StyledDialog = styled.dialog`
   outline: none;
@@ -117,21 +123,4 @@ const StyledDialog = styled.dialog`
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.2);
   }
-`
-
-const Contents = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const ButtonContainer = styled.div<Pick<DialogProps, 'isDarkPattern'>>`
-  display: flex;
-  gap: 9px;
-
-  ${({ isDarkPattern }) =>
-    isDarkPattern &&
-    css`
-      flex-direction: row-reverse;
-    `}
 `

@@ -13,10 +13,12 @@ function DialogPage() {
       /**
        * confirm 눌렀을 때 로직 실행
        */
+      console.log('confirm 이요')
     } else if (answer === 'cancel') {
       /**
        * cancel 눌렀을 때 로직 실행
        */
+      console.log('cancel 이요')
     }
   }
 
@@ -32,6 +34,11 @@ function DialogPage() {
           <button onClick={clickCloseButton}>X</button>
           <input />
         </form>
+        <Dialog.ButtonGroups>
+          <Dialog.Button answer="cancel">취소요!</Dialog.Button>
+          <Dialog.Button answer="confirm" />
+        </Dialog.ButtonGroups>
+        {/* <Dialog.Button answer="confirm" /> */}
       </Dialog>
 
       <Frame title="dialog">
