@@ -20,6 +20,7 @@ const PAGES: { [key in PageDirection]: string[] } = {
     'modal',
     'toast',
     'typo',
+    'dialog',
   ],
   products: [''],
   recursive: ['folder'],
