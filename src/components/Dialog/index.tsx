@@ -30,6 +30,7 @@ interface Props {
   onClose?: (answer: DialogAnswer) => void
 }
 
+// TODO: modal 합치기
 const Dialog = forwardRef<HTMLDialogElement, PropsWithChildren<Props>>(
   ({ onClose, children }, forwardRef) => {
     const ref = useRef<HTMLDialogElement>(null)
